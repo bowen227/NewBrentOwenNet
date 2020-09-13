@@ -1,4 +1,4 @@
-<section class="nav-bar p-2 sticky-top">
+<section class="nav-bar p-2">
     <section class="navbar-container container d-flex flex-row">
         <div class="logo flex-grow-1">
             <h1>Web Developer</h1>
@@ -10,6 +10,10 @@
     </section>
     <div class="drop-down-menu fixed-top d-flex flex-column" *ngIf="openMenu">
         <div class="links d-flex flex-column">
+            <div class="d-flex flex-row justify-content-between p-3">
+                <h1>Web Developer</h1>
+                <i class="fas fa-times font-weight-bold" (click)="toggleMenu()" *ngIf="openMenu"></i>
+            </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex" routerLink="/" (click)="toggleMenu()">
                     <div class="link-name flex-grow-1">
@@ -95,10 +99,18 @@
                 <li class="list-group-item d-flex social-links">
                     <div class="link-name flex-grow-1">
                         <span class="d-flex justify-content-around">
-                            <i class="fab fa-github-square"></i>
-                            <i class="fab fa-linkedin"></i>
-                            <i class="fab fa-facebook-square"></i>
-                            <i class="fab fa-twitter-square"></i>
+                            <a href="https://www.github.com/bowen227" target="_blank">
+                                <i class="fab fa-github-square"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/brent-owen-b5b46531" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://www.facebook.com/Brent.e.owen" target="_blank">
+                               <i class="fab fa-facebook-square"></i>
+                            </a>
+                            <a href="https://www.twitter.com/brenteowen1" target="_blank">
+                                <i class="fab fa-twitter-square"></i>
+                            </a>
                         </span>
                     </div>
                 </li>

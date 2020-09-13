@@ -1,0 +1,20 @@
+<section class="donut-graph-container mb-5 p-2">
+    <div class="spinner-border" role="status" *ngIf="!totalCasesDeaths">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div *ngIf="totalCasesDeaths">
+        <div class="chart-container">
+            <div class="inner-container">
+                <canvas baseChart
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType">
+                </canvas>
+            </div>
+            <div class="p-2">
+                <p style="margin-top: 30px; margin-bottom: 0px;">World Mortality Rate <span>{{ deathRate | percent:'1.1-2' }}</span></p>
+                <small>*Based on (deaths / cases) which will greatly overestimate the mortality rate.</small>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,31 @@
+.todo-container {
+    min-height: 680px;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 0px auto;
+}
+
+h2 {
+    background-color: #666666;
+    color: #fff;
+}
+
+button {
+    background-color: #CD5334;
+    color: #fff;
+    margin-top: 15px;
+}
+
+@media only screen and (min-width: 768px) {
+    .todo-container {
+        min-height: 880px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .todo-container {
+        min-height: 1220px;
+    }
+}

@@ -1,0 +1,13 @@
+select {
+    max-width: 175px;
+}
+
+.state-graph-container {
+    max-width: 800px;
+    margin: 0px auto;
+}
+
+span {
+    color: #CD5334;
+    font-weight: 600;
+}

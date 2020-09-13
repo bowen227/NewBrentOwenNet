@@ -1,0 +1,26 @@
+<section class="todo-container">
+    <h2 class="p-2"><i class="fas fa-clipboard-check mr-2"></i>Todo App</h2>
+    <div class="form-container">
+        <h3 class="ml-4 mt-3">Add Todo Group</h3>
+        <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="groupName">Group Name</label>
+                <input type="text" class="form-control" formControlName="groupName">
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+    <div class="todo-groups-container p-5">
+        <h3>Groups</h3>
+        <h5 *ngIf="todoGroups.length == 0">You haven't created any groups!</h5>
+        <ul class="list-group list-group-flush" *ngIf="todoGroups.length > 0">
+            <li class="list-group-item" *ngFor="let todo of todoGroups; let i = index;">
+                <div class="d-flex flex-row" [routerLink]="['/todoList', i]">
+                    <span class="flex-grow-1 mt-1">{{ todo }}</span>
+                    <i class="far fa-edit m-2" (click)="edit(todo, i)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

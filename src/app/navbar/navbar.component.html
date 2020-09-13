@@ -1,0 +1,148 @@
+<section class="nav-bar p-2 sticky-top">
+    <section class="navbar-container container d-flex flex-row">
+        <div class="logo flex-grow-1">
+            <h1>Web Developer</h1>
+        </div>
+        <div class="menu">
+            <i class="fas fa-bars font-weight-bold" (click)="toggleMenu()" *ngIf="!openMenu"></i>
+            <i class="fas fa-times font-weight-bold" (click)="toggleMenu()" *ngIf="openMenu"></i>
+        </div>
+    </section>
+    <div class="drop-down-menu fixed-top d-flex flex-column" *ngIf="openMenu">
+        <div class="links d-flex flex-column">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex" routerLink="/" (click)="toggleMenu()">
+                    <div class="link-name flex-grow-1">
+                        <span>Home</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </li>
+                <!-- <li class="list-group-item d-flex" (click)="toggleMore('projects')">
+                    <div class="link-name flex-grow-1">
+                        <span>Projects</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-down" *ngIf="!projects"></i>
+                        <i class="fas fa-angle-up" *ngIf="projects"></i>
+                    </div>
+                </li>
+                <div class="more-items" *ngIf="projects">
+                    <ul class="list-group list-group-flush p-3">
+                        <li class="list-group-item">
+                            Angular
+                        </li>
+                        <li class="list-group-item">
+                            React
+                        </li>
+                        <li class="list-group-item">
+                            .Net Core
+                        </li>
+                        <li class="list-group-item">
+                            NativeScripts
+                        </li>
+                    </ul>
+                </div> -->
+                <li class="list-group-item d-flex" (click)="toggleMore('projects')">
+                    <div class="link-name flex-grow-1">
+                        <span>Web Apps</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-down" *ngIf="!projects"></i>
+                        <i class="fas fa-angle-up" *ngIf="projects"></i>
+                    </div>
+                </li>
+                <div class="more-items" *ngIf="projects">
+                    <ul class="list-group list-group-flush p-3">
+                        <li class="list-group-item" routerLink="/todo" (click)="toggleMenu()" (click)="toggleMore('projects')">
+                            Todo
+                        </li>
+                    </ul>
+                </div>
+                <li class="list-group-item d-flex" (click)="toggleMore('tutorials')">
+                    <div class="link-name flex-grow-1">
+                        <span>Tutorials</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-down" *ngIf="!tutorials"></i>
+                        <i class="fas fa-angle-up" *ngIf="tutorials"></i>
+                    </div>
+                </li>
+                <div class="more-items" *ngIf="tutorials">
+                    <ul class="list-group list-group-flush p-3">
+                        <li class="list-group-item" routerLink="/angularTutorials" (click)="toggleMenu()" (click)="toggleMore('tutorials')">
+                            Angular
+                        </li>
+                    </ul>
+                </div>
+                <li class="list-group-item d-flex" routerLink="/covid" (click)="toggleMenu()">
+                    <div class="link-name flex-grow-1">
+                        <span>Covid-19</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex contact-button" routerLink="/contact" (click)="toggleMenu()">
+                    <div class="link-name flex-grow-1">
+                        <span>Contact Me</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex social-links">
+                    <div class="link-name flex-grow-1">
+                        <span class="d-flex justify-content-around">
+                            <i class="fab fa-github-square"></i>
+                            <i class="fab fa-linkedin"></i>
+                            <i class="fab fa-facebook-square"></i>
+                            <i class="fab fa-twitter-square"></i>
+                        </span>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex resume-button" (click)="openFile()">
+                    <div class="link-name flex-grow-1">
+                        <span>Resume</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="nav-bar-lrg">
+    <section class="navbar-container container d-flex flex-row align-items-center">
+        <div class="logo flex-grow-1">
+            <h1>Chattanooga Web Developer</h1>
+        </div>
+        <div class="nav-links d-flex flex-row justify-content-around">
+            <div routerLink="/">Home</div>
+            <div class="d-flex flex-column justify-content-center align-items-center" (click)="toggleMore('projects')">Web Apps
+                <div class="more-items" *ngIf="projects">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" routerLink="todo">
+                            Todo
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center align-items-center" (click)="toggleMore('tutorials')">Tutorials
+                <div class="more-items" *ngIf="tutorials">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" routerLink="angularTutorials">
+                            Angular
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div routerLink="/covid">Covid-19</div>
+            <div routerLink="/contact">Contact Me</div>
+            <div (click)="openFile()">Resume</div>
+        </div>
+    </section>
+</section>

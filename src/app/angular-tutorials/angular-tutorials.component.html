@@ -1,0 +1,23 @@
+<section class="angular-tutorials-container">
+    <div class="tutorial-heading-container p-2">
+        <h2 class="mt-2"><i class="far fa-file-code mr-2"></i>Angular Tutorials</h2>
+    </div>
+    <div class="angular-tutorial-list container d-flex flex-column justify-content-center align-items-center mb-5" *ngIf="angList.length > 0;">
+        <ng-container *ngFor="let item of angList; let i = index;">
+            <h3 class="mt-4">{{ item.title }}</h3>
+            <p>{{ item.body }}</p>
+            <div class="video-container">
+                <iframe
+                class="mx-2"
+                *ngFor="let vid of item.video; let j = index;"
+                [src]="vid.info | safe" 
+                frameborder="0"
+                width="350"
+                height="200"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </ng-container>
+    </div>
+</section>

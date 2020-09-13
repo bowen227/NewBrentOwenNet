@@ -1,0 +1,9 @@
+.donut-graph-container {
+    max-width: 800px;
+    margin: 0px auto;
+}
+
+.donut-graph-container span {
+    color: #CD5334;
+    font-weight: 600;
+}

@@ -1,0 +1,28 @@
+<section class="state-graph-container mb-5 p-2">
+    <h3 class="mb-3">State Data</h3>
+    <div class="inner-container">
+        <div *ngIf="states.length > 0">
+            <select class="form-control drop-down" #state (change)="sortData(state.value)">
+                <ng-container *ngFor="let state of states; let i = index;">
+                    <option [value]="state">{{ state }}</option>
+                </ng-container>
+            </select>
+        </div>
+        <div class="spinner-border text-danger" *ngIf="loading == true" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div *ngIf="showBarGraph == true && loading == false">
+            <canvas baseChart
+                [datasets]="barChartData"
+                [legend]="barChartLegend"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [chartType]="barChartType">
+            </canvas>
+        </div>
+        <div class="p-2">
+            <p style="margin-bottom: 0px;">State Mortality Rate <span>{{ stateDeathPerc | percent: '1.1-2' }}</span></p>
+            <small>*Based on (deaths / cases) which will greatly overestimate the mortality rate.</small>
+        </div>
+    </div>
+</section>

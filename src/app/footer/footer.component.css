@@ -1,0 +1,13 @@
+.footer-container {
+    background-color: #666666;
+}
+
+.footer-container i {
+    font-size: 3em;
+    color: #fff;
+}
+
+.link-name {
+    max-width: 400px;
+    margin: 0px auto;
+}

@@ -1,0 +1,34 @@
+.form-container {
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+.todo-list-container {
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+.completed-list-container {
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+h2 {
+    background-color: #666666;
+    color: #fff;
+}
+
+button {
+    background-color: #CD5334;
+    color: #fff;
+    margin-top: 15px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.checkbox {
+    width: 25px;
+    height: 25px;
+}

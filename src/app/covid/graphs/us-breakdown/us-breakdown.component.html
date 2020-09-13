@@ -1,0 +1,16 @@
+<section class="us-breakdown-container mb-5">
+    <h3 class="ml-2">US Breakdown</h3>
+    <div class="spinner-border text-danger" *ngIf="isLoading == true" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div *ngIf="newData.length > 0">
+        <div class="chart-container line-chart-large">
+            <canvas baseChart width="400" height="400"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType">
+            </canvas>
+        </div>
+    </div>
+</section>

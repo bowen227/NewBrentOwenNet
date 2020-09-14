@@ -23,6 +23,13 @@ import { UsBreakdownComponent } from './covid/graphs/us-breakdown/us-breakdown.c
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { TodoAppComponent } from './todo-app/todo-app.component';
 import { TodoComponent } from './todo-app/todo/todo.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
+import { LoginComponent } from './login/login.component';
 
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {
@@ -47,7 +54,8 @@ export class SafePipe implements PipeTransform {
     UsBreakdownComponent,
     ContactFormComponent,
     TodoAppComponent,
-    TodoComponent
+    TodoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -57,11 +65,36 @@ export class SafePipe implements PipeTransform {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    SocialLoginModule
   ],
   providers: [
     CovidService,
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '732591855904-surt36g10me569m9iuemqr5ptu9jqu8g.apps.googleusercontent.com'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId'),
+          },
+          {
+            id: AmazonLoginProvider.PROVIDER_ID,
+            provider: new AmazonLoginProvider(
+              'clientId'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

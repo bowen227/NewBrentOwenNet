@@ -23,4 +23,11 @@
             </li>
         </ul>
     </div>
+    <div class="popup-bottom-container p-2 d-flex flex-column" *ngIf="notSignedIn">
+        <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
+        <div>
+            <h3>You're not signed in!</h3>
+            <p>If you'd like to save your todo's please sign in. Otherwise, your todo's will not be saved when you leave this page.</p>
+        </div>
+    </div>
 </section>

@@ -9,6 +9,7 @@ export class NavbarComponent implements OnInit {
   public openMenu: boolean;
   public projects: boolean;
   public tutorials: boolean;
+  public isLoggedIn: boolean;
 
   constructor() { }
 
@@ -16,6 +17,17 @@ export class NavbarComponent implements OnInit {
     this.openMenu = false;
     this.projects = false;
     this.tutorials = false;
+
+    this.isSignedIn();
+  }
+
+  // Check If Signed In
+  public isSignedIn() {
+    if (localStorage.getItem('token')) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
   }
 
   public toggleMenu() {

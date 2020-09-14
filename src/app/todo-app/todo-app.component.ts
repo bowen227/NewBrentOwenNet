@@ -10,13 +10,29 @@ import { ToastrService } from 'ngx-toastr';
 export class TodoAppComponent implements OnInit {
   public groupForm: FormGroup;
   public todoGroups = [];
+  public isSignedIn: boolean = false;
+  public notSignedIn: boolean;
 
   constructor(private fb: FormBuilder, private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.initGroupForm();
-
+    this.signedIn();
     // this.todoGroups.push("Home Repair", "Landscaping", "Work");
+  }
+
+  // Check if signed in
+  public signedIn() {
+    if (localStorage.getItem('token')) {
+    this.isSignedIn = !this.isSignedIn;
+    } else {
+      this.notSignedIn = true;
+    }
+  }
+
+  // Close popup
+  public togglePopup() {
+    this.notSignedIn = !this.notSignedIn;
   }
 
   // Initialize GroupForm

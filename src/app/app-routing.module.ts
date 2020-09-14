@@ -6,6 +6,7 @@ import { CovidComponent } from './covid/covid.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { TodoAppComponent } from './todo-app/todo-app.component';
 import { TodoComponent } from './todo-app/todo/todo.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'covid', component: CovidComponent },
   { path: 'contact', component: ContactFormComponent },
   { path: 'todo', component: TodoAppComponent },
-  { path: 'todoList/:id', component: TodoComponent }
+  { path: 'todoList/:id', component: TodoComponent },
+  { path: 'signIn', component: LoginComponent }
 ];
 
 @NgModule({

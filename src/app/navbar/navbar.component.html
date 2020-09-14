@@ -122,6 +122,22 @@
                         <i class="fas fa-angle-right"></i>
                     </div>
                 </li>
+                <li class="list-group-item d-flex contact-button" *ngIf="!isLoggedIn" routerLink="/signIn" (click)="toggleMenu()">
+                    <div class="link-name flex-grow-1">
+                        <span>Sign In</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex contact-button" *ngIf="isLoggedIn" routerLink="/signIn" (click)="toggleMenu()">
+                    <div class="link-name flex-grow-1">
+                        <span>Sign Out</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-right"></i>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -155,6 +171,8 @@
             <div routerLink="/covid">Covid-19</div>
             <div routerLink="/contact">Contact Me</div>
             <div (click)="openFile()">Resume</div>
+            <div *ngIf="!isLoggedIn" routerLink="/signIn">Sign In</div>
+            <div *ngIf="isLoggedIn" routerLink="/signIn">Sign Out</div>
         </div>
     </section>
 </section>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocialAuthService, GoogleLoginProvider, SocialUser } from "angularx-social-login";
 
 @Component({
   selector: 'app-navbar',
@@ -6,28 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  public openMenu: boolean;
-  public projects: boolean;
-  public tutorials: boolean;
+  public openMenu: boolean = false;
+  public projects: boolean = false;
+  public tutorials: boolean = false;
   public isLoggedIn: boolean;
+  public user: SocialUser;
 
-  constructor() { }
+  constructor(private service: SocialAuthService) { }
 
   ngOnInit(): void {
-    this.openMenu = false;
-    this.projects = false;
-    this.tutorials = false;
-
-    this.isSignedIn();
-  }
-
-  // Check If Signed In
-  public isSignedIn() {
-    if (localStorage.getItem('token')) {
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
-    }
+    this.service.authState.subscribe((user) => {
+      this.user = user;
+      this.isLoggedIn = (user != null);
+    });
   }
 
   public toggleMenu() {

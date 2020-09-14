@@ -17,9 +17,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.service.authState.subscribe((user) => {
       this.user = user;
+      this.isLoggedIn = (user != null);
       if (user) {
-        localStorage.setItem('token', user.authToken);
-        this.isLoggedIn = true;
         this.toast.success('Login Successful', user.firstName);
       }
     });
@@ -31,9 +30,7 @@ export class LoginComponent implements OnInit {
 
   public signOut() {
     this.service.signOut();
-    localStorage.removeItem('token');
     this.toast.success('Logged out successfully');
-    this.isLoggedIn = false;
   }
 
 }

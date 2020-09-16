@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'covid', component: CovidComponent },
   { path: 'contact', component: ContactFormComponent },
   { path: 'todo', component: TodoAppComponent },
-  { path: 'todoList/:id', component: TodoComponent },
+  { path: 'todoList/:user/:todo', component: TodoComponent },
   { path: 'signIn', component: LoginComponent }
 ];
 

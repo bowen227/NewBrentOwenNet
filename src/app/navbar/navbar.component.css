@@ -10,7 +10,7 @@
     max-width: 2500px;
 }
 
-.logo h1 {
+h1 {
     font-size: 1.8em;
     font-weight: bolder;
     margin-bottom: 0px;
@@ -24,7 +24,13 @@
 .drop-down-menu {
     background-color: #fff;
     /* margin-top: 50px; */
-    height: 95%;
+    height: 100vh;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.links {
+    height: 100%;
 }
 
 .drop-down-menu span {
@@ -42,7 +48,7 @@
 }
 
 .social-links {
-    padding: 3em 0px;
+    padding: 2em 0px;
 }
 
 .resume-button {

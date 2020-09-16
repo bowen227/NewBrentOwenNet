@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./angular-tutorials.component.css']
 })
 export class AngularTutorialsComponent implements OnInit {
+  public loading: boolean = true;
 
   angList = [
     {
@@ -31,6 +32,12 @@ export class AngularTutorialsComponent implements OnInit {
 
   ngOnInit(): void {
     this.scrollToTop();
+  }
+
+  public onLoad() {
+    setTimeout(() => {
+    this.loading = false;
+    }, 1000);
   }
 
   public scrollToTop() {

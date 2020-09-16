@@ -7,7 +7,12 @@
             <h3 class="mt-4">{{ item.title }}</h3>
             <p>{{ item.body }}</p>
             <div class="video-container">
+                <div class="spinner-border text-danger" *ngIf="loading" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 <iframe
+                [hidden]="loading"
+                (load)="onLoad()"
                 class="mx-2"
                 *ngFor="let vid of item.video; let j = index;"
                 [src]="vid.info | safe" 

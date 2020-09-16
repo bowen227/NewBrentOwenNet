@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl, NgModel } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from "@angular/router";
+import { SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'app-todo',
@@ -11,15 +13,26 @@ export class TodoComponent implements OnInit {
   public todoForm: FormGroup;
   public todoItems = [];
   public completedTodos = [];
+  public user: SocialUser;
 
-  constructor(private fb: FormBuilder, private toast: ToastrService) { }
+  constructor(private fb: FormBuilder, private toast: ToastrService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      console.log(params);
+      this.user = params.user;
+    });
+
     this.initTodoForm();
+
+    this.scrollToTop();
   }
 
   // Initialize TodoForm
   public initTodoForm() {
+    if (this.user.name == null) {
+      this.toast.warning("Data Won't Save! Not Logged In!");
+    }
     return this.todoForm = this.fb.group({
       todoItem: '',
       completed: Boolean
@@ -49,6 +62,10 @@ export class TodoComponent implements OnInit {
   public completeTodo(i, item) {
     this.todoItems.splice(i, 1);
     this.completedTodos.push(item);
+  }
+
+  public scrollToTop() {
+    window.scroll(0, 0);
   }
 
 }

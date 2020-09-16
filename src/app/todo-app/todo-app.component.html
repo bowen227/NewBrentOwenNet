@@ -1,6 +1,7 @@
 <section class="todo-container">
     <h2 class="p-2"><i class="fas fa-clipboard-check mr-2"></i>Todo App</h2>
     <div class="form-container">
+        <h3 *ngIf="user != null">Welcome, {{ user.name }}</h3>
         <h3 class="ml-4 mt-3">Add Todo Group</h3>
         <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="groupForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
@@ -15,7 +16,7 @@
         <h5 *ngIf="todoGroups.length == 0">You haven't created any groups!</h5>
         <ul class="list-group list-group-flush" *ngIf="todoGroups.length > 0">
             <li class="list-group-item" *ngFor="let todo of todoGroups; let i = index;">
-                <div class="d-flex flex-row" [routerLink]="['/todoList', i]">
+                <div class="d-flex flex-row" [routerLink]="['/todoList', user, todo]">
                     <span class="flex-grow-1 mt-1">{{ todo }}</span>
                     <i class="far fa-edit m-2" (click)="edit(todo, i)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
@@ -23,11 +24,18 @@
             </li>
         </ul>
     </div>
-    <div class="popup-bottom-container p-2 d-flex flex-column" *ngIf="notSignedIn">
+    <div class="popup-bottom-container p-2 d-flex flex-column" *ngIf="!popup">
         <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
         <div>
             <h3>You're not signed in!</h3>
             <p>If you'd like to save your todo's please sign in. Otherwise, your todo's will not be saved when you leave this page.</p>
+        </div>
+    </div>
+    <div class="popup-bottom-container p-2 d-flex flex-column" *ngIf="user != null">
+        <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
+        <div>
+            <h3>You're signed in!</h3>
+            <p>Backend hasn't been implemented yet. You will not be able to save your data at this time.</p>
         </div>
     </div>
 </section>

@@ -15,6 +15,8 @@ export class ContactFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initContactForm();
+
+    this.scrollToTop();
   }
 
   // Initialize Contact Form
@@ -47,5 +49,9 @@ export class ContactFormComponent implements OnInit {
     });
 
     this.initContactForm();
+  }
+
+  public scrollToTop() {
+    window.scroll(0, 0);
   }
 }

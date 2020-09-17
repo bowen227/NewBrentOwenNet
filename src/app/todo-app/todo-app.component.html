@@ -14,12 +14,15 @@
     <div class="todo-groups-container p-5">
         <h3>Groups</h3>
         <h5 *ngIf="todoGroups.length == 0">You haven't created any groups!</h5>
-        <ul class="list-group list-group-flush" *ngIf="todoGroups.length > 0">
+        <div class="spinner-border text-danger" *ngIf="loadingGroups" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <ul class="list-group list-group-flush" *ngIf="todoGroups.length > 0 && !loadingGroups">
             <li class="list-group-item" *ngFor="let todo of todoGroups; let i = index;">
-                <div class="d-flex flex-row" [routerLink]="['/todoList', user, todo]">
-                    <span class="flex-grow-1 mt-1">{{ todo }}</span>
-                    <i class="far fa-edit m-2" (click)="edit(todo, i)"></i>
-                    <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
+                <div class="d-flex flex-row">
+                    <span class="flex-grow-1 mt-1 group" [routerLink]="['/todoList', user, todo]">{{ todo.groupName }}</span>
+                    <i class="far fa-edit m-2" (click)="edit(todo.id, todo.groupName, i)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="delete(todo.id, i, todo.groupName)"></i>
                 </div>
             </li>
         </ul>

@@ -25,6 +25,8 @@ export class TodoComponent implements OnInit {
 
     this.initTodoForm();
 
+    this.getTodosByGroup();
+
     this.scrollToTop();
   }
 
@@ -37,6 +39,11 @@ export class TodoComponent implements OnInit {
       todoItem: '',
       completed: Boolean
     })
+  }
+
+  // Get Todo's By Group
+  public getTodosByGroup() {
+    console.log(this.completeTodo, this.todoItems);
   }
 
   public onSubmit() {

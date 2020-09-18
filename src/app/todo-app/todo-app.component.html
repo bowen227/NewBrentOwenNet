@@ -20,7 +20,7 @@
         <ul class="list-group list-group-flush" *ngIf="todoGroups.length > 0 && !loadingGroups">
             <li class="list-group-item" *ngFor="let todo of todoGroups; let i = index;">
                 <div class="d-flex flex-row">
-                    <span class="flex-grow-1 mt-1 group" [routerLink]="['/todoList', user, todo]">{{ todo.groupName }}</span>
+                    <span class="flex-grow-1 mt-1 group" [routerLink]="['/todoList', todo.groupName]">{{ todo.groupName }}</span>
                     <i class="far fa-edit m-2" (click)="edit(todo.id, todo.groupName, i)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(todo.id, i, todo.groupName)"></i>
                 </div>

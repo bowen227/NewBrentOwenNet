@@ -18,7 +18,10 @@ export class TodoAppComponent implements OnInit {
   public isLoggedIn: boolean;
   public popup: boolean;
 
-  constructor(private fb: FormBuilder, private toast: ToastrService, private service: SocialAuthService, private tService: TodoService) { }
+  constructor(private fb: FormBuilder,
+              private toast: ToastrService,
+              private service: SocialAuthService,
+              private tService: TodoService) { }
 
   ngOnInit(): void {
     this.checkLogIn();
@@ -28,7 +31,6 @@ export class TodoAppComponent implements OnInit {
     this.getGroupsByUser();
 
     this.scrollToTop();
-    // this.todoGroups.push("Home Repair", "Landscaping", "Work");
   }
 
   // Check if signed in
@@ -123,14 +125,14 @@ export class TodoAppComponent implements OnInit {
               this.toast.success("Changed " + name + " to " + nGroup);
             });
           } else {
-            console.log("You didn't change the name");
+            this.toast.warning("You didn't change the name...");
           }
         }
       });
     } else {
       this.todoGroups.map(todo => {
         if (name == todo.groupName) {
-          let changed = window.prompt("Change " + name + " to?");
+          let changed = window.prompt("Change " + '"' + name + '"' + " to?");
 
           let nObj = { id: id, groupName: changed };
           this.todoGroups.splice(index, 1, nObj);

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
@@ -10,7 +10,7 @@ export class TodoService {
   constructor(private http: HttpClient) { }
 
   readonly GroupsURI = "https://localhost:5001/api/Group";
-  readonly TodosURI ="https://localhost:5001/Todo";
+  readonly TodosURI ="https://localhost:5001/api/Todo";
 
   // GET Group By User
   public getGroupsByUser(user) {
@@ -36,8 +36,7 @@ export class TodoService {
 
   // GET Todo By Group
   public getTodosByGroup(id, group) {
-    let data = { userId: id, groupName: group.groupName}
-    return this.http.get(this.TodosURI + '/' + data).pipe(map(res => res as JSON));
+    return this.http.get(this.TodosURI + '/' + id + '/' + group).pipe(map(res => res as JSON));
   }
 
   // POST New Item
@@ -47,7 +46,7 @@ export class TodoService {
 
   // PUT Item
   public updateItemName(todo) {
-    return this.http.put(`${this.TodosURI}/${todo.id}`, todo, { headers: new HttpHeaders({
+    return this.http.put(`${this.TodosURI}`, todo, { headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })}).pipe(map(res => res as any));
   }

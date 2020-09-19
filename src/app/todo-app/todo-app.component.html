@@ -27,7 +27,7 @@
             </li>
         </ul>
     </div>
-    <div class="popup-bottom-container d-flex flex-column justify-content-center align-items-center" *ngIf="!popup">
+    <div class="popup-bottom-container d-flex flex-column justify-content-center align-items-center" *ngIf="user == null && !popup">
         <!-- <div class="arrow">
             <i class="fas fa-location-arrow"></i>
         </div> -->
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="popup-bottom-container d-flex flex-column justify-content-center align-items-center" *ngIf="user != null">
+    <div class="popup-bottom-container d-flex flex-column justify-content-center align-items-center" *ngIf="user != null && popup">
         <div class="popup-container p-2 d-flex flex-column">
             <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
             <div>

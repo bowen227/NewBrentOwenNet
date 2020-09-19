@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from "@angular/router";
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { TodoService } from 'src/app/shared/todo.service';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-todo',
@@ -62,10 +63,19 @@ export class TodoComponent implements OnInit {
     if (this.user != null) {
       this.loadingTodos = true;
       this.tService.getTodosByGroup(this.user.id, this.group).subscribe(res => {
-        // Push Completed to completedTodos
-        // Push Not Completed to todoItems
         let data = [];
-        data.push(res);
+        for (const key in res) {
+          if (Object.prototype.hasOwnProperty.call(res, key)) {
+            const element = res[key];
+            let todo = {
+              id: element.id,
+              groupName: element.groupName,
+              todo: element.todo,
+              completed: element.completed
+            }
+            data.push(todo);
+          }
+        }
         for (const key in data) {
           if (Object.prototype.hasOwnProperty.call(data, key)) {
             const element = data[key];
@@ -89,12 +99,13 @@ export class TodoComponent implements OnInit {
     if (this.user != null) {
       let nTodo = {
         userId: this.user.id,
-        groupName: this.group.groupName,
+        groupName: this.group,
         todo: data.todoItem,
         completed: false
       };
 
       this.tService.addNewTodoToGroup(nTodo).subscribe(res => {
+        // console.log(res);
         this.todoItems.push(res);
       });
       this.initTodoForm();
@@ -108,14 +119,16 @@ export class TodoComponent implements OnInit {
   }
 
   public edit(todo, i) {
+    // console.log(todo);
     if (this.user != null) {
       this.todoItems.map(item => {
         if (item.id == todo.id) {
-          let nTodo = window.prompt("Change " + todo.todoItem + " to?");
+          let nTodo = window.prompt("Change " + todo.todo + " to?");
 
           let nObj = {
+            id: todo.id,
             userId: this.user.id,
-            groupName: this.group.groupName,
+            groupName: this.group,
             todo: nTodo,
             completed: false
           }
@@ -123,13 +136,14 @@ export class TodoComponent implements OnInit {
           if (nTodo != null) {
             this.tService.updateItemName(nObj).subscribe(res => {
               let updatedTodoName = {
+                id: res.id,
                 userId: this.user.id,
                 groupName: this.group.groupName,
-                todo: res.todoItem,
+                todo: res.todo,
                 completed: false
               }
               this.todoItems.splice(i, 1, updatedTodoName);
-              this.toast.success("Changed " + todo.todoItem + " to " + res.todoItem);
+              this.toast.success("Changed " + todo.todo + " to " + res.todo);
             });
           } else {
             this.toast.warning("You didn't change the name...");
@@ -161,9 +175,32 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  public completeTodo(i, item) {
-    this.todoItems.splice(i, 1);
-    this.completedTodos.push(item);
+  public completeTodo(item, i) {
+    if (this.user != null) {
+      this.todoItems.map(todo => {
+        if (todo.id == item.id) {
+          let cTodo = {
+            id: item.id,
+            userId: this.user.id,
+            groupName: this.group,
+            todo: item.todo,
+            completed: true
+          }
+
+          this.tService.updateItemName(cTodo).subscribe(res => {
+            // console.log(res.todo);
+            this.todoItems.splice(i, 1);
+            this.completedTodos.push(res);
+            this.toast.success("You've completed " + res.todo);
+          });
+        }
+      });
+    } else {
+      this.todoItems.splice(i, 1);
+      this.completedTodos.push(item);
+      console.log(item);
+      this.toast.success("You've completed " + item.todoItem);
+    }
   }
 
   public scrollToTop() {

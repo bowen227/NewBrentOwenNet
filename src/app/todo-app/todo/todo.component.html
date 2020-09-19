@@ -17,8 +17,8 @@
         <ul class="list-group list-group-flush" *ngIf="todoItems.length > 0">
             <li class="list-group-item" *ngFor="let item of todoItems; let i = index;">
                 <div class="d-flex flex-row align-items-center">
-                    <input type="checkbox" class="checkbox mr-2" (click)="completeTodo(i, item)">
-                    <span class="flex-grow-1 mt-1">{{ item.todoItem }}</span>
+                    <input type="checkbox" class="checkbox mr-2" (click)="completeTodo(item, i)">
+                    <span class="flex-grow-1 mt-1">{{ item.todo }}</span>
                     <i class="far fa-edit m-2" (click)="edit(item, i)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(item.id, i)"></i>
                 </div>
@@ -30,7 +30,7 @@
         <h5 *ngIf="completedTodos.length == 0">You haven't completed any Todo's!</h5>
         <ul class="list-group list-group-flush" *ngIf="completedTodos.length > 0">
             <li class="list-group-item" *ngFor="let item of completedTodos; let i = index;">
-                {{ item.todoItem }}
+                {{ item.todo }}
             </li>
         </ul>
     </div>

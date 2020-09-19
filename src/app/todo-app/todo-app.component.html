@@ -27,18 +27,25 @@
             </li>
         </ul>
     </div>
-    <div class="popup-bottom-container p-2 d-flex flex-column" *ngIf="!popup">
-        <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
-        <div>
-            <h3>You're not signed in!</h3>
-            <p>If you'd like to save your todo's please sign in. Otherwise, your todo's will not be saved when you leave this page.</p>
+    <div class="popup-bottom-container d-flex flex-column justify-content-center align-items-center" *ngIf="!popup">
+        <!-- <div class="arrow">
+            <i class="fas fa-location-arrow"></i>
+        </div> -->
+        <div class="popup-container p-2 d-flex flex-column">
+            <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
+            <div>
+                <h3>You're not signed in!</h3>
+                <p>If you'd like to save your groups please sign in. Otherwise, your groups will not be saved when you leave this page.</p>
+            </div>
         </div>
     </div>
-    <div class="popup-bottom-container p-2 d-flex flex-column" *ngIf="user != null">
-        <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
-        <div>
-            <h3>You're signed in!</h3>
-            <p>Backend hasn't been implemented yet. You will not be able to save your data at this time.</p>
+    <div class="popup-bottom-container d-flex flex-column justify-content-center align-items-center" *ngIf="user != null">
+        <div class="popup-container p-2 d-flex flex-column">
+            <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
+            <div>
+                <h3>You're signed in!</h3>
+                <p>Backend hasn't been implemented yet. You will not be able to save your data at this time.</p>
+            </div>
         </div>
     </div>
 </section>

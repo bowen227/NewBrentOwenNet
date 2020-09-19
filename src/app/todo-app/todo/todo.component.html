@@ -30,7 +30,7 @@
         <h5 *ngIf="completedTodos.length == 0">You haven't completed any Todo's!</h5>
         <ul class="list-group list-group-flush" *ngIf="completedTodos.length > 0">
             <li class="list-group-item" *ngFor="let item of completedTodos; let i = index;">
-                {{ item }}
+                {{ item.todoItem }}
             </li>
         </ul>
     </div>

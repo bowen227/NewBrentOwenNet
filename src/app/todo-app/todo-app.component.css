@@ -1,7 +1,3 @@
-.todo-container {
-    min-height: 680px;
-}
-
 .form-container {
     max-width: 400px;
     margin: 0px auto;
@@ -24,14 +20,20 @@ button {
 }
 
 .popup-bottom-container {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
     width: 100%;
-    top: 65px;
+    height: 100%;
+    top: 0;
 }
 
-.popup-bottom-container i {
+.popup-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    width: 100%;
+}
+
+.popup-container i {
     font-size: 20px;
 }
 
@@ -44,18 +46,8 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
-    .todo-container {
-        min-height: 880px;
-    }
 
-    .popup-bottom-container {
+    .popup-container {
         max-width: 400px;
-        right: 0;
-    }
-}
-
-@media only screen and (min-width: 1024px) {
-    .todo-container {
-        min-height: 1220px;
     }
 }

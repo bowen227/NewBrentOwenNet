@@ -111,9 +111,14 @@ export class TodoComponent implements OnInit {
       this.initTodoForm();
       this.toast.success(data.todoItem, 'New item added');
     } else {
-      this.todoItems.push(data);
+      let nTodo = {
+        groupName: this.group,
+        todo: data.todoItem,
+        completed: false
+      };
+      this.todoItems.push(nTodo);
       this.initTodoForm();
-      this.toast.success(data.todoItem, 'New item added');
+      this.toast.success(nTodo.todo, 'New item added');
     }
     
   }
@@ -152,12 +157,12 @@ export class TodoComponent implements OnInit {
       });
     } else {
       this.todoItems.map(item => {
-        if (item.todoItem == todo.todoItem) {
-          let changed = window.prompt("Change " + '"' + item.todoItem + '"' + " to?");
+        if (item.todo == todo.todo) {
+          let changed = window.prompt("Change " + '"' + item.todo + '"' + " to?");
 
-          let nObj = { todoItem: changed, completed: false };
+          let nObj = { todo: changed, completed: false };
           this.todoItems.splice(i, 1, nObj);
-          this.toast.success("Changed " + todo.todoItem + " to " + changed);
+          this.toast.success("Changed " + todo.todo + " to " + changed);
         }
       });
     }

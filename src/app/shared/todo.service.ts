@@ -9,8 +9,10 @@ export class TodoService {
 
   constructor(private http: HttpClient) { }
 
-  readonly GroupsURI = "https://localhost:5001/api/Group";
-  readonly TodosURI ="https://localhost:5001/api/Todo";
+  // readonly GroupsURI = "https://localhost:5001/api/Group";
+  readonly GroupsURI = "https://exerciselist.azurewebsites.net/api/Group";
+  // readonly TodosURI ="https://localhost:5001/api/Todo";
+  readonly TodosURI = "https://exerciselist.azurewebsites.net/api/Todo";
 
   // GET Group By User
   public getGroupsByUser(user) {

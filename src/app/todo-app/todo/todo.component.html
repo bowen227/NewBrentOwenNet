@@ -1,8 +1,8 @@
 <section class="todo-container">
-    <h2 class="p-2"><i class="fas fa-list-ul mr-2"></i>Todo List</h2>
+    <h2 class="p-2"><i class="fas fa-list-ul mr-2"></i>To-Do List</h2>
     <h3 class="p-2" routerLink="/todo"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Groups</h3>
     <div class="form-container">
-        <h3 class="ml-4 mt-3">Add Todo To "{{ group }}"</h3>
+        <h3 class="ml-4 mt-3">Add To-Do To "{{ group }}"</h3>
         <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="groupName">Todo Name</label>
@@ -13,7 +13,10 @@
     </div>
     <div class="todo-list-container p-5">
         <h3>Todo</h3>
-        <h5 *ngIf="todoItems.length == 0">You haven't added any Todo items!</h5>
+        <h5 *ngIf="todoItems.length == 0">You haven't added any To-Do items!</h5>
+        <div class="spinner-border text-danger" *ngIf="loadingTodos" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
         <ul class="list-group list-group-flush" *ngIf="todoItems.length > 0">
             <li class="list-group-item" *ngFor="let item of todoItems; let i = index;">
                 <div class="d-flex flex-row align-items-center">
@@ -27,7 +30,7 @@
     </div>
     <div class="completed-list-container p-5">
         <h3>Completed</h3>
-        <h5 *ngIf="completedTodos.length == 0">You haven't completed any Todo's!</h5>
+        <h5 *ngIf="completedTodos.length == 0">You haven't completed any To-Do's!</h5>
         <ul class="list-group list-group-flush" *ngIf="completedTodos.length > 0">
             <li class="list-group-item" *ngFor="let item of completedTodos; let i = index;">
                 {{ item.todo }}

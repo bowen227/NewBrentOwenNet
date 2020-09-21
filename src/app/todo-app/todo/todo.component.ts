@@ -87,6 +87,7 @@ export class TodoComponent implements OnInit {
           }
         }
       });
+      this.loadingTodos = false;
     } else {
       console.log(this.completedTodos, this.todoItems);
     }

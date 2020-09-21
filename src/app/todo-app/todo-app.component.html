@@ -2,7 +2,7 @@
     <h2 class="p-2"><i class="fas fa-clipboard-check mr-2"></i>Todo App</h2>
     <div class="form-container">
         <h3 *ngIf="user != null">Welcome, {{ user.name }}</h3>
-        <h3 class="ml-4 mt-3">Add Todo Group</h3>
+        <h3 class="ml-4 mt-3">Add To-Do Group</h3>
         <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="groupForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="groupName">Group Name</label>
@@ -13,7 +13,7 @@
     </div>
     <div class="todo-groups-container p-5">
         <h3>Groups</h3>
-        <h5 *ngIf="todoGroups.length == 0">You haven't created any groups!</h5>
+        <h5 *ngIf="todoGroups.length == 0 && !loadingGroups">You haven't created any groups!</h5>
         <div class="spinner-border text-danger" *ngIf="loadingGroups" role="status">
             <span class="sr-only">Loading...</span>
         </div>

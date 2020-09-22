@@ -13,11 +13,28 @@ export class CrmAppComponent implements OnInit {
   public user: SocialUser;
   public contactForm: FormGroup;
   public editForm: FormGroup;
+  public showNewContactForm: boolean = false;
   public showEditForm: boolean = false;
   public isLoading: boolean = false;
   public isLoggedIn: boolean;
   public popup: boolean;
-  public contacts = [];
+  public contacts = [
+    { id: 0, firstName: 'Brent', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+    { id: 1, firstName: 'Brandon', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+    { id: 2, firstName: 'Easton', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+    { id: 3, firstName: 'Kelly', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+    { id: 4, firstName: 'Emily', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+    { id: 5, firstName: 'Cindy', lastName: 'Thompson', company: '', phone: '', fax: '', email: '' },
+    { id: 6, firstName: 'Beverly', lastName: 'Stakely', company: '', phone: '', fax: '', email: '' },
+    { id: 7, firstName: 'David', lastName: 'Thomas', company: '', phone: '', fax: '', email: '' },
+    { id: 8, firstName: 'Mark', lastName: 'Sawyer', company: '', phone: '', fax: '', email: '' },
+    { id: 9, firstName: 'Jason', lastName: 'Shelton', company: '', phone: '', fax: '', email: '' },
+    { id: 10, firstName: 'Staci', lastName: 'Saffles', company: '', phone: '', fax: '', email: '' },
+    { id: 11, firstName: 'Amber', lastName: 'Scroggins', company: '', phone: '', fax: '', email: '' },
+  ];
+  public searchTerm = '';
+  public showSearched: boolean = false;
+  public searchedContacts = [];
 
   constructor(private fb: FormBuilder,
               private toast: ToastrService,
@@ -26,8 +43,6 @@ export class CrmAppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkLogIn();
-
-    this.initContactForm();
   }
 
   // Check if signed in
@@ -46,52 +61,61 @@ export class CrmAppComponent implements OnInit {
     }
   }
 
+  // Show New Contact From or Edit Form
+  public showForm(id) {
+    if (id == 'new') {
+      this.showNewContactForm = true;
+      this.initContactForm('new');
+    } else {
+      this.showEditForm = true;
+      this.initContactForm(id);
+    }
+  }
+
   // Initialize ContactForm
-  public initContactForm() {
-    return this.contactForm = this.fb.group({
-      firstName: '',
-      lastName: ''
-    });
+  public initContactForm(id) {
+    if (id == 'new') {
+      return this.contactForm = this.fb.group({
+        id: this.contacts.length,
+        firstName: '',
+        lastName: '',
+        company: '',
+        phone: '',
+        fax: '',
+        email: ''
+      });
+    } else {
+      this.contacts.map(contact => {
+        if (id == contact.id) {
+          this.contactForm = this.fb.group({
+            id: id,
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            company: contact.company,
+            phone: contact.phone,
+            fax: contact.fax,
+            email: contact.email
+          });
+          this.showEditForm = true;
+        }
+      });
+    }
   }
 
   public onSubmit() {
-    this.isLoading = true;
-    
-    const data = this.contactForm.value;
-
-    let contact = {
-      id: this.contacts.length,
-      firstName: data.firstName,
-      lastName: data.lastName
-    };
-
-    this.contacts.push(contact);
-    this.initContactForm();
-    this.isLoading = false;
-  }
-
-  public initEditForm(id) {
-    this.contacts.map(contact => {
-      if (id == contact.id) {
-        this.showEditForm = true;
-        this.editForm = this.fb.group({
-          id: id,
-          firstName: contact.firstName,
-          lastName: contact.lastName,
-          company: '',
-          phone: '',
-          fax: '',
-          email: ''
-        });
+    let data = this.contactForm.value;
+    if (data.firstName == '') {
+      this.showNewContactForm = false;
+      this.showEditForm = false;
+    } else {
+      if (this.showEditForm) {
+        this.contacts.splice(data.id, 1, data);
+        this.showEditForm = false;
+      } else {
+        this.contacts.push(data);
+        this.showNewContactForm = false;
       }
-    });
-  }
-
-  public onEdit() {
-    let data = this.editForm.value;
-
-    this.contacts.splice(data.id, 1, data);
-    this.showEditForm = false;
+    }
   }
 
   public delete(index) {
@@ -100,6 +124,25 @@ export class CrmAppComponent implements OnInit {
 
   public contactDetails(contact) {
     this.route.navigate(['/details', JSON.stringify(contact)]);
+  }
+
+  public searchContact(event) {
+    if (this.searchedContacts.length > 0) {
+      this.searchedContacts = [];
+      this.contacts.map(contact => {
+        if (contact.firstName.toLowerCase().includes(event.toLowerCase())) {
+          this.searchedContacts.push(contact);
+        }
+      });
+      this.showSearched = true;
+    } else {
+      this.contacts.map(contact => {
+        if (contact.firstName.toLocaleLowerCase().includes(event.toLowerCase())) {
+          this.searchedContacts.push(contact);
+        }
+      });
+      this.showSearched = true;
+    }
   }
 
 }

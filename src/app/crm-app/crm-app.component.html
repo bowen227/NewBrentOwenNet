@@ -1,8 +1,8 @@
 <section class="main-container">
     <h2 class="p-2"><i class="fas fa-tasks mr-2"></i>CRM App</h2>
     <div class="form-container">
-        <h3 class="ml-4 mt-3">Add New Contact</h3>
-        <form class="container d-flex flex-column justify-content-around" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <h3 class="ml-4 mt-3">Add New Contact<i class="fas fa-plus-square ml-3" (click)="showForm('new')"></i></h3>
+        <!-- <form class="container d-flex flex-column justify-content-around" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" formControlName="firstName">
@@ -12,55 +12,69 @@
                 <input type="text" class="form-control" formControlName="lastName">
             </div>
             <button type="submit" class="btn">Submit</button>
-        </form>
+        </form> -->
     </div>
-    <div class="contact-container p-5">
+    <div class="p-4 search-box-container form-group" *ngIf="contacts.length > 10;">
+        <label for="searchTerm">Search Contacts</label>
+        <input type="text" class="form-control" name="searchTerm" [(ngModel)]="searchTerm" (ngModelChange)="searchContact($event)">
+    </div>
+    <div class="contact-container p-4">
         <h3>Contacts</h3>
         <h5 *ngIf="!isLoading && contacts.length == 0">You haven't created any contacts!</h5>
         <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-        <ul class="list-group list-group-flush" *ngIf="contacts.length > 0 && !isLoading">
+        <ul class="list-group list-group-flush" *ngIf="contacts.length > 0 && !showSearched">
             <li class="list-group-item" *ngFor="let c of contacts; let i = index;">
                 <div class="d-flex flex-row">
                     <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
                     <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { id: c.id, firstName: c.firstName, lastName: c.lastName }]">{{ c.firstName }} {{ c.lastName }}</span>
-                    <i class="far fa-edit m-2" (click)="initEditForm(c.id)"></i>
+                    <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
+                </div>
+            </li>
+        </ul>
+        <ul class="list-group list-group-flush" *ngIf="showSearched">
+            <li class="list-group-item" *ngFor="let c of searchedContacts; let i = index;">
+                <div class="d-flex flex-row">
+                    <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
+                    <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { id: c.id, firstName: c.firstName, lastName: c.lastName }]">{{ c.firstName }} {{ c.lastName }}</span>
+                    <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
                 </div>
             </li>
         </ul>
     </div>
-    <div class="edit-form-container d-flex flex-column justify-content-center align-items-center" *ngIf="showEditForm">
+    <div class="edit-form-container d-flex flex-column justify-content-center align-items-center" *ngIf="showNewContactForm || showEditForm">
         <div class="edit-form">
-        <h3 class="ml-4 mt-3">Edit Contact</h3>
-        <form class="container d-flex flex-column justify-content-around" [formGroup]="editForm" (ngSubmit)="onEdit()">
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" class="form-control" formControlName="firstName">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" formControlName="lastName">
-            </div>
-            <div class="form-group">
-                <label for="company">Company Name</label>
-                <input type="text" class="form-control" formControlName="company">
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" formControlName="phone">
-            </div>
-            <div class="form-group">
-                <label for="fax">Fax</label>
-                <input type="text" class="form-control" formControlName="fax">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" formControlName="email">
-            </div>
-            <button type="submit" class="btn">Save</button>
-        </form>
+            <h3 class="ml-4 mt-3">Edit Contact</h3>
+            <form class="container d-flex flex-column justify-content-around" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="firstName">First Name  *</label>
+                    <input type="text" class="form-control" formControlName="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name  *</label>
+                    <input type="text" class="form-control" formControlName="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" class="form-control" formControlName="company">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" formControlName="phone">
+                </div>
+                <div class="form-group">
+                    <label for="fax">Fax</label>
+                    <input type="text" class="form-control" formControlName="fax">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" formControlName="email">
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
         </div>
     </div>
 </section>

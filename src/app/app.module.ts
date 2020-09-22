@@ -30,6 +30,8 @@ import {
   AmazonLoginProvider,
 } from 'angularx-social-login';
 import { LoginComponent } from './login/login.component';
+import { CrmAppComponent } from './crm-app/crm-app.component';
+import { ContactDetailsComponent } from './crm-app/contact-details/contact-details.component';
 
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {
@@ -55,7 +57,9 @@ export class SafePipe implements PipeTransform {
     ContactFormComponent,
     TodoAppComponent,
     TodoComponent,
-    LoginComponent
+    LoginComponent,
+    CrmAppComponent,
+    ContactDetailsComponent
   ],
   imports: [
     BrowserModule,

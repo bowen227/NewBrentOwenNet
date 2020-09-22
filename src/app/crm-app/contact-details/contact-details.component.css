@@ -1,0 +1,33 @@
+h2 {
+    background-color: #666666;
+    color: #fff;
+}
+
+.contact {
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+.task-form-container {
+    max-width: 400px;
+    margin: 0px auto;
+}
+
+.task-container {
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+.task:hover {
+    cursor: pointer;
+}
+
+.task-container i:hover {
+    cursor: pointer;
+}
+
+button {
+    background-color: #CD5334;
+    color: #fff;
+    margin-top: 15px;
+}

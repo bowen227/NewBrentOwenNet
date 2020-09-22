@@ -1,0 +1,36 @@
+<section class="details-container">
+    <h2 class="p-2"><i class="fas fa-tasks mr-2"></i>Contact Tasks</h2>
+    <h3 class="p-2" routerLink="/crm"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Contacts</h3>
+    <div class="contact p-4">
+        <h4>{{ contact.firstName }} {{ contact.lastName}}</h4>
+        <!-- <h4>Phone</h4>
+        {{ contact.phone }}
+        <h4>Fax</h4>
+        {{ contact.fax }}
+        <h4>Email</h4>
+        {{ contact.email }} -->
+    </div>
+    <div class="task-form-container">
+        <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="task">Task Name</label>
+                <input type="text" class="form-control" formControlName="task">
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+    <div class="task-container">
+        <h3 class="ml-4 mt-3">Tasks</h3>
+        <ul class="list-group list-group-flush" *ngIf="tasks.length > 0">
+            <li class="list-group-item" *ngFor="let t of tasks; let i = index">
+                <div class="d-flex flex-row align-items-center">
+                    <!-- <input type="checkbox" class="checkbox mr-2" (click)="completeTask(i)"> -->
+                    <span class="mt-1 mr-3">{{ t.date | date }}</span>
+                    <span class="flex-grow-1 mt-1 task">{{ t.task }}</span>
+                    <i class="far fa-edit m-2" (click)="edit(i)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

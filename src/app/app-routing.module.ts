@@ -7,6 +7,8 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { TodoAppComponent } from './todo-app/todo-app.component';
 import { TodoComponent } from './todo-app/todo/todo.component';
 import { LoginComponent } from './login/login.component';
+import { CrmAppComponent } from './crm-app/crm-app.component';
+import { ContactDetailsComponent } from './crm-app/contact-details/contact-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +17,9 @@ const routes: Routes = [
   { path: 'contact', component: ContactFormComponent },
   { path: 'todo', component: TodoAppComponent },
   { path: 'todoList/:todo', component: TodoComponent },
-  { path: 'signIn', component: LoginComponent }
+  { path: 'signIn', component: LoginComponent },
+  { path: 'crm', component: CrmAppComponent },
+  { path: 'details', component: ContactDetailsComponent }
 ];
 
 @NgModule({

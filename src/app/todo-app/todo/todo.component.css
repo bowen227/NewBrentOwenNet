@@ -3,6 +3,10 @@
     margin: 0px auto;
 }
 
+.back:hover {
+    cursor: pointer;
+}
+
 .todo-list-container {
     max-width: 500px;
     margin: 0px auto;
@@ -26,6 +30,10 @@ button {
 
 ul {
     list-style-type: none;
+}
+
+.todo input:hover, .todo i:hover {
+    cursor: pointer;
 }
 
 .checkbox {

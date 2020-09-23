@@ -37,6 +37,10 @@ button {
     font-size: 20px;
 }
 
+.popup-container i:hover {
+    cursor: pointer;
+}
+
 .group:hover {
     cursor: pointer;
 }

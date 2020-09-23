@@ -38,7 +38,7 @@
             <li class="list-group-item" *ngFor="let c of searchedContacts; let i = index;">
                 <div class="d-flex flex-row">
                     <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
-                    <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { id: c.id, firstName: c.firstName, lastName: c.lastName }]">{{ c.firstName }} {{ c.lastName }}</span>
+                    <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { id: c.id, firstName: c.firstName, lastName: c.lastName, company: c.company, phone: c.phone, fax: c.fax, email: c.email }]">{{ c.firstName }} {{ c.lastName }}</span>
                     <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
                 </div>
@@ -75,6 +75,19 @@
                 </div>
                 <button type="submit" class="btn">Save</button>
             </form>
+        </div>
+    </div>
+    <div class="indev-container d-flex flex-column align-items-center justify-content-center" *ngIf="indevPopup">
+        <div class="indev d-flex flex-column align-items-center justify-content-center p-3">
+            <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
+            <div>
+                <h3>Currently in development</h3>
+                <p>Backend not implemented. Some funtions not working or completed.</p>
+                <p>
+                    You are able to add contacts and go to contact details page however, your information will not
+                    save on page change.
+                </p>
+            </div>
         </div>
     </div>
 </section>

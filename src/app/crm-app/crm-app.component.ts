@@ -18,23 +18,25 @@ export class CrmAppComponent implements OnInit {
   public isLoading: boolean = false;
   public isLoggedIn: boolean;
   public popup: boolean;
-  public contacts = [
-    { id: 0, firstName: 'Brent', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-    { id: 1, firstName: 'Brandon', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-    { id: 2, firstName: 'Easton', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-    { id: 3, firstName: 'Kelly', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-    { id: 4, firstName: 'Emily', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-    { id: 5, firstName: 'Cindy', lastName: 'Thompson', company: '', phone: '', fax: '', email: '' },
-    { id: 6, firstName: 'Beverly', lastName: 'Stakely', company: '', phone: '', fax: '', email: '' },
-    { id: 7, firstName: 'David', lastName: 'Thomas', company: '', phone: '', fax: '', email: '' },
-    { id: 8, firstName: 'Mark', lastName: 'Sawyer', company: '', phone: '', fax: '', email: '' },
-    { id: 9, firstName: 'Jason', lastName: 'Shelton', company: '', phone: '', fax: '', email: '' },
-    { id: 10, firstName: 'Staci', lastName: 'Saffles', company: '', phone: '', fax: '', email: '' },
-    { id: 11, firstName: 'Amber', lastName: 'Scroggins', company: '', phone: '', fax: '', email: '' },
-  ];
+  // public contacts = [
+  //   { id: 0, firstName: 'Brent', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+  //   { id: 1, firstName: 'Brandon', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+  //   { id: 2, firstName: 'Easton', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+  //   { id: 3, firstName: 'Kelly', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+  //   { id: 4, firstName: 'Emily', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
+  //   { id: 5, firstName: 'Cindy', lastName: 'Thompson', company: '', phone: '', fax: '', email: '' },
+  //   { id: 6, firstName: 'Beverly', lastName: 'Stakely', company: '', phone: '', fax: '', email: '' },
+  //   { id: 7, firstName: 'David', lastName: 'Thomas', company: '', phone: '', fax: '', email: '' },
+  //   { id: 8, firstName: 'Mark', lastName: 'Sawyer', company: '', phone: '', fax: '', email: '' },
+  //   { id: 9, firstName: 'Jason', lastName: 'Shelton', company: '', phone: '', fax: '', email: '' },
+  //   { id: 10, firstName: 'Staci', lastName: 'Saffles', company: '', phone: '', fax: '', email: '' },
+  //   { id: 11, firstName: 'Amber', lastName: 'Scroggins', company: '', phone: '', fax: '', email: '' },
+  // ];
+  public contacts = [];
   public searchTerm = '';
   public showSearched: boolean = false;
   public searchedContacts = [];
+  public indevPopup: boolean = true;
 
   constructor(private fb: FormBuilder,
               private toast: ToastrService,
@@ -143,6 +145,10 @@ export class CrmAppComponent implements OnInit {
       });
       this.showSearched = true;
     }
+  }
+
+  public togglePopup() {
+    this.indevPopup = !this.indevPopup;
   }
 
 }

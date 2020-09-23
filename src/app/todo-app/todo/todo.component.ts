@@ -193,7 +193,7 @@ export class TodoComponent implements OnInit {
             completed: true
           }
 
-          this.tService.updateItemName(cTodo).subscribe(res => {
+            this.tService.updateItemName(cTodo).subscribe(res => {
             // console.log(res.todo);
             this.todoItems.splice(i, 1);
             this.completedTodos.push(res);

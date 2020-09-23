@@ -41,6 +41,7 @@ export class ContactDetailsComponent implements OnInit {
       fax: this.route.snapshot.paramMap.get('fax'),
       email: this.route.snapshot.paramMap.get('email')
     }
+
     this.contact = c;
   }
 

@@ -28,7 +28,7 @@
             <li class="list-group-item" *ngFor="let c of contacts; let i = index;">
                 <div class="d-flex flex-row">
                     <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
-                    <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { id: c.id, firstName: c.firstName, lastName: c.lastName }]">{{ c.firstName }} {{ c.lastName }}</span>
+                    <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { firstName: c.firstName, lastName: c.lastName, company: c.company, phone: c.phone, fax: c.fax, email: c.email }]">{{ c.firstName }} {{ c.lastName }}</span>
                     <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
                 </div>
@@ -38,8 +38,9 @@
             <li class="list-group-item" *ngFor="let c of searchedContacts; let i = index;">
                 <div class="d-flex flex-row">
                     <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
-                    <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { id: c.id, firstName: c.firstName, lastName: c.lastName, company: c.company, phone: c.phone, fax: c.fax, email: c.email }]">{{ c.firstName }} {{ c.lastName }}</span>
+                    <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { firstName: c.firstName, lastName: c.lastName, company: c.company, phone: c.phone, fax: c.fax, email: c.email }]">{{ c.firstName }} {{ c.lastName }}</span>
                     <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
+                    
                     <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
                 </div>
             </li>
@@ -63,11 +64,11 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="text" class="form-control" formControlName="phone">
+                    <input type="tel" class="form-control" formControlName="phone">
                 </div>
                 <div class="form-group">
                     <label for="fax">Fax</label>
-                    <input type="text" class="form-control" formControlName="fax">
+                    <input type="tel" class="form-control" formControlName="fax">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>

@@ -11,7 +11,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContactDetailsComponent implements OnInit {
   public user = SocialUser;
-  public contact;
+  public company;
+  public contacts = [];
+  public showNewContactForm: boolean = false;
+  public showEditContactForm: boolean = false;
+  public contactForm: FormGroup;
   public taskForm: FormGroup;
   public tasks = [];
   public completedTasks = [];
@@ -34,15 +38,77 @@ export class ContactDetailsComponent implements OnInit {
   public getData() {
     let c = {
       id: this.route.snapshot.paramMap.get('id'),
-      firstName: this.route.snapshot.paramMap.get('firstName'),
-      lastName: this.route.snapshot.paramMap.get('lastName'),
       company: this.route.snapshot.paramMap.get('company'),
+      street: this.route.snapshot.paramMap.get('street'),
+      city: this.route.snapshot.paramMap.get('city'),
+      state: this.route.snapshot.paramMap.get('state'),
+      zip: this.route.snapshot.paramMap.get('zip'),
       phone: this.route.snapshot.paramMap.get('phone'),
-      fax: this.route.snapshot.paramMap.get('fax'),
-      email: this.route.snapshot.paramMap.get('email')
+      fax: this.route.snapshot.paramMap.get('fax')
     }
 
-    this.contact = c;
+    this.company = c;
+  }
+
+  // Show Add Contact Form
+  public showForm(index) {
+    if (index == 'new') {
+      this.showNewContactForm = true;
+      this.initContactForm('new');
+    } else {
+      this.showEditContactForm = true;
+      this.initContactForm(index);
+    }
+  }
+
+  // Initialize Contact Form
+  public initContactForm(index) {
+    if (index == 'new') {
+      return this.contactForm = this.fb.group({
+        id: this.contacts.length,
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        title: ''
+      });
+    } else {
+      this.contacts.map(contact => {
+        if (index == contact.id) {
+          this.contactForm = this.fb.group({
+            id: contact.id,
+            firstName: contact.firstName,
+            lastName: contact.lastName,
+            phone: contact.phone,
+            email: contact.email,
+            title: contact.title
+          });
+          this.showEditContactForm = true
+        }
+      });
+    }
+  }
+
+  // Add New Contact
+  public addContact() {
+    let contact = this.contactForm.value;
+    if (contact.firstName == '') {
+      this.showEditContactForm = false;
+      this.showNewContactForm = false;
+    } else {
+      if (this.showEditContactForm) {
+        this.contacts.splice(contact.id, 1, contact);
+        this.showEditContactForm = false;
+      } else {
+        this.contacts.push(contact);
+        this.showNewContactForm = false;
+      }
+    }
+  }
+
+  // Delete Contact
+  public deleteContact(index) {
+    this.contacts.splice(index, 1);
   }
 
   // Initialize TaskForm

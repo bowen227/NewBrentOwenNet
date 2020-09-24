@@ -79,24 +79,26 @@ export class CrmAppComponent implements OnInit {
     if (id == 'new') {
       return this.contactForm = this.fb.group({
         id: this.contacts.length,
-        firstName: '',
-        lastName: '',
         company: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
         phone: '',
-        fax: '',
-        email: ''
+        fax: ''
       });
     } else {
       this.contacts.map(contact => {
         if (id == contact.id) {
           this.contactForm = this.fb.group({
             id: id,
-            firstName: contact.firstName,
-            lastName: contact.lastName,
             company: contact.company,
+            street: contact.street,
+            city: contact.city,
+            state: contact.state,
+            zip: contact.zip,
             phone: contact.phone,
-            fax: contact.fax,
-            email: contact.email
+            fax: contact.fax
           });
           this.showEditForm = true;
         }

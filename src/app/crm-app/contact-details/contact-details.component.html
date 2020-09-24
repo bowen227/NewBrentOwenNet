@@ -1,18 +1,65 @@
 <section class="details-container">
-    <h2 class="p-2"><i class="fas fa-tasks mr-2"></i>Contact Tasks</h2>
-    <h3 class="p-2" routerLink="/crm"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Contacts</h3>
-    <div class="contact p-4">
-        <div class="contact-name">
-            <h4>{{ contact.firstName }} {{ contact.lastName}}</h4>
-            <p>{{ contact.company }}</p>
-        </div>
-        <div class="contact-info">
-            <p *ngIf="contact.phone.length > 3">Phone: ({{ contact.phone | slice:0:3 }}) {{ contact.phone | slice:3:6 }}-{{ contact.phone | slice:6:10 }}</p>
-            <p *ngIf="contact.fax.length > 3">Fax: ({{ contact.fax | slice:0:3 }}) {{ contact.fax | slice:3:6 }}-{{ contact.fax | slice:6:10 }}</p>
-            <p *ngIf="contact.email.length > 3">Email: {{ contact.email }}</p>
+    <h2 class="p-2"><i class="fas fa-tasks mr-2"></i>Details</h2>
+    <h3 class="p-2" routerLink="/crm"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Companies</h3>
+    <div class="company p-3">
+        <div class="company-name">
+            <h4>{{ company.company }}</h4>
+            <div>
+                <p>{{ company.street }}</p>
+                <div class="d-flex flex-row">
+                    <p>{{ company.city }},</p>
+                    <p class="ml-1">{{ company.state }}</p>
+                    <p class="ml-3">{{ company.zip }}</p>
+                </div>
+            </div>
+            <div class="company-details d-flex flex-row">
+                <p class="mr-3" *ngIf="company.phone.length > 3">P: ({{ company.phone | slice:0:3 }}) {{ company.phone | slice:3:6 }}-{{ company.phone | slice:6:10 }}</p>
+                <p *ngIf="company.fax.length > 3">F: ({{ company.fax | slice:0:3 }}) {{ company.fax | slice:3:6 }}-{{ company.fax | slice:6:10 }}</p>
+            </div>
         </div>
     </div>
-    <div class="task-form-container">
+    <div class="contacts-container">
+        <h3 class="ml-4 mt-3">Contacts<i class="fas fa-plus-square ml-3" (click)="showForm('new')"></i></h3>
+        <ul class="list-group list-group-flush" *ngIf="contacts.length > 0">
+            <li class="list-group-item" *ngFor="let c of contacts; let i = index;">
+                <div class="d-flex flex-row align-items-center">
+                    <span class="flex-grow-1 mt-1 task">{{ c.firstName }} {{ c.lastName }}</span>
+                    <span class="mt-1 contact-phone">({{ c.phone | slice:0:3 }}) {{ c.phone | slice:3:6 }}-{{ c.phone | slice:6:10 }}</span>
+                    <i class="far fa-edit m-2" (click)="initContactForm(i)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="deleteContact(i)"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="edit-form-container d-flex flex-column justify-content-center align-items-center" *ngIf="showNewContactForm || showEditContactForm">
+        <div class="edit-form">
+            <h3 class="ml-4 mt-3">{{ showNewContactForm ? "New Contact" : "Edit Contact"}}</h3>
+            <form class="container d-flex flex-column justify-content-around" [formGroup]="contactForm" (ngSubmit)="addContact()">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" formControlName="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" formControlName="lastName">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" class="form-control" formControlName="phone">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" formControlName="email">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" formControlName="title">
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+    <div class="task-form-container mt-5">
         <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="task">Task Name</label>
@@ -35,9 +82,9 @@
             </li>
         </ul>
     </div>
-    <div class="task-container p-2">
+    <div class="task-container p-2" *ngIf="completedTasks.length > 0">
         <h3 class="ml-4 mt-3">Completed</h3>
-        <ul class="list-group list-group-flush" *ngIf="completedTasks.length > 0">
+        <ul class="list-group list-group-flush">
             <li class="list-group-item" *ngFor="let c of completedTasks; let i = index;">
                 {{ c.task }}
             </li>

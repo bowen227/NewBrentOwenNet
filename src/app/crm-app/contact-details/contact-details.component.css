@@ -3,11 +3,46 @@ h2 {
     color: #fff;
 }
 
-.contact {
+.company {
     max-width: 500px;
     margin: 0px auto;
-    display: flex;
-    flex-direction: column;
+}
+
+.company-name p {
+    margin-bottom: 0px;
+}
+
+.contacts-container {
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+.fa-plus-square {
+    color: #CD5334;
+}
+
+.fa-plus-square:hover {
+    cursor: pointer;
+}
+
+.contact-phone {
+    min-width: 125px;
+}
+
+.edit-form-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.edit-form {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    width: 100%;
+    padding-bottom: 1em;
+    max-width: 500px;
 }
 
 .task-form-container {

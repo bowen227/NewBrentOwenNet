@@ -29,6 +29,16 @@ h2 {
     min-width: 125px;
 }
 
+.contact-more-details {
+    display: none;
+}
+
+.contact-more-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .edit-form-container {
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;

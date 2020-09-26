@@ -23,14 +23,10 @@
         <ul class="list-group list-group-flush" *ngIf="contacts.length > 0">
             <li class="list-group-item" *ngFor="let c of contacts; let i = index;">
                 <div class="d-flex flex-row align-items-center">
-                    <span class="flex-grow-1 mt-1 task" (click)="showMoreDetails(i)">{{ c.firstName }} {{ c.lastName }}</span>
+                    <span class="flex-grow-1 mt-1 task">{{ c.firstName }} {{ c.lastName }}</span>
                     <span class="mt-1 contact-phone" *ngIf="c.phone.length > 4">({{ c.phone | slice:0:3 }}) {{ c.phone | slice:3:6 }}-{{ c.phone | slice:6:10 }}</span>
                     <i class="far fa-edit m-2" (click)="initContactForm(i)"></i>
                     <i class="far fa-trash-alt m-2" (click)="deleteContact(i)"></i>
-                </div>
-                <div class="contact-more-details" *ngIf="showMore">
-                    <span>{{ c.title }}</span>
-                    <span>{{ c.email }}</span>
                 </div>
             </li>
         </ul>

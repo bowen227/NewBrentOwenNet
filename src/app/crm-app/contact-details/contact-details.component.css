@@ -17,6 +17,10 @@ h2 {
     margin: 0px auto;
 }
 
+.contacts-container i:hover {
+    cursor: pointer;
+}
+
 .fa-plus-square {
     color: #CD5334;
 }
@@ -30,13 +34,9 @@ h2 {
 }
 
 .contact-more-details {
-    display: none;
-}
-
-.contact-more-details {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .edit-form-container {

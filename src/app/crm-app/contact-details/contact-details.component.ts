@@ -13,7 +13,6 @@ export class ContactDetailsComponent implements OnInit {
   public user = SocialUser;
   public company;
   public contacts = [];
-  public showMore: boolean = false;
   public showNewContactForm: boolean = false;
   public showEditContactForm: boolean = false;
   public contactForm: FormGroup;
@@ -110,11 +109,6 @@ export class ContactDetailsComponent implements OnInit {
   // Delete Contact
   public deleteContact(index) {
     this.contacts.splice(index, 1);
-  }
-
-  // Show More Details
-  public showMoreDetails(index) {
-    this.showMore = !this.showMore;
   }
 
   // Initialize TaskForm

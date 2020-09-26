@@ -36,7 +36,7 @@ export class TodoService {
     return this.http.delete(this.GroupsURI + '/' + id).pipe(map(res => res as JSON));
   }
 
-  // GET Todo By Group
+  // GET Todo By User and Group
   public getTodosByGroup(id, group) {
     return this.http.get(this.TodosURI + '/' + id + '/' + group).pipe(map(res => res as JSON));
   }

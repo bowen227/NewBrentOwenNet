@@ -98,7 +98,7 @@ export class TodoAppComponent implements OnInit {
         this.todoGroups.push(res);
       });
       this.initGroupForm();
-      this.toast.success(data.groupName, 'New group added');
+      this.toast.success(data.groupName, 'New group added!');
       this.loadingGroups = false;
     } else {
       this.todoGroups.push(data);

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
+import { CrmService } from '../shared/crm.service';
 
 @Component({
   selector: 'app-crm-app',
@@ -18,20 +19,6 @@ export class CrmAppComponent implements OnInit {
   public isLoading: boolean = false;
   public isLoggedIn: boolean;
   public popup: boolean;
-  // public contacts = [
-  //   { id: 0, firstName: 'Brent', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-  //   { id: 1, firstName: 'Brandon', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-  //   { id: 2, firstName: 'Easton', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-  //   { id: 3, firstName: 'Kelly', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-  //   { id: 4, firstName: 'Emily', lastName: 'Owen', company: '', phone: '', fax: '', email: '' },
-  //   { id: 5, firstName: 'Cindy', lastName: 'Thompson', company: '', phone: '', fax: '', email: '' },
-  //   { id: 6, firstName: 'Beverly', lastName: 'Stakely', company: '', phone: '', fax: '', email: '' },
-  //   { id: 7, firstName: 'David', lastName: 'Thomas', company: '', phone: '', fax: '', email: '' },
-  //   { id: 8, firstName: 'Mark', lastName: 'Sawyer', company: '', phone: '', fax: '', email: '' },
-  //   { id: 9, firstName: 'Jason', lastName: 'Shelton', company: '', phone: '', fax: '', email: '' },
-  //   { id: 10, firstName: 'Staci', lastName: 'Saffles', company: '', phone: '', fax: '', email: '' },
-  //   { id: 11, firstName: 'Amber', lastName: 'Scroggins', company: '', phone: '', fax: '', email: '' },
-  // ];
   public contacts = [];
   public searchTerm = '';
   public showSearched: boolean = false;
@@ -41,10 +28,13 @@ export class CrmAppComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private toast: ToastrService,
               private service: SocialAuthService,
-              private route: Router) { }
+              private route: Router,
+              private cService: CrmService) { }
 
   ngOnInit(): void {
     this.checkLogIn();
+
+    this.getCompaniesByUser();
   }
 
   // Check if signed in
@@ -63,6 +53,19 @@ export class CrmAppComponent implements OnInit {
     }
   }
 
+  // Get Companies By User
+  public getCompaniesByUser() {
+    this.isLoading = true;
+    if (this.user != null) {
+      this.cService.getCompaniesByUser(this.user.id).subscribe(res => {
+        console.log(res);
+      });
+    } else {
+      console.log("Not logged in...");
+    }
+    this.isLoading = false;
+  }
+
   // Show New Contact From or Edit Form
   public showForm(id) {
     if (id == 'new') {
@@ -76,58 +79,145 @@ export class CrmAppComponent implements OnInit {
 
   // Initialize ContactForm
   public initContactForm(id) {
-    if (id == 'new') {
-      return this.contactForm = this.fb.group({
-        id: this.contacts.length,
-        company: '',
-        street: '',
-        city: '',
-        state: '',
-        zip: '',
-        phone: '',
-        fax: ''
-      });
-    } else {
-      this.contacts.map(contact => {
-        if (id == contact.id) {
-          this.contactForm = this.fb.group({
-            id: id,
-            company: contact.company,
-            street: contact.street,
-            city: contact.city,
-            state: contact.state,
-            zip: contact.zip,
-            phone: contact.phone,
-            fax: contact.fax
-          });
-          this.showEditForm = true;
-        }
-      });
-    }
-  }
-
-  public onSubmit() {
-    let data = this.contactForm.value;
-    if (data.firstName == '') {
-      this.showNewContactForm = false;
-      this.showEditForm = false;
-    } else {
-      if (this.showEditForm) {
-        this.contacts.splice(data.id, 1, data);
-        this.showEditForm = false;
+    if (this.user != null) {
+      if (id == 'new') {
+        return this.contactForm = this.fb.group({
+          company: '',
+          street: '',
+          city: '',
+          state: '',
+          zip: '',
+          phone: '',
+          fax: ''
+        });
       } else {
-        this.contacts.push(data);
-        this.showNewContactForm = false;
+        this.contacts.map(contact => {
+          if (id == contact.id) {
+            this.contactForm = this.fb.group({
+              company: contact.company,
+              street: contact.street,
+              city: contact.city,
+              state: contact.state,
+              zip: contact.zip,
+              phone: contact.phone,
+              fax: contact.fax
+            });
+          }
+        });
+      }
+    } else {
+      if (id == 'new') {
+        return this.contactForm = this.fb.group({
+          id: this.contacts.length,
+          company: '',
+          street: '',
+          city: '',
+          state: '',
+          zip: '',
+          phone: '',
+          fax: ''
+        });
+      } else {
+        this.contacts.map(contact => {
+          if (id == contact.id) {
+            this.contactForm = this.fb.group({
+              id: id,
+              company: contact.company,
+              street: contact.street,
+              city: contact.city,
+              state: contact.state,
+              zip: contact.zip,
+              phone: contact.phone,
+              fax: contact.fax
+            });
+            this.showEditForm = true;
+          }
+        });
       }
     }
   }
 
-  public delete(index) {
-    this.contacts.splice(index, 1);
+  public onSubmit() {
+    const data = this.contactForm.value;
+
+    if (this.user != null) {
+      if (data.company == '') {
+        this.showNewContactForm = false;
+        this.showEditForm = false;
+        this.toast.warning("Form not complete!", "Something went wrong...");
+      } else {
+        if (this.showEditForm) {
+          let company = {
+            userId: this.user.id,
+            companyName: data.company,
+            street: data.street,
+            city: data.city,
+            state: data.state,
+            zip: data.zip,
+            phone: data.phone,
+            fax: data.fax
+          };
+          this.contacts.map(x => {
+            if (x.id == data.id) {
+              this.cService.updateCompany(company).subscribe(res => {
+                this.contacts.splice(data.id, 1, company);
+                this.showEditForm = false;
+                this.toast.success(company.companyName, "Company updated!!");
+              });
+            }
+          });
+        }
+
+        if (this.showNewContactForm) {
+          let company = {
+            userId: this.user.id,
+            companyName: data.company,
+            street: data.street,
+            city: data.city,
+            state: data.state,
+            zip: data.zip,
+            phone: data.phone,
+            fax: data.fax
+          };
+    
+          this.cService.addNewCompany(company).subscribe(res => {
+            this.contacts.push(res);
+          });
+          this.showNewContactForm = false;
+          this.toast.success(data.company, 'New company added!');
+        }
+      }
+    } else {
+      if (this.showEditForm) {
+        this.contacts.splice(data.id, 1, data);
+        this.showEditForm = false;
+        this.toast.success(data.company, "Company updated!!");
+      } else {
+        this.contacts.push(data);
+        this.showNewContactForm = false;
+        this.toast.success(data.company, 'Company added!!');
+      }
+    }
   }
 
-  public contactDetails(contact) {
-    this.route.navigate(['/details', JSON.stringify(contact)]);
+  public delete(id) {
+    if (this.user != null) {
+      this.contacts.map(c => {
+        if (c.id == id) {
+          this.cService.deleteCompanyById(id).subscribe(res => {
+            this.contacts.splice(id, 1);
+            this.toast.warning("Company removed!!");
+          });
+        }
+      });
+    } else {
+      this.contacts.map(c => {
+        if (c.id == id) {
+          this.contacts.splice(id, 1);
+          this.toast.warning("Company removed!!");
+        }
+      });
+    }
   }
 
   public searchContact(event) {

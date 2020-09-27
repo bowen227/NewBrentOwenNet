@@ -58,7 +58,12 @@ export class CrmAppComponent implements OnInit {
     this.isLoading = true;
     if (this.user != null) {
       this.cService.getCompaniesByUser(this.user.id).subscribe(res => {
-        console.log(res);
+        for (const key in res) {
+          if (Object.prototype.hasOwnProperty.call(res, key)) {
+            const element = res[key];
+            this.contacts.push(element);
+          }
+        }
       });
     } else {
       console.log("Not logged in...");
@@ -94,7 +99,8 @@ export class CrmAppComponent implements OnInit {
         this.contacts.map(contact => {
           if (id == contact.id) {
             this.contactForm = this.fb.group({
-              company: contact.company,
+              id: contact.id,
+              company: contact.companyName,
               street: contact.street,
               city: contact.city,
               state: contact.state,
@@ -121,7 +127,7 @@ export class CrmAppComponent implements OnInit {
         this.contacts.map(contact => {
           if (id == contact.id) {
             this.contactForm = this.fb.group({
-              id: id,
+              id: contact.id,
               company: contact.company,
               street: contact.street,
               city: contact.city,
@@ -130,7 +136,6 @@ export class CrmAppComponent implements OnInit {
               phone: contact.phone,
               fax: contact.fax
             });
-            this.showEditForm = true;
           }
         });
       }
@@ -148,6 +153,7 @@ export class CrmAppComponent implements OnInit {
       } else {
         if (this.showEditForm) {
           let company = {
+            id: data.id,
             userId: this.user.id,
             companyName: data.company,
             street: data.street,
@@ -158,12 +164,13 @@ export class CrmAppComponent implements OnInit {
             fax: data.fax
           };
           this.contacts.map(x => {
-            if (x.id == data.id) {
+            if (x.id == company.id) {
               this.cService.updateCompany(company).subscribe(res => {
-                this.contacts.splice(data.id, 1, company);
-                this.showEditForm = false;
-                this.toast.success(company.companyName, "Company updated!!");
+                this.contacts.splice(res.id, 1, company);
+                console.log(this.contacts);
               });
+              this.showEditForm = false;
+              this.toast.success(company.companyName, "Company updated!!");
             }
           });
         }

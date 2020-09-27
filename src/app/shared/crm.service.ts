@@ -19,12 +19,13 @@ export class CrmService {
 
   // POST New Company
   public addNewCompany(company) {
+    console.log(company);
     return this.http.post(this.CompanyURI, company).pipe(map(res => res as JSON));
   }
 
   // PUT Company
   public updateCompany(updatedCompany) {
-    return this.http.put(`${this.CompanyURI}/${updatedCompany.id}`, updatedCompany, { headers: new HttpHeaders({
+    return this.http.put(`${this.CompanyURI}`, updatedCompany, { headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })}).pipe(map(res => res as any));
   }

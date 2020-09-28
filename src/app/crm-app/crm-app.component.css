@@ -56,6 +56,10 @@ button {
     max-width: 500px;
 }
 
+.id-input {
+    display: hidden;
+}
+
 .indev-container {
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;

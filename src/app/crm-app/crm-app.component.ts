@@ -145,55 +145,57 @@ export class CrmAppComponent implements OnInit {
   public onSubmit() {
     const data = this.contactForm.value;
 
-    if (this.user != null) {
-      if (data.company == '') {
-        this.showNewContactForm = false;
-        this.showEditForm = false;
-        this.toast.warning("Form not complete!", "Something went wrong...");
-      } else {
-        if (this.showEditForm) {
-          let company = {
-            id: data.id,
-            userId: this.user.id,
-            companyName: data.company,
-            street: data.street,
-            city: data.city,
-            state: data.state,
-            zip: data.zip,
-            phone: data.phone,
-            fax: data.fax
-          };
-          this.contacts.map(x => {
-            if (x.id == company.id) {
-              this.cService.updateCompany(company).subscribe(res => {
-                this.contacts.splice(res.id, 1, company);
-                console.log(this.contacts);
-              });
-              this.showEditForm = false;
-              this.toast.success(company.companyName, "Company updated!!");
-            }
-          });
-        }
+    if (data.company == '') {
+      this.showNewContactForm = false;
+      this.showEditForm = false;
+      this.toast.warning("Form not complete!", "Something went wrong...");
+    }
 
-        if (this.showNewContactForm) {
-          let company = {
-            userId: this.user.id,
-            companyName: data.company,
-            street: data.street,
-            city: data.city,
-            state: data.state,
-            zip: data.zip,
-            phone: data.phone,
-            fax: data.fax
-          };
-    
-          this.cService.addNewCompany(company).subscribe(res => {
-            this.contacts.push(res);
-          });
-          this.showNewContactForm = false;
-          this.toast.success(data.company, 'New company added!');
+    if (this.user != null) {
+      const index = this.contacts.findIndex(x => x.id == data.id);
+
+      this.contacts.map(x => {
+        if (x.id == data.id) {
+          if (this.showEditForm) {
+            let company = {
+              id: data.id,
+              userId: this.user.id,
+              companyName: data.company,
+              street: data.street,
+              city: data.city,
+              state: data.state,
+              zip: data.zip,
+              phone: data.phone,
+              fax: data.fax
+            };
+
+            this.cService.updateCompany(company).subscribe(res => {
+              this.contacts.splice(index, 1, res);
+              this.showEditForm = false;
+              this.toast.success(res.companyName, "Company updated!!");
+            });
+          }
+
+          if (this.showNewContactForm) {
+            let company = {
+              userId: this.user.id,
+              companyName: data.company,
+              street: data.street,
+              city: data.city,
+              state: data.state,
+              zip: data.zip,
+              phone: data.phone,
+              fax: data.fax
+            };
+      
+            this.cService.addNewCompany(company).subscribe(res => {
+              this.contacts.push(res);
+              this.showNewContactForm = false;
+              this.toast.success(data.company, 'New company added!');
+            });
+          }
         }
-      }
+      });
     } else {
       if (this.showEditForm) {
         this.contacts.splice(data.id, 1, data);

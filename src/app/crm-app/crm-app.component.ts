@@ -156,6 +156,7 @@ export class CrmAppComponent implements OnInit {
 
       this.contacts.map(x => {
         if (x.id == data.id) {
+          
           if (this.showEditForm) {
             let company = {
               id: data.id,
@@ -169,7 +170,7 @@ export class CrmAppComponent implements OnInit {
               fax: data.fax
             };
 
-              this.cService.updateCompany(company).subscribe(res => {
+            this.cService.updateCompany(company).subscribe(res => {
               this.contacts.splice(index, 1, res);
               this.showEditForm = false;
               this.toast.success(res.companyName, "Company updated!!");
@@ -215,7 +216,7 @@ export class CrmAppComponent implements OnInit {
     if (this.user != null) {
       this.cService.deleteCompanyById(id).subscribe(res => {
         this.contacts.splice(index, 1);
-        this.toast.warning("Company removed!!");
+        this.toast.warning("Company emoved!!");
       });
     } else {
       this.contacts.splice(index, 1);

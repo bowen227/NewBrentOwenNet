@@ -169,7 +169,7 @@ export class CrmAppComponent implements OnInit {
               fax: data.fax
             };
 
-            this.cService.updateCompany(company).subscribe(res => {
+              this.cService.updateCompany(company).subscribe(res => {
               this.contacts.splice(index, 1, res);
               this.showEditForm = false;
               this.toast.success(res.companyName, "Company updated!!");
@@ -210,22 +210,16 @@ export class CrmAppComponent implements OnInit {
   }
 
   public delete(id) {
+    const index = this.contacts.findIndex(x => x.id == id);
+
     if (this.user != null) {
-      this.contacts.map(c => {
-        if (c.id == id) {
-          this.cService.deleteCompanyById(id).subscribe(res => {
-            this.contacts.splice(id, 1);
-            this.toast.warning("Company removed!!");
-          });
-        }
+      this.cService.deleteCompanyById(id).subscribe(res => {
+        this.contacts.splice(index, 1);
+        this.toast.warning("Company removed!!");
       });
     } else {
-      this.contacts.map(c => {
-        if (c.id == id) {
-          this.contacts.splice(id, 1);
-          this.toast.warning("Company removed!!");
-        }
-      });
+      this.contacts.splice(index, 1);
+      this.toast.warning("Company removed!!");
     }
   }
 

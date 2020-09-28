@@ -30,7 +30,7 @@
                     <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
                     <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { company: c.company, street: c.street, city: c.city, state: c.state, zip: c.zip, phone: c.phone, fax: c.fax }]">{{ c.companyName }}</span>
                     <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
-                    <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="delete(c.id)"></i>
                 </div>
             </li>
         </ul>
@@ -40,7 +40,6 @@
                     <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
                     <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details', { company: c.company, street: c.street, city: c.city, state: c.state, zip: c.zip, phone: c.phone, fax: c.fax }]">{{ c.company }}</span>
                     <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
-                    
                     <i class="far fa-trash-alt m-2" (click)="delete(c.id)"></i>
                 </div>
             </li>

@@ -19,7 +19,6 @@ export class CrmService {
 
   // POST New Company
   public addNewCompany(company) {
-    console.log(company);
     return this.http.post(this.CompanyURI, company).pipe(map(res => res as JSON));
   }
 

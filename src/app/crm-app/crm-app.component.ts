@@ -152,12 +152,12 @@ export class CrmAppComponent implements OnInit {
     }
 
     if (this.user != null) {
-      const index = this.contacts.findIndex(x => x.id == data.id);
 
-      this.contacts.map(x => {
-        if (x.id == data.id) {
-          
-          if (this.showEditForm) {
+      if (this.showEditForm) {
+        const index = this.contacts.findIndex(x => x.id == data.id);
+
+        this.contacts.map(x => {
+          if (x.id == data.id) {
             let company = {
               id: data.id,
               userId: this.user.id,
@@ -176,27 +176,27 @@ export class CrmAppComponent implements OnInit {
               this.toast.success(res.companyName, "Company updated!!");
             });
           }
+        });
+      }
 
-          if (this.showNewContactForm) {
-            let company = {
-              userId: this.user.id,
-              companyName: data.company,
-              street: data.street,
-              city: data.city,
-              state: data.state,
-              zip: data.zip,
-              phone: data.phone,
-              fax: data.fax
-            };
-      
-            this.cService.addNewCompany(company).subscribe(res => {
-              this.contacts.push(res);
-              this.showNewContactForm = false;
-              this.toast.success(data.company, 'New company added!');
-            });
-          }
-        }
-      });
+      if (this.showNewContactForm) {
+        let company = {
+          userId: this.user.id,
+          companyName: data.company,
+          street: data.street,
+          city: data.city,
+          state: data.state,
+          zip: data.zip,
+          phone: data.phone,
+          fax: data.fax
+        };
+  
+        this.cService.addNewCompany(company).subscribe(res => {
+          this.contacts.push(res);
+          this.showNewContactForm = false;
+          this.toast.success(data.company, 'New company added!');
+        });
+      }
     } else {
       if (this.showEditForm) {
         this.contacts.splice(data.id, 1, data);

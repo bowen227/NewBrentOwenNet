@@ -33,18 +33,18 @@ export class ContactDetailsComponent implements OnInit {
 
     this.checkLogIn();
 
-    this.getContactsByCompany();
-
     this.initTaskForm();
 
     this.scrollToTop();
+
+    this.getContactsByCompany();
   }
 
   // Get Contact If Not Logged In
   public getCompanyData() {
     let c = {
       id: this.route.snapshot.paramMap.get('id'),
-      company: this.route.snapshot.paramMap.get('company'),
+      companyName: this.route.snapshot.paramMap.get('company'),
       street: this.route.snapshot.paramMap.get('street'),
       city: this.route.snapshot.paramMap.get('city'),
       state: this.route.snapshot.paramMap.get('state'),
@@ -63,20 +63,20 @@ export class ContactDetailsComponent implements OnInit {
         this.user = user;
         this.toast.success('Login Successful', this.user.firstName);
       });
-    } else {
-      this.toast.success('Loged In!', this.user.firstName);
     }
   }
 
   // Get Contacts
   public getContactsByCompany() {
     // Add isLoading
+    console.log("Getting contacts...");
 
     if (this.user != null) {
       this.cService.getContactsByCompany(this.user.id, this.company.companyName).subscribe(res => {
         for (const key in res) {
           if (Object.prototype.hasOwnProperty.call(res, key)) {
             const element = res[key];
+            console.log(element);
             this.contacts.push(element);
           }
         }
@@ -104,7 +104,6 @@ export class ContactDetailsComponent implements OnInit {
     if (this.user != null) {
       if (id == 'new') {
         return this.contactForm = this.fb.group({
-          id: '',
           firstName: '',
           lastName: '',
           phone: '',
@@ -164,9 +163,9 @@ export class ContactDetailsComponent implements OnInit {
     if (this.user != null) {
       const index = this.contacts.findIndex(x => x.id == data.id);
 
-      this.contacts.map(x => {
-        if (x.id == data.id) {
-          if (this.showEditContactForm) {
+      if (this.showEditContactForm) {
+        this.contacts.map(x => {
+          if (x.id == data.id) {
             let contact = {
               id: data.id,
               userId: this.user.id,
@@ -184,26 +183,26 @@ export class ContactDetailsComponent implements OnInit {
               this.toast.success(res.firstName, "Contact updated!!");
             });
           }
+        });
+      }
 
-          if (this.showNewContactForm) {
-            let contact = {
-              userId: this.user.id,
-              companyName: this.company.companyName,
-              firstName: '',
-              lastName: '',
-              phone: '',
-              email: '',
-              title: ''
-            };
+      if (this.showNewContactForm) {
+        let contact = {
+          userId: this.user.id,
+          companyName: this.company.companyName,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          email: data.email,
+          title: data.title
+        };
 
-            this.cService.addNewContact(contact).subscribe(res => {
-              this.contacts.push(res);
-              this.showNewContactForm = false;
-              this.toast.success(data.firstName, "New contact added!!");
-            });
-          }
-        }
-      });
+        this.cService.addNewContact(contact).subscribe(res => {
+          this.contacts.push(res);
+          this.showNewContactForm = false;
+          this.toast.success(data.firstName, "New contact added!!");
+        });
+      }
     } else {
       if (this.showEditContactForm) {
         this.contacts.splice(data.id, 1, data);

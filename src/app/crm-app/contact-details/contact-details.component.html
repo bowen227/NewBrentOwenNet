@@ -25,7 +25,7 @@
                 <div class="d-flex flex-row align-items-center">
                     <span class="flex-grow-1 mt-1 task">{{ c.firstName }} {{ c.lastName }}</span>
                     <span class="mt-1 contact-phone" *ngIf="c.phone.length > 4">({{ c.phone | slice:0:3 }}) {{ c.phone | slice:3:6 }}-{{ c.phone | slice:6:10 }}</span>
-                    <i class="far fa-edit m-2" (click)="initContactForm(c.id)"></i>
+                    <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="deleteContact(c.id)"></i>
                 </div>
             </li>

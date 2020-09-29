@@ -36,6 +36,7 @@ export class CrmService {
 
   // GET Contacts By User and Company
   public getContactsByCompany(user, company) {
+    console.log(company);
     return this.http.get(this.ContactURI + '/' + user + '/' + company).pipe(map(res => res as JSON));
   }
 

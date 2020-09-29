@@ -3,6 +3,10 @@ h2 {
     color: #fff;
 }
 
+.fa-arrow-alt-circle-left {
+    cursor: pointer;
+}
+
 .company {
     max-width: 500px;
     margin: 0px auto;

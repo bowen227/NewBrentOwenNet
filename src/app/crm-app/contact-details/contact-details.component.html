@@ -20,7 +20,13 @@
     </div>
     <div class="contacts-container">
         <h3 class="ml-4 mt-3">Contacts<i class="fas fa-plus-square ml-3" (click)="showForm('new')"></i></h3>
-        <ul class="list-group list-group-flush" *ngIf="contacts.length > 0">
+        <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="no-contacts ml-4" *ngIf="contacts.length == 0 && !isLoading">
+            <p>You haven't added any Contacts</p>
+        </div>
+        <ul class="list-group list-group-flush" *ngIf="contacts.length > 0 && !isLoading">
             <li class="list-group-item" *ngFor="let c of contacts; let i = index;">
                 <div class="d-flex flex-row align-items-center">
                     <span class="flex-grow-1 mt-1 task">{{ c.firstName }} {{ c.lastName }}</span>

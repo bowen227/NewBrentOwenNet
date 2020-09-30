@@ -20,6 +20,7 @@ export class ContactDetailsComponent implements OnInit {
   public taskForm: FormGroup;
   public tasks = [];
   public completedTasks = [];
+  public isLoading: boolean = false;
   
 
   constructor(private service: SocialAuthService,
@@ -68,15 +69,13 @@ export class ContactDetailsComponent implements OnInit {
 
   // Get Contacts
   public getContactsByCompany() {
-    // Add isLoading
-    console.log("Getting contacts...");
+    this.isLoading = true;
 
     if (this.user != null) {
       this.cService.getContactsByCompany(this.user.id, this.company.companyName).subscribe(res => {
         for (const key in res) {
           if (Object.prototype.hasOwnProperty.call(res, key)) {
             const element = res[key];
-            console.log(element);
             this.contacts.push(element);
           }
         }
@@ -84,7 +83,7 @@ export class ContactDetailsComponent implements OnInit {
     } else {
       console.log("Not logged in...");
     }
-    // Stop loading
+    this.isLoading = false;
   }
   // Get Tasks
 

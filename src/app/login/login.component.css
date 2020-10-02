@@ -12,6 +12,7 @@ h2 {
     max-width: 450px;
     margin: 0px auto;
     padding: 1em;
+    /* border: 1px solid #666666; */
 }
 
 .signout-button {

@@ -18,6 +18,8 @@ export class ContactDetailsComponent implements OnInit {
   public showEditContactForm: boolean = false;
   public contactForm: FormGroup;
   public taskForm: FormGroup;
+  public showNewTaskForm: boolean = false;
+  public showEditTaskForm: boolean = false;
   public tasks = [];
   public completedTasks = [];
   public isLoading: boolean = false;
@@ -34,11 +36,11 @@ export class ContactDetailsComponent implements OnInit {
 
     this.checkLogIn();
 
-    this.initTaskForm();
-
     this.scrollToTop();
 
     this.getContactsByCompany();
+
+    this.getTasks();
   }
 
   // Get Contact If Not Logged In
@@ -86,7 +88,21 @@ export class ContactDetailsComponent implements OnInit {
     this.isLoading = false;
   }
   // Get Tasks
-
+  public getTasks() {
+    if (this.user != null) {
+      this.cService.getTasksByCompany(this.user.id, this.company.companyName).subscribe(res => {
+        for (const key in res) {
+          if (Object.prototype.hasOwnProperty.call(res, key)) {
+            const element = res[key];
+            this.tasks.push(element);
+          }
+        }
+      });
+    } else {
+      console.log("Not Logged in...");
+    }
+  }
+  
   // Show Add Contact Form
   public showForm(id) {
     if (id == 'new') {
@@ -157,6 +173,7 @@ export class ContactDetailsComponent implements OnInit {
     if (data.firstName == '') {
       this.showEditContactForm = false;
       this.showNewContactForm = false;
+      this.toast.warning("You have to have a first name");
     }
 
     if (this.user != null) {
@@ -208,9 +225,11 @@ export class ContactDetailsComponent implements OnInit {
         this.showEditContactForm = false;
         this.toast.success(data.firstName, "Contact updated!!");
       } else {
-        this.contacts.push(data);
-        this.showNewContactForm = false;
-        this.toast.success(data.firstName, "Contact added!!");
+        if (this.showNewContactForm) {
+          this.contacts.push(data);
+          this.showNewContactForm = false;
+          this.toast.success(data.firstName, "Contact added!!");
+        }
       }
     }
   }
@@ -230,52 +249,162 @@ export class ContactDetailsComponent implements OnInit {
     }
   }
 
+  // Show Task Form
+  public showTaskForm(id) {
+    if (id == 'new') {
+      this.showNewTaskForm = true;
+      this.initTaskForm('new');
+    } else {
+      this.showEditTaskForm = true;
+      this.initTaskForm(id);
+    }
+  }
+
   // Initialize TaskForm
-  public initTaskForm() {
-    return this.taskForm = this.fb.group({
-      id: this.tasks.length,
-      task: '',
-      date: new Date(),
-      completed: false
-    }); 
+  public initTaskForm(id) {
+    if (this.user != null) {
+      if (id == 'new') {
+        return this.taskForm = this.fb.group({
+          task: '',
+          completed: false
+        });
+      } else {
+        this.tasks.map(task => {
+          if (id == task.id) {
+            this.taskForm = this.fb.group({
+              id: task.id,
+              userId: task.userId,
+              company: task.companyName,
+              task: task.task,
+              completed: task.completed
+            });
+          }
+        });
+      }
+    } else {
+      if (id == 'new') {
+        return this.taskForm = this.fb.group({
+          id: this.tasks.length,
+          company: this.company.companyName,
+          task: '',
+          completed: false
+        });
+      } else {
+        this.tasks.map(task => {
+          if (id == task.id) {
+            this.taskForm = this.fb.group({
+              id: task.id,
+              company: task.company,
+              task: task.task,
+              completed: task.completed
+            });
+          }
+        });
+      }
+    }
   }
 
   // Create New Task
   public onSubmit() {
-    let task = this.taskForm.value;
-    this.tasks.push(task);
-    this.initTaskForm();
+    const data = this.taskForm.value;
+
+    if (data.task.length < 1) {
+      this.showNewTaskForm = false;
+      this.showEditTaskForm = false;
+      this.toast.warning("You didn't add a task..");
+    }
+
+    if (this.user != null) {
+      const index = this.tasks.findIndex(x => x.id == data.id);
+
+      if (this.showEditTaskForm && index != null) {
+        this.tasks.map(x => {
+          if (x.id == data.id) {
+            let task = {
+              id: data.id,
+              userId: data.userId,
+              company: data.company,
+              task: data.task,
+              completed: data.completed
+            };
+  
+            this.cService.updateTask(task).subscribe(res => {
+              this.tasks.splice(index, 1, res);
+              this.showEditTaskForm = false;
+              this.toast.success("Updated task!!");
+            });
+          }
+        });
+      }
+
+      if (this.showNewTaskForm) {
+        let task = {
+          userId: this.user.id,
+          company: this.company.companyName,
+          task: data.task,
+          completed: data.completed
+        };
+
+        this.cService.addNewTask(task).subscribe(res => {
+          this.tasks.push(res);
+          this.showNewTaskForm = false;
+          this.toast.success("New task added!!");
+        });
+      }
+    } else {
+      if (this.showEditTaskForm) {
+        this.tasks.splice(data.id, 1, data);
+        this.showEditTaskForm = false;
+        this.toast.success("Task updated!!");
+      } else {
+        if (this.showNewTaskForm) {
+          this.tasks.push(data);
+          this.showNewTaskForm = false;
+        }
+      }
+    }
   }
 
   // Complete Task
   public completeTask(item, index) {
-    this.tasks.splice(index, 1);
-    this.completedTasks.push(item);
-    this.toast.success("You've completed " + item.task);
-  }
+    if (this.user != null) {
+      this.tasks.map(task => {
+        if (task.id == item.id) {
+          let cTask = {
+            id: item.id,
+            userId: item.userId,
+            company: item.companyName,
+            task: item.task,
+            completed: true
+          };
 
-  // Edit Task
-  public edit(index) {
-    this.tasks.map(task => {
-      if (task.id == index) {
-        let eTask = window.prompt("Change " + task.task + " to?");
-
-        let nTask = {
-          id: index,
-          task: eTask,
-          date: new Date(),
-          completed: false
+          this.cService.updateTask(cTask).subscribe(res => {
+            this.tasks.splice(index, 1);
+            this.completedTasks.push(res);
+            this.toast.success("You've completed a task!!");
+          });
         }
-        this.tasks.splice(index, 1, nTask);
-        this.toast.success("Changed " + task + " to " + eTask);
-      }
-    });
+      });
+    } else {
+      this.tasks.splice(index, 1);
+      this.completedTasks.push(item);
+      this.toast.success("You've completed " + item.task);
+    }
   }
 
   // Delete Task
-  public delete(index) {
-    this.tasks.splice(index, 1);
-    this.toast.warning("Task deleted");
+  public deleteTask(id) {
+    const index = this.tasks.findIndex(x => x.id == id);
+
+    if (this.user != null) {
+      this.cService.deleteTask(id).subscribe(res => {
+        this.tasks.splice(index, 1);
+        this.toast.warning("Task deleted!!");
+      });
+    } else {
+      this.tasks.splice(index, 1);
+      this.toast.warning("Task deleted");
+    }
   }
 
   public scrollToTop() {

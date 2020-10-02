@@ -87,7 +87,7 @@ export class CrmAppComponent implements OnInit {
     if (this.user != null) {
       if (id == 'new') {
         return this.contactForm = this.fb.group({
-          company: '',
+          companyName: '',
           street: '',
           city: '',
           state: '',
@@ -100,7 +100,7 @@ export class CrmAppComponent implements OnInit {
           if (id == contact.id) {
             this.contactForm = this.fb.group({
               id: contact.id,
-              company: contact.companyName,
+              companyName: contact.companyName,
               street: contact.street,
               city: contact.city,
               state: contact.state,
@@ -115,7 +115,7 @@ export class CrmAppComponent implements OnInit {
       if (id == 'new') {
         return this.contactForm = this.fb.group({
           id: this.contacts.length,
-          company: '',
+          companyName: '',
           street: '',
           city: '',
           state: '',
@@ -128,7 +128,7 @@ export class CrmAppComponent implements OnInit {
           if (id == contact.id) {
             this.contactForm = this.fb.group({
               id: contact.id,
-              company: contact.company,
+              companyName: contact.companyName,
               street: contact.street,
               city: contact.city,
               state: contact.state,
@@ -161,7 +161,7 @@ export class CrmAppComponent implements OnInit {
             let company = {
               id: data.id,
               userId: this.user.id,
-              companyName: data.company,
+              companyName: data.companyName,
               street: data.street,
               city: data.city,
               state: data.state,
@@ -182,7 +182,7 @@ export class CrmAppComponent implements OnInit {
       if (this.showNewContactForm) {
         let company = {
           userId: this.user.id,
-          companyName: data.company,
+          companyName: data.companyName,
           street: data.street,
           city: data.city,
           state: data.state,
@@ -201,11 +201,11 @@ export class CrmAppComponent implements OnInit {
       if (this.showEditForm) {
         this.contacts.splice(data.id, 1, data);
         this.showEditForm = false;
-        this.toast.success(data.company, "Company updated!!");
+        this.toast.success(data.companyName, "Company updated!!");
       } else {
         this.contacts.push(data);
         this.showNewContactForm = false;
-        this.toast.success(data.company, 'Company added!!');
+        this.toast.success(data.companyName, 'Company added!!');
       }
     }
   }

@@ -3,7 +3,7 @@
     <h3 class="p-2" routerLink="/crm"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Companies</h3>
     <div class="company p-3">
         <div class="company-name">
-            <h4>{{ company.company }}</h4>
+            <h4>{{ company.companyName }}</h4>
             <div>
                 <p>{{ company.street }}</p>
                 <div class="d-flex flex-row">
@@ -65,25 +65,21 @@
             </form>
         </div>
     </div>
-    <div class="task-form-container mt-5">
-        <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="task">Task Name</label>
-                <input type="text" class="form-control" formControlName="task">
-            </div>
-            <button type="submit" class="btn">Submit</button>
-        </form>
-    </div>
     <div class="task-container p-2">
-        <h3 class="ml-4 mt-3">Tasks</h3>
+        <h3 class="ml-4 mt-3">Tasks<i class="fas fa-plus-square ml-3" (click)="showTaskForm('new')"></i></h3>
+        <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="no-contacts ml-4" *ngIf="tasks.length == 0 && !isLoading">
+            <p>You haven't added any Tasks</p>
+        </div>
         <ul class="list-group list-group-flush" *ngIf="tasks.length > 0">
             <li class="list-group-item" *ngFor="let t of tasks; let i = index;">
                 <div class="d-flex flex-row align-items-center">
                     <input type="checkbox" class="checkbox mr-2" (click)="completeTask(t, i)">
-                    <span class="mt-1 mr-3">{{ t.date | date:'M/dd' }}</span>
                     <span class="flex-grow-1 mt-1 task">{{ t.task }}</span>
-                    <i class="far fa-edit m-2" (click)="edit(i)"></i>
-                    <i class="far fa-trash-alt m-2" (click)="delete(i)"></i>
+                    <i class="far fa-edit m-2" (click)="showTaskForm(t.id)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="deleteTask(t.id)"></i>
                 </div>
             </li>
         </ul>
@@ -95,5 +91,17 @@
                 {{ c.task }}
             </li>
         </ul>
+    </div>
+    <div class="task-form-container d-flex flex-column justify-content-center align-items-center" *ngIf="showNewTaskForm || showEditTaskForm">
+        <div class="task-form">
+            <h3 class="ml-4 mt-3">{{ showNewTaskForm ? "New Task" : "Edit Task"}}</h3>
+            <form class="container d-flex flex-column justify-content-around" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="task">Task</label>
+                    <input type="text" class="form-control" formControlName="task" required>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
     </div>
 </section>

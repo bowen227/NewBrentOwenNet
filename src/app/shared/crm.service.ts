@@ -9,8 +9,14 @@ export class CrmService {
 
   constructor(private http: HttpClient) { }
 
-  readonly CompanyURI = "https://localhost:5001/api/Company";
-  readonly ContactURI = "https://localhost:5001/api/CompanyContacts";
+  // readonly CompanyURI = "https://localhost:5001/api/Company";
+  // readonly ContactURI = "https://localhost:5001/api/CompanyContacts";
+  // readonly TaskURI = "https://localhost:5001/api/CompanyTask";
+
+  readonly CompanyURI = "https://exerciselist.azurewebsites.net/api/Company";
+  readonly ContactURI = "https://exerciselist.azurewebsites.net/api/CompanyContacts";
+  readonly TaskURI = "https://exerciselist.azurewebsites.net/api/CompanyTask";
+
 
   // GET Company By User
   public getCompaniesByUser(user) {
@@ -55,5 +61,28 @@ export class CrmService {
   // DELETE Contact
   public deleteContact(id) {
     return this.http.delete(this.ContactURI + '/' + id).pipe(map(res => res as JSON));
+  }
+
+  // GET Contacts By User and Company
+  public getTasksByCompany(user, company) {
+    console.log(company);
+    return this.http.get(this.TaskURI + '/' + user + '/' + company).pipe(map(res => res as JSON));
+  }
+
+  // POST New Contacts
+  public addNewTask(contact) {
+    return this.http.post(this.TaskURI, contact).pipe(map(res => res as JSON));
+  }
+
+  // PUT Contact
+  public updateTask(updatedContact) {
+    return this.http.put(this.TaskURI, updatedContact, { headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })}).pipe(map(res => res as any));
+  }
+
+  // DELETE Contact
+  public deleteTask(id) {
+    return this.http.delete(this.TaskURI + '/' + id).pipe(map(res => res as JSON));
   }
 }

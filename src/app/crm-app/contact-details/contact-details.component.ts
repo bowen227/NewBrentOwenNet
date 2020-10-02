@@ -94,7 +94,11 @@ export class ContactDetailsComponent implements OnInit {
         for (const key in res) {
           if (Object.prototype.hasOwnProperty.call(res, key)) {
             const element = res[key];
-            this.tasks.push(element);
+            if (element.completed == true) {
+              this.completedTasks.push(element);
+            } else {
+              this.tasks.push(element);
+            }
           }
         }
       });

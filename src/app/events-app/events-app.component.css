@@ -1,0 +1,17 @@
+h2 {
+    background-color: #666666;
+    color: #fff;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 0px auto;
+}
+
+.fa-plus-square:hover {
+    cursor: pointer;
+}
+
+.fa-plus-square {
+    color: #CD5334;
+}

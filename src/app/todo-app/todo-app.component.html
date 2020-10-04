@@ -1,7 +1,7 @@
 <section class="todo-container">
     <h2 class="p-2"><i class="fas fa-clipboard-check mr-2"></i>To-Do App</h2>
+    <h3 class="ml-3" *ngIf="user != null">Welcome, {{ user.name }}</h3>
     <div class="form-container">
-        <h3 *ngIf="user != null">Welcome, {{ user.name }}</h3>
         <h3 class="ml-4 mt-3">Add To-Do Group</h3>
         <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="groupForm" (ngSubmit)="onSubmit()">
             <div class="form-group">

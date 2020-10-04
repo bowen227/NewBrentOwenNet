@@ -44,9 +44,6 @@ export class TodoAppComponent implements OnInit {
       this.isLoggedIn = (this.user != null);
       this.popup = (this.user != null);
 
-      if (this.user != null) {
-        this.toast.success('Login Successful!', this.user.firstName);
-      }
     }
   }
 

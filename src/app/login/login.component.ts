@@ -27,9 +27,10 @@ export class LoginComponent implements OnInit {
   public signInWithGoogle() {
     this.service.signIn(GoogleLoginProvider.PROVIDER_ID).then(user => {
       if (user != null) {
+        this.toast.success("Log in successful!");
         this.loc.back();
       } else {
-        this.toast.warning('Login Failed!')
+        this.toast.warning('Login Failed!');
       }
     });
   }

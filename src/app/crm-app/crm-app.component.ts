@@ -46,10 +46,8 @@ export class CrmAppComponent implements OnInit {
 
       this.isLoggedIn = (this.user != null);
       this.popup = (this.user != null);
+      this.indevPopup = (this.user == null);
 
-      if (this.user != null) {
-        this.toast.success('Login Successfull!', this.user.firstName);
-      }
     }
   }
 

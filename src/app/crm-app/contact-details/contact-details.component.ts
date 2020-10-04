@@ -64,7 +64,7 @@ export class ContactDetailsComponent implements OnInit {
     if (this.user == null) {
       this.service.authState.subscribe(user => {
         this.user = user;
-        this.toast.success('Login Successful', this.user.firstName);
+        // this.toast.success('Login Successful', this.user.firstName);
       });
     }
   }

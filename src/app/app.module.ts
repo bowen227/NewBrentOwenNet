@@ -72,7 +72,7 @@ export class SafePipe implements PipeTransform {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    SocialLoginModule
+    SocialLoginModule,
   ],
   providers: [
     CovidService,

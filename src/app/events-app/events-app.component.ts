@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-events-app',
@@ -16,6 +17,7 @@ export class EventsAppComponent implements OnInit {
   public showEditEventForm: boolean = false;
   public isLoading: boolean = false;
   public events = [];
+  public date = new Date();
   public popup: boolean;
 
   constructor(private fb: FormBuilder,
@@ -65,13 +67,41 @@ export class EventsAppComponent implements OnInit {
     }
 
     if (this.user != null) {
-      const event = {
+      const nEvent = {
         eventName: data.eventName,
         eventDate: data.eventDate
       };
       // Add service
+      
+      this.toast.success(data.eventName, "Created!");
+    } else {
+      this.events.push(data);
+      this.showNewEventForm = false;
+      this.showEditEventForm = false;
       this.toast.success(data.eventName, "Created!");
     }
+  }
+
+  public showDaysLeft(date) {
+    let today = new Date();
+    let end = new Date(date);
+    // let daysLeft = Math.floor((Date.UTC(
+    //     end.getFullYear(), end.getMonth(), end.getDate()) - 
+    //     Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())) / (1000*60*60*24));
+    let days = end.getDate() - today.getDate() + 1;
+    let hours = days * 24;
+    let min = hours * 60;
+    let sec = min * 60;
+    let timeLeft = {'days': days, 'hours': hours}
+    return timeLeft;
+  }
+
+  public showHoursLeft(date) {
+    let today = new Date();
+    let end = new Date(date);
+    let days = end.getDate() - today.getDate() + 1;
+    let hours = days * 24;
+    return hours;
   }
 
 }

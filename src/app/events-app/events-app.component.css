@@ -3,15 +3,32 @@ h2 {
     color: #fff;
 }
 
-.form-container {
-    max-width: 400px;
-    margin: 0px auto;
-}
-
 .fa-plus-square:hover {
     cursor: pointer;
 }
 
 .fa-plus-square {
     color: #CD5334;
+}
+
+.event-form-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    width: 100%;
+    padding-bottom: 1em;
+    max-width: 500px;
+}
+
+button {
+    background-color: #CD5334;
+    color: #fff;
+    margin-top: 10px;
 }

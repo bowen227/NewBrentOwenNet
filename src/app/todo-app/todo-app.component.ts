@@ -43,7 +43,6 @@ export class TodoAppComponent implements OnInit {
 
       this.isLoggedIn = (this.user != null);
       this.popup = (this.user != null);
-
     }
   }
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
 import {formatDate} from '@angular/common';
+import { distinct } from 'rxjs/operators';
 
 @Component({
   selector: 'app-events-app',
@@ -82,26 +83,33 @@ export class EventsAppComponent implements OnInit {
     }
   }
 
-  public showDaysLeft(date) {
-    let today = new Date();
-    let end = new Date(date);
-    // let daysLeft = Math.floor((Date.UTC(
-    //     end.getFullYear(), end.getMonth(), end.getDate()) - 
-    //     Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())) / (1000*60*60*24));
-    let days = end.getDate() - today.getDate() + 1;
-    let hours = days * 24;
-    let min = hours * 60;
-    let sec = min * 60;
-    let timeLeft = {'days': days, 'hours': hours}
-    return timeLeft;
-  }
+  public showCountDown(date, id) {
+    const end = new Date(date);
 
-  public showHoursLeft(date) {
-    let today = new Date();
-    let end = new Date(date);
-    let days = end.getDate() - today.getDate() + 1;
-    let hours = days * 24;
-    return hours;
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+
+    let timer;
+    
+    let showRemaing = () => {
+      let now = new Date();
+      let distance = end.getTime() - now.getTime();
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById(id).innerHTML = 'Completed';
+        return;
+      }
+
+      let days = Math.floor(distance / day);
+      let hours = Math.floor((distance % day) / hour);
+      let minutes = Math.floor((distance % hour) / minute);
+      let seconds = Math.floor((distance % minute) / second);
+      document.getElementById(id).innerHTML = days + 'D : ' + hours + 'H : ' + minutes + 'M : ' + seconds + 'S';
+    }
+
+    timer = setInterval(showRemaing, 1000);
   }
 
 }

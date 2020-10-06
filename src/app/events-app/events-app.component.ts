@@ -27,6 +27,8 @@ export class EventsAppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkLogIn();
+
+    this.showCountDown();
   }
 
   // Check if signed in
@@ -76,40 +78,62 @@ export class EventsAppComponent implements OnInit {
       
       this.toast.success(data.eventName, "Created!");
     } else {
-      this.events.push(data);
+      const nEvent = {
+        id: this.events.length,
+        eventName: data.eventName,
+        eventDate: data.eventDate
+      };
+      this.events.push(nEvent);
       this.showNewEventForm = false;
       this.showEditEventForm = false;
-      this.toast.success(data.eventName, "Created!");
+      this.toast.success(nEvent.eventName, "Created!");
+      this.showCountDown();
     }
   }
 
-  public showCountDown(date, id) {
-    const end = new Date(date);
+  public showCountDown() {
+    if (this.events.length > 0) {
 
-    const second = 1000;
-    const minute = second * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
+      this.events.forEach(element => {
+        let index = this.events.findIndex(e => e.id == element.id).toString();
 
-    let timer;
+        let end = new Date(element.eventDate);
+        let now = new Date();
+
+        const second = 1000;
+        const minute = second * 60;
+        const hour = minute * 60;
+        const day = hour * 24;
+
+        let distance = end.getTime() - now.getTime();
     
-    let showRemaing = () => {
-      let now = new Date();
-      let distance = end.getTime() - now.getTime();
-      if (distance < 0) {
-        clearInterval(timer);
-        document.getElementById(id).innerHTML = 'Completed';
-        return;
-      }
+        let timer;
 
-      let days = Math.floor(distance / day);
-      let hours = Math.floor((distance % day) / hour);
-      let minutes = Math.floor((distance % hour) / minute);
-      let seconds = Math.floor((distance % minute) / second);
-      document.getElementById(id).innerHTML = days + 'D : ' + hours + 'H : ' + minutes + 'M : ' + seconds + 'S';
+        if (distance < 0) {
+          clearInterval(timer);
+          document.getElementById(index).innerHTML = 'Completed';
+          return;
+        }
+        
+        function showRemaing() {
+          let now = new Date();
+          let distance = end.getTime() - now.getTime();
+          if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById(index).innerHTML = 'Completed';
+            return;
+          }
+    
+          let days = Math.floor(distance / day);
+          let hours = Math.floor((distance % day) / hour);
+          let minutes = Math.floor((distance % hour) / minute);
+          let seconds = Math.floor((distance % minute) / second);
+          document.getElementById(index).innerHTML = days + 'D : ' + hours + 'H : ' + minutes + 'M : ' + seconds + 'S';
+        }
+    
+        timer = setInterval(showRemaing, 1000);
+      });
     }
-
-    timer = setInterval(showRemaing, 1000);
   }
 
 }

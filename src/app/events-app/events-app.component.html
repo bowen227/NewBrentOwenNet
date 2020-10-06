@@ -12,9 +12,9 @@
         <ul class="list-group list-group-flush" *ngIf="events.length > 0">
             <li class="list-group-item" *ngFor="let e of events; let i = index;">
                 <div class="d-flex flex-row">
-                    <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
                     <span class="flex-grow-1 mt-1 contact">{{ e.eventName }}</span>
-                    <span class="date mt-1" id="{{ i }}" [load]="showCountDown(e.eventDate, i)"></span>
+                    <!-- <span class="date mt-1" id="{{ i }}" [load]="showCountDown(e.eventDate, i)"></span> -->
+                    <span class="date mt-1" id="{{ i }}"></span>
                     <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(c.id)"></i>
                 </div>

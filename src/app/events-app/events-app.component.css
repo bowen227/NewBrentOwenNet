@@ -3,6 +3,16 @@ h2 {
     color: #fff;
 }
 
+.form-container {
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+.events-container {
+    max-width: 400px;
+    margin: 0px auto;
+}
+
 .fa-plus-square:hover {
     cursor: pointer;
 }

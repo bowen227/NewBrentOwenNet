@@ -4,35 +4,35 @@
     <div class="form-container">
         <h3 class="ml-4 mt-3">Add New Event<i class="fas fa-plus-square ml-3" (click)="showForm('new')"></i></h3>
         <div class="p-4 events-container">
-        <h3>Events</h3>
-        <h5 *ngIf="!isLoading && events.length == 0">You haven't created any events!</h5>
-        <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
-            <span class="sr-only">Loading...</span>
+            <h3>Events</h3>
+            <h5 *ngIf="!isLoading && events.length == 0">You haven't created any events!</h5>
+            <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <ul class="list-group list-group-flush" *ngIf="events.length > 0">
+                <li class="list-group-item" *ngFor="let e of events; let i = index;">
+                    <div class="d-flex flex-row">
+                        <span class="flex-grow-1 mt-1 contact">{{ e.eventName }}</span>
+                        <!-- <span class="date mt-1" id="{{ i }}" [load]="showCountDown(e.eventDate, i)"></span> -->
+                        <span class="date mt-1" id="{{ i }}"></span>
+                        <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
+                        <i class="far fa-trash-alt m-2" (click)="delete(c.id)"></i>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <ul class="list-group list-group-flush" *ngIf="events.length > 0">
-            <li class="list-group-item" *ngFor="let e of events; let i = index;">
-                <div class="d-flex flex-row">
-                    <span class="flex-grow-1 mt-1 contact">{{ e.eventName }}</span>
-                    <!-- <span class="date mt-1" id="{{ i }}" [load]="showCountDown(e.eventDate, i)"></span> -->
-                    <span class="date mt-1" id="{{ i }}"></span>
-                    <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
-                    <i class="far fa-trash-alt m-2" (click)="delete(c.id)"></i>
-                </div>
-            </li>
-        </ul>
-        </div>
-        <div class="event-form-container d-flex justify-content-center align-items-center p-3" *ngIf="showNewEventForm || showEditEventForm">
-            <form class="container d-flex flex-column justify-content-around align-items-center p-3" [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="eventName">Event Name</label>
-                    <input type="text" class="form-control" formControlName="eventName">
-                </div>
-                <div class="form-group">
-                    <label for="eventDate">Event Date</label>
-                    <input type="date" class="form-control" formControlName="eventDate">
-                </div>
-                <button type="submit" class="btn">Submit</button>
-            </form>
-        </div>
+    </div>
+    <div class="event-form-container d-flex justify-content-center align-items-center p-3" *ngIf="showNewEventForm || showEditEventForm">
+        <form class="container d-flex flex-column justify-content-around align-items-center p-3" [formGroup]="eventsForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="eventName">Event Name</label>
+                <input type="text" class="form-control" formControlName="eventName">
+            </div>
+            <div class="form-group">
+                <label for="eventDate">Event Date</label>
+                <input type="date" class="form-control" formControlName="eventDate">
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
     </div>
 </section>

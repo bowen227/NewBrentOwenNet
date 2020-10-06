@@ -35,4 +35,11 @@
             <button type="submit" class="btn">Submit</button>
         </form>
     </div>
+    <div class="popup-container d-flex flex-column justify-content-center align-items-center" *ngIf="!popup">
+        <div class="popup-inner-container p-4">
+            <p>Backend not completed. You will lose your events on page change.</p>
+            <p>App not complete. There are still bugs currently being worked on.</p>
+            <button class="btn" (click)="closePopup()">Close</button>
+        </div>
+    </div>
 </section>

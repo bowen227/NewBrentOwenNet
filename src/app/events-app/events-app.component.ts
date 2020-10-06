@@ -136,4 +136,8 @@ export class EventsAppComponent implements OnInit {
     }
   }
 
+  public closePopup() {
+    this.popup = !this.popup;
+  }
+
 }

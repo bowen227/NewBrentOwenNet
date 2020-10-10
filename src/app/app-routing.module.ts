@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { CrmAppComponent } from './crm-app/crm-app.component';
 import { ContactDetailsComponent } from './crm-app/contact-details/contact-details.component';
 import { EventsAppComponent } from './events-app/events-app.component';
+import { FbsScoresComponent } from './fbs-scores/fbs-scores.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'signIn', component: LoginComponent },
   { path: 'crm', component: CrmAppComponent },
   { path: 'details', component: ContactDetailsComponent },
-  { path: 'events', component: EventsAppComponent }
+  { path: 'events', component: EventsAppComponent },
+  { path: 'scores', component: FbsScoresComponent }
 ];
 
 @NgModule({

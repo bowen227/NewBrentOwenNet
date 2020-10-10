@@ -1,0 +1,9 @@
+<section>
+    <ul class="list-group-flush">
+        <ng-container *ngFor="let item of names;">
+            <li class="list-group-item" *ngFor="let i of item">
+                {{ i.name | json }}  {{ i.startDate }}
+            </li>
+        </ng-container>
+    </ul>
+</section>

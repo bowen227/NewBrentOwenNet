@@ -12,6 +12,7 @@ export class FbsScoresComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
   public data;
+  public week;
   public keys = [];
   public names = [];
   public games = [];
@@ -23,6 +24,8 @@ export class FbsScoresComponent implements OnInit {
 
   public sortData() {
     this.getData().subscribe(data => {
+      console.log(data);
+      this.week = data['week'].number;
       this.data = data;
       for (const key in this.data) {
         if (Object.prototype.hasOwnProperty.call(this.data, key)) {

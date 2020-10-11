@@ -8,7 +8,62 @@ import { Component, OnInit } from '@angular/core';
 export class BlogAppComponent implements OnInit {
   public popup: boolean = true;
   public blogs = [
-    {title: 'Test', info: 'Test blog info sentence.', author: 'Brent Owen', image: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fblog.hubspot.com%2Fhubfs%2Fhow%2520to%2520write%2520a%2520blog%2520post-2.jpg&imgrefurl=https%3A%2F%2Fblog.hubspot.com%2F&tbnid=gLf5IZX1JlvLOM&vet=12ahUKEwjPr7f4qa3sAhVP6VMKHfE-AFkQMygAegUIARDNAQ..i&docid=nxmcBnhaYYobzM&w=598&h=398&q=blog%20images&ved=2ahUKEwjPr7f4qa3sAhVP6VMKHfE-AFkQMygAegUIARDNAQ'}
+    {
+      title: 'Test',
+      info: 'Test blog info sentence.',
+      author: 'Brent Owen',
+      image: '../../assets/upper_image.jpg',
+      body: '<h2>1 This is the heading</h2><img src="../../assets/upper_image.jpg"><p>This is the main paragraph for the blog post.</p>'
+    },
+    {
+      title: 'Test',
+      info: 'Test blog info sentence.',
+      author: 'Brent Owen',
+      image: '../../assets/upper_image.jpg',
+      body: '<h2>2 This is the heading</h2><img src="../../assets/upper_image.jpg"><p>This is the main paragraph for the blog post.</p>'
+    },
+    {
+      title: 'Test',
+      info: 'Test blog info sentence.',
+      author: 'Brent Owen',
+      image: '../../assets/upper_image.jpg',
+      body: '<h2>3 This is the heading</h2><img src="../../assets/upper_image.jpg"><p>This is the main paragraph for the blog post.</p>'
+    },
+    {
+      title: 'Test',
+      info: 'Test blog info sentence.',
+      author: 'Brent Owen',
+      image: '../../assets/upper_image.jpg',
+      body: '<h2>4 This is the heading</h2><img src="../../assets/upper_image.jpg"><p>This is the main paragraph for the blog post.</p>'
+    },
+    {
+      title: 'Test',
+      info: 'Test blog info sentence.',
+      author: 'Brent Owen',
+      image: '../../assets/upper_image.jpg',
+      body: '<h2>5 This is the heading</h2><img src="../../assets/upper_image.jpg"><p>This is the main paragraph for the blog post.</p>'
+    },
+    {
+      title: 'Test',
+      info: 'Test blog info sentence.',
+      author: 'Brent Owen',
+      image: '../../assets/upper_image.jpg',
+      body: '<h2>6 This is the heading</h2><img src="../../assets/upper_image.jpg"><p>This is the main paragraph for the blog post.</p>'
+    },
+    {
+      title: 'Test',
+      info: 'Test blog info sentence.',
+      author: 'Brent Owen',
+      image: '../../assets/upper_image.jpg',
+      body: '<h2>7 This is the heading</h2><img src="../../assets/upper_image.jpg"><p>This is the main paragraph for the blog post.</p>'
+    },
+    {
+      title: 'Test',
+      info: 'Test blog info sentence.',
+      author: 'Brent Owen',
+      image: '../../assets/upper_image.jpg',
+      body: '<h2>8 This is the heading</h2><img src="../../assets/upper_image.jpg"><p>This is the main paragraph for the blog post.</p>'
+    }
   ];
 
   constructor() { }

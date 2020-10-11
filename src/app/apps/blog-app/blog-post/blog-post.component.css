@@ -1,0 +1,12 @@
+h2 {
+    background-color: #666666;
+    color: #fff;
+}
+
+.body-container {
+    width: 100%;
+}
+
+.body-container div {
+    width: 90%;
+}

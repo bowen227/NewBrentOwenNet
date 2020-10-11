@@ -12,6 +12,7 @@ import { ContactDetailsComponent } from './apps/crm-app/contact-details/contact-
 import { EventsAppComponent } from './apps/events-app/events-app.component';
 import { FbsScoresComponent } from './apps/fbs-scores/fbs-scores.component';
 import { BlogAppComponent } from './apps/blog-app/blog-app.component';
+import { BlogPostComponent } from './apps/blog-app/blog-post/blog-post.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'details', component: ContactDetailsComponent },
   { path: 'events', component: EventsAppComponent },
   { path: 'scores', component: FbsScoresComponent },
-  { path: 'blogs', component: BlogAppComponent }
+  { path: 'blogs', component: BlogAppComponent },
+  { path: 'post', component: BlogPostComponent }
 ];
 
 @NgModule({

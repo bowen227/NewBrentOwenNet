@@ -15,6 +15,7 @@ h2 {
     background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
     width: 90%;
+    max-width: 400px;
     border-radius: 30px;
 }
 
@@ -23,3 +24,18 @@ button {
     color: #fff;
     margin-top: 15px;
 }
+
+.card-deck {
+    justify-content: center;
+}
+
+.card {
+    min-width: 300px;
+    max-width: 300px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+/* .card-img {
+    width: 100%;
+} */

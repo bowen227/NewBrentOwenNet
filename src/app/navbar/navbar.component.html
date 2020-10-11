@@ -14,7 +14,7 @@
                 <h1>Web Developer</h1>
                 <i class="fas fa-times font-weight-bold" (click)="toggleMenu()" *ngIf="openMenu"></i>
             </div>
-            <ul class="list-group list-group-flush">
+            <ul class="list-group list-group-flush mb-4">
                 <li class="list-group-item d-flex" routerLink="/" (click)="toggleMenu()">
                     <div class="link-name flex-grow-1">
                         <span>Home</span>
@@ -70,6 +70,9 @@
                         </li>
                         <li class="list-group-item" routerLink="/scores" (click)="toggleMenu()" (click)="toggleMore('projects')">
                             Scores
+                        </li>
+                        <li class="list-group-item" routerLink="/blogs" (click)="toggleMenu()" (click)="toggleMore('projects')">
+                            Blogs
                         </li>
                     </ul>
                 </div>
@@ -173,6 +176,9 @@
                         </li>
                         <li class="list-group-item" routerLink="scores">
                             Scores
+                        </li>
+                        <li class="list-group-item" routerLink="blogs">
+                            Blogs
                         </li>
                     </ul>
                 </div>

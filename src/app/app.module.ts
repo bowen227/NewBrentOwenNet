@@ -34,6 +34,7 @@ import { CrmAppComponent } from './apps/crm-app/crm-app.component';
 import { ContactDetailsComponent } from './apps/crm-app/contact-details/contact-details.component';
 import { EventsAppComponent } from './apps/events-app/events-app.component';
 import { FbsScoresComponent } from './apps/fbs-scores/fbs-scores.component';
+import { BlogAppComponent } from './apps/blog-app/blog-app.component';
 
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {
@@ -63,7 +64,8 @@ export class SafePipe implements PipeTransform {
     CrmAppComponent,
     ContactDetailsComponent,
     EventsAppComponent,
-    FbsScoresComponent
+    FbsScoresComponent,
+    BlogAppComponent
   ],
   imports: [
     BrowserModule,

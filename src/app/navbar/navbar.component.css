@@ -24,9 +24,9 @@ h1 {
 .drop-down-menu {
     background-color: #fff;
     /* margin-top: 50px; */
-    height: 100vh;
+    height: 100%;
     z-index: 1000;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .links {

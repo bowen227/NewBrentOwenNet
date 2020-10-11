@@ -1,0 +1,13 @@
+.main-container {
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+h2 {
+    background-color: #666666;
+    color: #fff;
+}
+
+ul {
+    margin: 0px auto;
+}

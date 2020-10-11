@@ -1,9 +1,12 @@
 <section>
-    <ul class="list-group-flush">
-        <ng-container *ngFor="let item of names;">
-            <li class="list-group-item" *ngFor="let i of item">
-                {{ i.name | json }}  {{ i.startDate }}
+    <h2 class="p-3"><i class="fas fa-tasks mr-2"></i>Scores App</h2>
+    <div class="main-container">
+        <h3 class="ml-4 mt-3">College Football Scores</h3>
+        <ul class="list-group list-group-flush mt-4">
+            <li class="list-group-item" *ngFor="let game of games;">
+                {{ game.homeTeam }} {{ game.homeScore }} @ {{ game.awayTeam }} {{ game.awayScore }} <br>
+                {{ game.date | date}}
             </li>
-        </ng-container>
-    </ul>
+        </ul>
+    </div>
 </section>

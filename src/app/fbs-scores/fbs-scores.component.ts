@@ -11,9 +11,10 @@ import { map } from 'rxjs/operators';
 export class FbsScoresComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
-  public games;
+  public data;
   public keys = [];
   public names = [];
+  public games = [];
   public gamesURL = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard";
 
   ngOnInit(): void {
@@ -22,16 +23,29 @@ export class FbsScoresComponent implements OnInit {
 
   public sortData() {
     this.getData().subscribe(data => {
-      this.games = data
-      for (const key in this.games) {
-        if (Object.prototype.hasOwnProperty.call(this.games, key)) {
-          const element = this.games[key];
-          this.keys.push(element);
-          this.keys.forEach(item => {
-            this.names.push(item);
-          });
+      this.data = data;
+      for (const key in this.data) {
+        if (Object.prototype.hasOwnProperty.call(this.data, key)) {
+          const element = this.data[key];
+          if (element.length > 4) {
+            this.names.push(element);
+          }
         }
       }
+      console.log(this.names);
+      this.names.map(item => {
+        item.map(i => {
+          // console.log(i);
+            let game = {
+              date: i.date,
+              homeTeam: i['competitions'][0]['competitors'][0]['team'].abbreviation,
+              awayTeam: i['competitions'][0]['competitors'][1]['team'].abbreviation,
+              homeScore: i['competitions'][0]['competitors'][0].score,
+              awayScore: i['competitions'][0]['competitors'][1].score 
+            }
+            this.games.push(game);
+        });
+      })
     });
   }
 

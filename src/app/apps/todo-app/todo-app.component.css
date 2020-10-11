@@ -28,9 +28,10 @@ button {
 }
 
 .popup-container {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
-    width: 100%;
+    width: 90%;
+    border-radius: 30px;
 }
 
 .popup-container i {

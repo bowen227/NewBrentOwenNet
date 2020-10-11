@@ -128,7 +128,7 @@ export class EventsAppComponent implements OnInit {
           let hours = Math.floor((distance % day) / hour);
           let minutes = Math.floor((distance % hour) / minute);
           let seconds = Math.floor((distance % minute) / second);
-          document.getElementById(index).innerHTML = days + 'D : ' + hours + 'H : ' + minutes + 'M : ' + seconds + 'S';
+          document.getElementById(index).innerHTML = days + ' : ' + hours + ' : ' + minutes + ' : ' + seconds;
         }
     
         timer = setInterval(showRemaing, 1000);

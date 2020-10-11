@@ -31,11 +31,12 @@
         <!-- <div class="arrow">
             <i class="fas fa-location-arrow"></i>
         </div> -->
-        <div class="popup-container p-2 d-flex flex-column" *ngIf="user == null">
-            <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i>
+        <div class="popup-container p-3 d-flex flex-column" *ngIf="user == null">
+            <!-- <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i> -->
             <div>
                 <h3>You're not signed in!</h3>
                 <p>If you'd like to save your groups please sign in. Otherwise, your groups will not be saved when you leave this page.</p>
+                <button class="btn" (click)="togglePopup()">Close</button>
             </div>
         </div>
     </div>

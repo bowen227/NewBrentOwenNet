@@ -40,9 +40,10 @@ h2 {
 .popup-inner-container {
     background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
-    width: 100%;
+    width: 90%;
     padding-bottom: 1em;
     max-width: 500px;
+    border-radius: 30px;
 }
 
 form {

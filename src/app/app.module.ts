@@ -21,8 +21,8 @@ import { WorldGraphComponent } from './covid/graphs/world-graph/world-graph.comp
 import { StateGraphComponent } from './covid/graphs/state-graph/state-graph.component';
 import { UsBreakdownComponent } from './covid/graphs/us-breakdown/us-breakdown.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
-import { TodoAppComponent } from './todo-app/todo-app.component';
-import { TodoComponent } from './todo-app/todo/todo.component';
+import { TodoAppComponent } from './apps/todo-app/todo-app.component';
+import { TodoComponent } from './apps/todo-app/todo/todo.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
   GoogleLoginProvider,
@@ -30,10 +30,10 @@ import {
   AmazonLoginProvider,
 } from 'angularx-social-login';
 import { LoginComponent } from './login/login.component';
-import { CrmAppComponent } from './crm-app/crm-app.component';
-import { ContactDetailsComponent } from './crm-app/contact-details/contact-details.component';
-import { EventsAppComponent } from './events-app/events-app.component';
-import { FbsScoresComponent } from './fbs-scores/fbs-scores.component';
+import { CrmAppComponent } from './apps/crm-app/crm-app.component';
+import { ContactDetailsComponent } from './apps/crm-app/contact-details/contact-details.component';
+import { EventsAppComponent } from './apps/events-app/events-app.component';
+import { FbsScoresComponent } from './apps/fbs-scores/fbs-scores.component';
 
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {

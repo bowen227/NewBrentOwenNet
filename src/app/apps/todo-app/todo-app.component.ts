@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl, NgModel } f
 import { SocialAuthService, GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { ToastrService } from 'ngx-toastr';
-import { TodoService } from '../shared/todo.service';
+import { TodoService } from '../../shared/todo.service';
 
 @Component({
   selector: 'app-todo-app',

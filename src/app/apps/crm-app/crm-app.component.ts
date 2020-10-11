@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
-import { CrmService } from '../shared/crm.service';
+import { CrmService } from '../../shared/crm.service';
 
 @Component({
   selector: 'app-crm-app',

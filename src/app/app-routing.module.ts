@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'details', component: ContactDetailsComponent },
   { path: 'events', component: EventsAppComponent },
   { path: 'scores', component: FbsScoresComponent },
-  { path: 'blog', component: BlogAppComponent }
+  { path: 'blogs', component: BlogAppComponent }
 ];
 
 @NgModule({

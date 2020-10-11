@@ -1,3 +1,28 @@
 <section>
-    blog app
+    <h2 class="p-3"><i class="fas fa-blog mr-2"></i>Blogs</h2>
+    <div class="blogs">
+        <h4 *ngIf="blogs.length == 0">No Blogs to display...</h4>
+        <div class="card-deck justify-content-center flex-wrap p-2" *ngIf="blogs.length > 0">
+            <div class="spinner-border text-warning" role="status" *ngIf="isLoading">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="card shadow p-3 mb-5 bg-white rounded" *ngFor="let item of blogs; let i = index;">
+                <img [src]="item.image" alt="Card image cap" class="card-img top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.info }}</p>
+                    <button class="btn">More</button>
+                    <blockquote class="blockquote mb-0">
+                        <footer class="blockquote-footer"><cite title="Source Title">{{ item.author }}</cite></footer>
+                      </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup d-flex justify-content-center align-items-center" *ngIf="popup">
+        <div class="inner-popup p-3">
+            <h3>Currently in-dev.</h3>
+            <button class="btn" (click)="closePopup()">Close</button>
+        </div>
+    </div>
 </section>

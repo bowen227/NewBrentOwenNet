@@ -3,10 +3,31 @@ h2 {
     color: #fff;
 }
 
+img {
+    max-width: 200px;
+}
+
 .body-container {
     width: 100%;
 }
 
-.body-container div {
-    width: 90%;
+.body-post {
+    width: 100%;
+}
+
+:host ::ng-deep .post-image {
+    max-width: 200px;
+    margin-bottom: 25px;
+}
+
+@media only screen and (min-width: 768px) {
+    .body-container div {
+        width: 70%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .body-container div {
+        width: 50%;
+    }
 }

@@ -13,6 +13,7 @@ import { EventsAppComponent } from './apps/events-app/events-app.component';
 import { FbsScoresComponent } from './apps/fbs-scores/fbs-scores.component';
 import { BlogAppComponent } from './apps/blog-app/blog-app.component';
 import { BlogPostComponent } from './apps/blog-app/blog-post/blog-post.component';
+import { BlogDashboardComponent } from './apps/blog-app/blog-dashboard/blog-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,13 +22,14 @@ const routes: Routes = [
   { path: 'contact', component: ContactFormComponent },
   { path: 'todo', component: TodoAppComponent },
   { path: 'todoList/:todo', component: TodoComponent },
-  { path: 'signIn', component: LoginComponent },
+  // { path: 'signIn', component: LoginComponent },
   { path: 'crm', component: CrmAppComponent },
   { path: 'details', component: ContactDetailsComponent },
   { path: 'events', component: EventsAppComponent },
   { path: 'scores', component: FbsScoresComponent },
   { path: 'blogs', component: BlogAppComponent },
-  { path: 'post', component: BlogPostComponent }
+  { path: 'blogs/:id', component: BlogPostComponent },
+  { path: 'dashboard', component: BlogDashboardComponent }
 ];
 
 @NgModule({

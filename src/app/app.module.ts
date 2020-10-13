@@ -41,6 +41,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { BlogDashboardComponent } from './apps/blog-app/blog-dashboard/blog-dashboard.component';
 
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {
@@ -72,7 +73,8 @@ export class SafePipe implements PipeTransform {
     EventsAppComponent,
     FbsScoresComponent,
     BlogAppComponent,
-    BlogPostComponent
+    BlogPostComponent,
+    BlogDashboardComponent,
   ],
   imports: [
     BrowserModule,

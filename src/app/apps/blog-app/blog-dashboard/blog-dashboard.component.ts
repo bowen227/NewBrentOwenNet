@@ -1,0 +1,58 @@
+import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { BlogService } from 'src/app/shared/blog.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { timeout, timeoutWith } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-blog-dashboard',
+  templateUrl: './blog-dashboard.component.html',
+  styleUrls: ['./blog-dashboard.component.css']
+})
+export class BlogDashboardComponent implements OnInit {
+  title: string;
+  image: string = null;
+  body: string;
+
+  public uploadPerc: Observable<number>;
+  public dloadURL: Observable<string>;
+
+  constructor(private bService: BlogService,
+              private toast: ToastrService,
+              private storage: AngularFireStorage) { }
+
+  ngOnInit(): void {
+  }
+
+  public createNewPost() {
+    const data = {
+      title: this.title,
+      image: this.image,
+      body: this.body,
+      published: new Date(),
+      author: this.bService.authState.displayName || this.bService.authState.email,
+      authorId: this.bService.userId
+    }
+    this.bService.createPost(data)
+    this.title = '';
+    this.body = '';
+    this.toast.success("Post created!!");
+  }
+
+  public upload(event) {
+    const file = event.target.files[0];
+    const path = `posts/${file.name}`
+    if (file.type.split('/')[0] !== 'image') {
+      return this.toast.warning("Can only upload image files...");
+    } else {
+      const task = this.storage.upload(path, file);
+      setTimeout(() => {
+        this.dloadURL = this.storage.ref(path).getDownloadURL();
+        this.uploadPerc = task.percentageChanges();
+        this.dloadURL.subscribe(url => this.image = url);
+      }, 2000);
+    }
+  }
+
+}

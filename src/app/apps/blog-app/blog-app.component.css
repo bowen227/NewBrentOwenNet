@@ -19,10 +19,18 @@ h2 {
     border-radius: 30px;
 }
 
+img:hover {
+    cursor: pointer;
+}
+
 button {
     background-color: #CD5334;
     color: #fff;
     margin-top: 15px;
+}
+
+.cards-container {
+    height: 100%;
 }
 
 .card-deck {
@@ -30,10 +38,7 @@ button {
 }
 
 .card {
-    min-width: 300px;
-    max-width: 300px;
-    margin-bottom: 15px;
-    margin-top: 15px;
+    width: 100%;
 }
 
 .right {
@@ -41,6 +46,14 @@ button {
     margin-right: 20px;
 }
 
-/* .card-img {
-    width: 100%;
-} */
+span {
+    background-color: #CD5334;
+    color: #fff;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .card {
+        max-width: 250px;
+    }
+}

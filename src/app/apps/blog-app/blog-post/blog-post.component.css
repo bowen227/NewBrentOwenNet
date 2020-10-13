@@ -4,10 +4,11 @@ h2 {
 }
 
 img {
-    max-width: 200px;
+    width: 100%;
 }
 
 .body-container {
+    margin: 0px auto;
     width: 100%;
 }
 
@@ -21,13 +22,14 @@ img {
 }
 
 @media only screen and (min-width: 768px) {
-    .body-container div {
+    .body-container {
         width: 70%;
     }
 }
 
 @media only screen and (min-width: 1024px) {
-    .body-container div {
+    .body-container {
+        margin: 0px auto;
         width: 50%;
     }
 }

@@ -1,0 +1,14 @@
+button {
+    background-color: #CD5334;
+    color: #fff;
+    margin-top: 15px;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0px auto;
+}
+
+img {
+    width: 100%;
+}

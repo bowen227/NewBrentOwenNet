@@ -36,6 +36,11 @@ button {
     margin-top: 15px;
 }
 
+.right {
+    float: right;
+    margin-right: 20px;
+}
+
 /* .card-img {
     width: 100%;
 } */

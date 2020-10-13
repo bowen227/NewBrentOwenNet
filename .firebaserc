@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "blog-app-ac2af": {
+      "hosting": {
+        "brentowen-net": [
+          "blog-app-ac2af"
+        ]
+      }
+    }
+  }
+}

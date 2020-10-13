@@ -37,6 +37,11 @@ import { FbsScoresComponent } from './apps/fbs-scores/fbs-scores.component';
 import { BlogAppComponent } from './apps/blog-app/blog-app.component';
 import { BlogPostComponent } from './apps/blog-app/blog-post/blog-post.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
@@ -79,6 +84,9 @@ export class SafePipe implements PipeTransform {
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     SocialLoginModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule
   ],
   providers: [
     CovidService,

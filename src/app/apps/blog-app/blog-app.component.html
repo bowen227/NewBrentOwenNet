@@ -1,4 +1,20 @@
 <section>
+    <div>
+        <h2 class="p-3"><i class="fas fa-blog mr-2"></i>Blogs</h2>
+        <div class="d-flex" *ngIf="auth.afAuth.authState | async as user; else showSignInBtn">
+            <h3 class="flex-grow-1">Hi, {{ user.displayName }}</h3>
+            <button class="btn right" (click)="auth.signOut()">Sign Out</button>
+        </div>
+    </div>
+    <ng-template #showSignInBtn>
+        <button class="btn right" (click)="auth.signIn()">Login with Google</button>
+    </ng-template>
+</section>
+
+
+<!-- OLD BELOW -->
+
+<!-- <section>
     <h2 class="p-3"><i class="fas fa-blog mr-2"></i>Blogs</h2>
     <div class="blogs">
         <h4 *ngIf="blogs.length == 0">No Blogs to display...</h4>
@@ -11,7 +27,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ item.title }}</h5>
                     <p class="card-text">{{ item.info }}</p>
-                    <!-- <div [innerHTML]="item.body"></div> -->
+                    <div [innerHTML]="item.body"></div?>
                     <button class="btn" [routerLink]="['/post', {body: item.body, title: item.title}]">More</button>
                     <blockquote class="blockquote mb-0">
                         <footer class="blockquote-footer"><cite title="Source Title">{{ item.author }}</cite></footer>
@@ -26,4 +42,4 @@
             <button class="btn" (click)="closePopup()">Close</button>
         </div>
     </div>
-</section>
+</section> -->

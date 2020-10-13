@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { BlogService } from '../../shared/blog.service';
+import { POST } from '../../shared/blog.service';
 
 @Component({
   selector: 'app-blog-app',
@@ -7,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogAppComponent implements OnInit {
   public popup: boolean = true;
+  public posts: Observable<POST[]>;
   public blogs = [
     {
       title: 'From fat to fit',
@@ -58,15 +63,15 @@ export class BlogAppComponent implements OnInit {
       <h5>Down 60lbs</h5>
       <img src="../../assets/down_60lbs.jpg" class="post-image">
       <p></p>
-      
       `
     },
 
   ];
 
-  constructor() { }
+  constructor(public auth: BlogService, firestore: AngularFirestore) { }
 
   ngOnInit(): void {
+    
   }
 
   public closePopup() {

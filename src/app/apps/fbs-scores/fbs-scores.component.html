@@ -6,7 +6,7 @@
         <ul class="list-group list-group-flush mt-4">
             <li class="list-group-item" *ngFor="let game of games;">
                 {{ game.homeTeam }} {{ game.homeScore }} @ {{ game.awayTeam }} {{ game.awayScore }} <br>
-                {{ game.date | date}}
+                {{ game.date | date: 'medium'}}
             </li>
         </ul>
     </div>

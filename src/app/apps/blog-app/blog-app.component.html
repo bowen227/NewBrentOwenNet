@@ -14,7 +14,7 @@
                 <h5 class="card-title">{{ post.title }}</h5>
                 <!-- <p class="card-text">{{ post.body }}</p> -->
                 <blockquote class="blockquote mb-0">
-                    <footer class="blockquote-footer"><cite title="Source Title">{{ post.author }}</cite></footer>
+                    <footer class="blockquote-footer"><cite title="Source Title">{{ post.author }} <br> {{ post.published.toDate() | date }}</cite></footer>
                 </blockquote>
                 <div class="d-flex flex-row" *ngIf="bService.afAuth.authState | async as user;">
                     <div class="flex-grow-1"></div>

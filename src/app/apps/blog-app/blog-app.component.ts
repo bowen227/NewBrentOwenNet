@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BlogService } from '../../shared/blog.service';
+import { AuthService } from '../../shared/auth.service';
 import { Post } from './post';
 
 @Component({
@@ -10,16 +11,16 @@ import { Post } from './post';
 })
 export class BlogAppComponent implements OnInit {
   posts: Observable<Post[]>;
-  public popup: boolean = true;
+  user;
 
-  constructor(public bService: BlogService) { }
+  constructor(public bService: BlogService, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.posts = this.bService.getPosts();
-  }
 
-  public closePopup() {
-    this.popup = !this.popup;
+    this.user = this.auth.auth.authState.subscribe(u => {
+      console.log(u);
+    })
   }
 
 }

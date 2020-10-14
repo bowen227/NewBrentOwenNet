@@ -16,7 +16,6 @@ export class BlogPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPost();
-    console.log(this);
   }
 
   public getPost() {

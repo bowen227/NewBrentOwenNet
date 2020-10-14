@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { BlogService } from 'src/app/shared/blog.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { timeout, timeoutWith } from 'rxjs/operators';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-blog-dashboard',
@@ -14,15 +15,18 @@ export class BlogDashboardComponent implements OnInit {
   title: string;
   image: string = null;
   body: string;
+  userId;
 
   public uploadPerc: Observable<number>;
   public dloadURL: Observable<string>;
 
   constructor(private bService: BlogService,
               private toast: ToastrService,
-              private storage: AngularFireStorage) { }
+              private storage: AngularFireStorage,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.auth.authState.subscribe(u => this.userId = u.uid);
   }
 
   public createNewPost() {
@@ -32,7 +36,7 @@ export class BlogDashboardComponent implements OnInit {
       body: this.body,
       published: new Date(),
       author: this.bService.authState.displayName || this.bService.authState.email,
-      authorId: this.bService.userId
+      authorId: this.userId
     }
     this.bService.createPost(data)
     this.title = '';

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl, NgModel } f
 import { SocialAuthService, GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { ToastrService } from 'ngx-toastr';
+import { BlogService } from 'src/app/shared/blog.service';
 import { TodoService } from '../../shared/todo.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class TodoAppComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private toast: ToastrService,
               private service: SocialAuthService,
-              private tService: TodoService) { }
+              private tService: TodoService,
+              private bService: BlogService) { }
 
   ngOnInit(): void {
     this.checkLogIn();
@@ -31,6 +33,8 @@ export class TodoAppComponent implements OnInit {
     this.getGroupsByUser();
 
     this.scrollToTop();
+
+    console.log(this.user);
   }
 
   // Check if signed in

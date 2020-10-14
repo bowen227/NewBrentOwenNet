@@ -1,10 +1,20 @@
 <section>
-    <!-- <h2 class="p-3"><i class="fas fa-blog mr-2"></i>{{ title }}</h2> -->
-    <h3 class="p-2" routerLink="/blogs"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Blogs</h3>
-    <div class="body-container p-3" *ngIf="post">
-        <img src="{{ post.image }}" class="mb-3">
-        <h4 class="mb-0">{{ post.title }}</h4>
-        <small>Posted by: {{ post.author }} - {{ post.published.toDate() | date }}</small>
-        <p class="mt-4">{{ post.body }}</p>
+    <div *ngIf="!edit">
+        <!-- <h2 class="p-3"><i class="fas fa-blog mr-2"></i>{{ title }}</h2> -->
+        <h3 class="p-2" routerLink="/blogs"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Blogs</h3>
+        <div class="body-container p-3" *ngIf="post">
+            <i class="fas fa-edit m-2" *ngIf="user == post.authorId" (click)="edit = true"></i>
+            <img src="{{ post.image }}" class="mb-3">
+            <h4 class="mb-0">{{ post.title }}</h4>
+            <small>Posted by: {{ post.author }} - {{ post.published.toDate() | date }}</small>
+            <p class="mt-4">{{ post.body }}</p>
+        </div>
     </div>
+    <div *ngIf="edit" class="body-container">
+        <input class="form-control mb-2" type="text" placeholder="Title" [(ngModel)]="post.title">
+        <textarea class="form-control" name="body" cols="30" rows="10" [(ngModel)]="post.body"></textarea>
+        <button class="btn" (click)="editPost()">Save</button>
+        <button (click)="edit = false" class="cancelBtn btn">Cancel</button>
+    </div>
+    
 </section>

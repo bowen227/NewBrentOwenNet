@@ -29,13 +29,13 @@ export class BlogService {
     return this.authenticated ? this.authState.uid : null;
   }
 
-  signIn() {
-    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
+  // signIn() {
+  //   this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  // }
 
-  signOut() {
-    this.afAuth.signOut();
-  }
+  // signOut() {
+  //   this.afAuth.signOut();
+  // }
 
   public getPosts() {
     return this.postCollection.snapshotChanges().pipe(map(actions => {

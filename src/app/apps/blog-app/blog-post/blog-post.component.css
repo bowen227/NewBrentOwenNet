@@ -7,9 +7,29 @@ img {
     width: 100%;
 }
 
+button {
+    background-color: #CD5334;
+    color: #fff;
+    margin-top: 15px;
+}
+
+.cancelBtn {
+    background-color: transparent;
+    color: #CD5334;
+}
+
+.cancelBtn:hover {
+    background-color: rgba(119, 136, 153, 0.466);
+}
+
 .body-container {
     margin: 0px auto;
     width: 100%;
+}
+
+.body-container i {
+    float: right;
+    font-size: 22px;
 }
 
 .body-post {

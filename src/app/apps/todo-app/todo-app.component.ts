@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl, NgModel } f
 import { SocialAuthService, GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { ToastrService } from 'ngx-toastr';
-import { BlogService } from 'src/app/shared/blog.service';
+import { AuthService } from 'src/app/shared/auth.service';
 import { TodoService } from '../../shared/todo.service';
 
 @Component({
@@ -12,7 +12,8 @@ import { TodoService } from '../../shared/todo.service';
   styleUrls: ['./todo-app.component.css']
 })
 export class TodoAppComponent implements OnInit {
-  public user: SocialUser;
+  // public user: SocialUser;
+  public user;
   public groupForm: FormGroup;
   public loadingGroups: boolean = false;
   public todoGroups = [];
@@ -23,18 +24,32 @@ export class TodoAppComponent implements OnInit {
               private toast: ToastrService,
               private service: SocialAuthService,
               private tService: TodoService,
-              private bService: BlogService) { }
+              private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.checkLogIn();
+    this.auth.auth.authState.subscribe(u => {
+      if (u !== null) {
+        const user = {
+          id: u.uid,
+          name: u.displayName
+        }
+        this.user = user
+
+        // console.log(this.user);
+
+        this.getGroupsByUser();
+
+      } else {
+        this.user = null
+      }
+    });
+    // this.checkLogIn();
 
     this.initGroupForm();
 
-    this.getGroupsByUser();
 
     this.scrollToTop();
 
-    console.log(this.user);
   }
 
   // Check if signed in
@@ -52,7 +67,7 @@ export class TodoAppComponent implements OnInit {
 
   // Get Todo Groups From API By User
   public getGroupsByUser() {
-    if (this.user != null) {
+    if (this.user !== null) {
       this.loadingGroups = true;
       this.tService.getGroupsByUser(this.user.id).subscribe(res => {
         for (const key in res) {

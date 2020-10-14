@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { TodoService } from 'src/app/shared/todo.service';
 import { identifierModuleUrl } from '@angular/compiler';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-todo',
@@ -15,7 +16,8 @@ export class TodoComponent implements OnInit {
   public todoForm: FormGroup;
   public todoItems = [];
   public completedTodos = [];
-  public user: SocialUser;
+  // public user: SocialUser;
+  public user;
   public group;
   public loadingTodos = false;
 
@@ -23,18 +25,31 @@ export class TodoComponent implements OnInit {
               private toast: ToastrService, 
               private route: ActivatedRoute,
               private tService: TodoService,
-              private service: SocialAuthService) { }
+              private service: SocialAuthService,
+              private auth: AuthService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.group = params.todo;
     });
 
-    this.checkLogIn();
+    this.auth.auth.authState.subscribe(u => {
+      if (u !== null) {
+        const user = {
+          id: u.uid,
+          name: u.displayName
+        }
+        this.user = user
+        this.getTodosByGroup();
+
+      } else {
+        this.user = null
+      }
+    });
+
+    // this.checkLogIn();
 
     this.initTodoForm();
-
-    this.getTodosByGroup();
 
     this.scrollToTop();
   }

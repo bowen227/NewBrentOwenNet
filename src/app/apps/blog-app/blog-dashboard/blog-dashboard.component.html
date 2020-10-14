@@ -1,20 +1,36 @@
-<section class="p-3">
+<section class="">
     <h3 class="p-2" routerLink="/blogs"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Blogs</h3>
-    <div class="form-container">
-        <input type="file" name="file" id="file" (change)="upload($event)">
-        <div class="progress" style="height: 2px;" [hidden]="!uploadPerc">
-            <div 
-            class="progress-bar" 
-            role="progressbar" 
-            attr.aria-valuenow="{{ uploadPerc | async }}"
-            aria-valuemin="0" 
-            aria-valuemax="100"></div>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <span class="btn btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Create new post
+              </span>
+            </h2>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div class="form-container">
+                        <input type="file" name="file" id="file" (change)="upload($event)">
+                        <div class="progress" style="height: 2px;" [hidden]="!uploadPerc">
+                            <div 
+                                class="progress-bar" 
+                                role="progressbar" 
+                                attr.aria-valuenow="{{ uploadPerc | async }}"
+                                aria-valuemin="0" 
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <div [hidden]="!image" class="mb-2">
+                            <img [src]="image || '//:0'">
+                        </div>
+                        <input class="form-control mb-2" type="text" placeholder="Title" [(ngModel)]="title">
+                        <textarea class="form-control" name="body" cols="30" rows="10" [(ngModel)]="body"></textarea>
+                        <button class="btn" (click)="createNewPost()" [disabled]="!title || !body">Create Post</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div [hidden]="!image" class="mb-2">
-            <img [src]="image || '//:0'">
-        </div>
-        <input class="form-control mb-2" type="text" placeholder="Title" [(ngModel)]="title">
-        <textarea class="form-control" name="body" cols="30" rows="10" [(ngModel)]="body"></textarea>
-        <button class="btn" (click)="createNewPost()" [disabled]="!title || !body">Create Post</button>
-    </div>
+    </div>    
 </section>

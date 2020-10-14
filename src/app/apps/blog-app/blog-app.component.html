@@ -1,9 +1,9 @@
 <section>
     <h2 class="p-3"><i class="fas fa-blog mr-2"></i>Blogs</h2>
-    <button class="btn" (click)="auth.signIn()">signIn</button>
+    <!-- <button class="btn" (click)="auth.signIn()">signIn</button>
     <button *ngIf="auth.auth.authState | async as user;" class="btn" (click)="auth.signOut()">signOut</button>
-    {{ user }}
-    <div class="px-3">
+    {{ user }} -->
+    <div class="px-3 heading">
         <div class="d-flex" *ngIf="auth.auth.authState | async as user;">
             <h4 class="flex-grow-1">Hi, {{ user.displayName || user.email }}</h4>
             <span class="btn" routerLink="/dashboard">Write a Post</span>

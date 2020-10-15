@@ -36,18 +36,21 @@ export class ContactDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.auth.authState.subscribe(u => {
-      const user = {
-        id: u.uid,
-        name: u.displayName
-      }
-      this.user = user
-    
-      this.getCompanyData();
-
-      this.getContactsByCompany();
-
-      this.getTasks();
+      if (u !== null) {
+        const user = {
+          id: u.uid,
+          name: u.displayName
+        }
+        this.user = user
       
+        this.getCompanyData();
+  
+        this.getContactsByCompany();
+  
+        this.getTasks();
+      } else {
+        this.user = null
+      }
     });
 
     // this.checkLogIn();

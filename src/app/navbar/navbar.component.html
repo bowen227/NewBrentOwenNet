@@ -134,7 +134,7 @@
                         <i class="fas fa-angle-right"></i>
                     </div>
                 </li>
-                <li class="list-group-item d-flex contact-button" *ngIf="!isLoggedIn" (click)="signIn()" (click)="toggleMenu()">
+                <li class="list-group-item d-flex contact-button" *ngIf="!user" (click)="signIn()" (click)="toggleMenu()">
                     <div class="link-name flex-grow-1">
                         <span>Sign In</span>
                     </div>
@@ -142,7 +142,7 @@
                         <i class="fas fa-angle-right"></i>
                     </div>
                 </li>
-                <li class="list-group-item d-flex contact-button" *ngIf="isLoggedIn" (click)="signOut()" (click)="toggleMenu()">
+                <li class="list-group-item d-flex contact-button" *ngIf="user" (click)="signOut()" (click)="toggleMenu()">
                     <div class="link-name flex-grow-1">
                         <span>Sign Out</span>
                     </div>
@@ -195,8 +195,8 @@
             <div routerLink="/covid">Covid-19</div>
             <div routerLink="/contact">Contact Me</div>
             <div (click)="openFile()">Resume</div>
-            <div *ngIf="!isLoggedIn" (click)="signIn()">Sign In</div>
-            <div *ngIf="isLoggedIn" (click)="signOut()">Sign Out</div>
+            <div *ngIf="!user" (click)="signIn()">Sign In</div>
+            <div *ngIf="user" (click)="signOut()">Sign Out</div>
         </div>
     </section>
 </section>

@@ -37,12 +37,16 @@ export class CrmAppComponent implements OnInit {
   ngOnInit(): void {
     // this.checkLogIn();
     this.auth.auth.authState.subscribe(u => {
-      const user = {
-        id: u.uid,
-        name: u.displayName
+      if (u !== null) {
+        const user = {
+          id: u.uid,
+          name: u.displayName
+        }
+        this.user = user
+        this.getCompaniesByUser();
+      } else {
+        this.user = null
       }
-      this.user = user
-      this.getCompaniesByUser();
     })
 
     // this.getCompaniesByUser();

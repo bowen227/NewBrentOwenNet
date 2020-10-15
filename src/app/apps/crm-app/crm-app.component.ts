@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/shared/auth.service';
 import { CrmService } from '../../shared/crm.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { CrmService } from '../../shared/crm.service';
   styleUrls: ['./crm-app.component.css']
 })
 export class CrmAppComponent implements OnInit {
-  public user: SocialUser;
+  // public user: SocialUser;
+  public user;
   public contactForm: FormGroup;
   public editForm: FormGroup;
   public showNewContactForm: boolean = false;
@@ -29,12 +31,21 @@ export class CrmAppComponent implements OnInit {
               private toast: ToastrService,
               private service: SocialAuthService,
               private route: Router,
-              private cService: CrmService) { }
+              private cService: CrmService,
+              private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.checkLogIn();
+    // this.checkLogIn();
+    this.auth.auth.authState.subscribe(u => {
+      const user = {
+        id: u.uid,
+        name: u.displayName
+      }
+      this.user = user
+      this.getCompaniesByUser();
+    })
 
-    this.getCompaniesByUser();
+    // this.getCompaniesByUser();
   }
 
   // Check if signed in

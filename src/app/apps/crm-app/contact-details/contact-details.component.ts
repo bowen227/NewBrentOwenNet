@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/shared/auth.service';
 import { CrmService } from 'src/app/shared/crm.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { CrmService } from 'src/app/shared/crm.service';
   styleUrls: ['./contact-details.component.css']
 })
 export class ContactDetailsComponent implements OnInit {
-  public user: SocialUser;
+  // public user: SocialUser;
+  public user;
   public company;
   public contacts = [];
   public showNewContactForm: boolean = false;
@@ -29,18 +31,29 @@ export class ContactDetailsComponent implements OnInit {
               private toast: ToastrService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
-              private cService: CrmService) { }
+              private cService: CrmService,
+              private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.getCompanyData();
+    this.auth.auth.authState.subscribe(u => {
+      const user = {
+        id: u.uid,
+        name: u.displayName
+      }
+      this.user = user
+    
+      this.getCompanyData();
 
-    this.checkLogIn();
+      this.getContactsByCompany();
+
+      this.getTasks();
+      
+    });
+
+    // this.checkLogIn();
 
     this.scrollToTop();
 
-    this.getContactsByCompany();
-
-    this.getTasks();
   }
 
   // Get Contact If Not Logged In

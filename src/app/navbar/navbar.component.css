@@ -22,10 +22,11 @@ h1 {
 }
 
 .drop-down-menu {
+    position: absolute;
+    top: 0;
     background-color: #fff;
     /* margin-top: 50px; */
-    height: 100%;
-    z-index: 1000;
+    z-index: 101;
     overflow: scroll;
 }
 

@@ -48,6 +48,12 @@ button {
     cursor: pointer;
 }
 
+.new-comment {
+    position: relative;
+    height: 100%;
+    width: 100%;   
+}
+
 :host ::ng-deep .post-image {
     max-width: 200px;
     margin-bottom: 25px;

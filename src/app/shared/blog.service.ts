@@ -71,4 +71,8 @@ export class BlogService {
   public updateLike(id: string) {
     return this.getPost(id).update({likes: firebase.firestore.FieldValue.increment(1)})
   }
+
+  public addComment(id: string, data) {
+    return this.getPost(id).update({comments: firebase.firestore.FieldValue.arrayUnion(data)});
+  }
 }

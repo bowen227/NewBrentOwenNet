@@ -10,5 +10,5 @@ export class Post {
     image: string
     published: Date
     likes: number | firestore.FieldValue
-    comments: Array<string>
+    comments: Array<string> | firestore.FieldValue
 }

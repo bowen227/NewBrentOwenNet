@@ -38,7 +38,9 @@ export class BlogDashboardComponent implements OnInit {
       body: this.body,
       published: new Date(),
       author: this.bService.authState.displayName || this.bService.authState.email,
-      authorId: this.userId
+      authorId: this.userId,
+      likes: 0,
+      comments: []
     }
     this.bService.createPost(data)
     this.title = '';

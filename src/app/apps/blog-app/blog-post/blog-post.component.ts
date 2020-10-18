@@ -14,6 +14,8 @@ export class BlogPostComponent implements OnInit {
   public user;
   public userId;
   public edit: boolean = false;
+  public newComment: boolean = false;
+  public comment: string;
 
   constructor(private route: ActivatedRoute,
               private bService: BlogService,
@@ -22,7 +24,8 @@ export class BlogPostComponent implements OnInit {
   ngOnInit(): void {
     this.auth.auth.authState.subscribe(u => {
       if (u !== null) {
-        this.user = u.uid
+        this.userId = u.uid
+        this.user = u.displayName || u.email
       } else {
         this.user = null
       }
@@ -50,5 +53,20 @@ export class BlogPostComponent implements OnInit {
   public addLike() {
     const id = this.route.snapshot.paramMap.get('id');
     this.bService.updateLike(id);
+  }
+
+  public addComment() {
+    this.newComment = !this.newComment
+  }
+
+  public saveComment() {
+    const id = this.route.snapshot.paramMap.get('id');
+    const data = {
+      date: new Date(),
+      text: this.comment,
+      user: this.user
+    }
+    this.bService.addComment(id, data)
+    this.addComment();
   }
 }

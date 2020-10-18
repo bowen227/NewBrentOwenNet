@@ -36,6 +36,18 @@ button {
     width: 100%;
 }
 
+.likes {
+    width: 30%;
+}
+
+.fa-thumbs-up {
+    color: #CD5334;
+}
+
+.fa-thumbs-up:hover {
+    cursor: pointer;
+}
+
 :host ::ng-deep .post-image {
     max-width: 200px;
     margin-bottom: 25px;

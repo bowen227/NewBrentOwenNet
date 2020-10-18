@@ -47,4 +47,8 @@ export class BlogPostComponent implements OnInit {
     this.edit = !this.edit;
   }
 
+  public addLike() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.bService.updateLike(id);
+  }
 }

@@ -7,6 +7,9 @@
             <img src="{{ post.image }}" class="mb-3">
             <h4 class="mb-0">{{ post.title }}</h4>
             <small>Posted by: {{ post.author }} - {{ post.published.toDate() | date }}</small>
+            <br>
+            <small>Likes: {{ post.likes }}</small>
+            <i class="fas fa-thumbs-up" (click)="addLike()"></i>
             <p class="mt-4">{{ post.body }}</p>
             <div class="mt-4 comments">
                 <h3>COMMENTS:</h3>

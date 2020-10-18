@@ -1,4 +1,5 @@
 import { Data } from '@angular/router'
+import { firestore } from 'firebase'
 
 export class Post {
     id: string
@@ -8,6 +9,6 @@ export class Post {
     body: string
     image: string
     published: Date
-    likes: number
+    likes: number | firestore.FieldValue
     comments: Array<string>
 }

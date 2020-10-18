@@ -19,10 +19,20 @@
                 <blockquote class="blockquote mb-0">
                     <footer class="blockquote-footer"><cite title="Source Title">{{ post.author }} <br> {{ post.published.toDate() | date }}</cite></footer>
                 </blockquote>
-                <div class="d-flex flex-row" *ngIf="user == post.authorId">
-                    <div class="flex-grow-1"></div>
-                    <i class="fas fa-trash-alt m-2" (click)="deletePost(post.id)"></i>
-                    <!-- <i class="fas fa-edit m-2"></i> -->
+                <div class="d-flex flex-row mt-2">
+                    <div class="flex-grow-1">
+                        <span>
+                            <i class="fas fa-thumbs-up"></i>
+                            {{ post.likes }}
+                        </span>
+                        <span>
+                            <i class="fas fa-comments"></i>
+                            {{ post.comments.length }}
+                        </span>
+                    </div>
+                    <div *ngIf="user == post.authorId">
+                        <i class="fas fa-trash-alt m-2" (click)="deletePost(post.id)"></i>
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,6 +8,15 @@
             <h4 class="mb-0">{{ post.title }}</h4>
             <small>Posted by: {{ post.author }} - {{ post.published.toDate() | date }}</small>
             <p class="mt-4">{{ post.body }}</p>
+            <div class="mt-4 comments">
+                <h3>COMMENTS:</h3>
+                <ul class="list-group list-group-flush" *ngFor='let c of post.comments'>
+                    <li class="list-group-item">
+                        {{ c.date.toDate() | date }}
+                        {{ c.text }}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div *ngIf="edit" class="body-container">

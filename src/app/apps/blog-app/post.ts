@@ -8,4 +8,6 @@ export class Post {
     body: string
     image: string
     published: Date
+    likes: number
+    comments: Array<string>
 }

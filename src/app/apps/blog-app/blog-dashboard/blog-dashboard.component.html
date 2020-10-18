@@ -13,14 +13,8 @@
                 <div class="card-body">
                     <div class="form-container">
                         <input type="file" name="file" id="file" (change)="upload($event)">
-                        <div class="progress" style="height: 2px;" [hidden]="!uploadPerc">
-                            <div 
-                                class="progress-bar" 
-                                role="progressbar" 
-                                attr.aria-valuenow="{{ uploadPerc | async }}"
-                                aria-valuemin="0" 
-                                aria-valuemax="100">
-                            </div>
+                        <div class="progress" style="height: 10px;" [hidden]="!uploadPerc">
+                            <progress max="100" [value]="(uploadPerc | async)"></progress>
                         </div>
                         <div [hidden]="!image" class="mb-2">
                             <img [src]="image || '//:0'">

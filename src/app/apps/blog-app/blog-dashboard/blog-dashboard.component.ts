@@ -5,6 +5,8 @@ import { BlogService } from 'src/app/shared/blog.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { timeout, timeoutWith } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/auth.service';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-blog-dashboard',
@@ -41,6 +43,7 @@ export class BlogDashboardComponent implements OnInit {
     this.bService.createPost(data)
     this.title = '';
     this.body = '';
+    this.image = null;
     this.toast.success("Post created!!");
   }
 
@@ -48,12 +51,13 @@ export class BlogDashboardComponent implements OnInit {
     const file = event.target.files[0];
     const path = `posts/${file.name}`
     if (file.type.split('/')[0] !== 'image') {
+      this.image = null;
       return this.toast.warning("Can only upload image files...");
     } else {
       const task = this.storage.upload(path, file);
+      this.uploadPerc = task.percentageChanges();
       setTimeout(() => {
         this.dloadURL = this.storage.ref(path).getDownloadURL();
-        this.uploadPerc = task.percentageChanges();
         this.dloadURL.subscribe(url => this.image = url);
       }, 2000);
     }

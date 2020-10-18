@@ -42,7 +42,8 @@ export class FbsScoresComponent implements OnInit {
             homeScore: i['competitions'][0]['competitors'][0].score,
             awayScore: i['competitions'][0]['competitors'][1].score,
             status: i['status']['type']['shortDetail'],
-            situation: i['competitions'][0]['situation']
+            situation: i['competitions'][0]['situation'],
+            // passLeaders: i['competitions'][0]['leaders'][0]['leaders'][0]['athlete']['displayName']
           }
           this.games.push(game as Game);
         }

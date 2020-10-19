@@ -35,7 +35,6 @@ export class CrmAppComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit(): void {
-    // this.checkLogIn();
     this.auth.auth.authState.subscribe(u => {
       if (u !== null) {
         const user = {
@@ -48,22 +47,6 @@ export class CrmAppComponent implements OnInit {
         this.user = null
       }
     })
-
-    // this.getCompaniesByUser();
-  }
-
-  // Check if signed in
-  public checkLogIn() {
-    if (this.user == null) {
-      this.service.authState.subscribe(user => {
-        this.user = user;
-      });
-
-      this.isLoggedIn = (this.user != null);
-      this.popup = (this.user != null);
-      this.indevPopup = (this.user == null);
-
-    }
   }
 
   // Get Companies By User
@@ -111,7 +94,7 @@ export class CrmAppComponent implements OnInit {
       } else {
         this.contacts.map(contact => {
           if (id == contact.id) {
-            this.contactForm = this.fb.group({
+            return this.contactForm = this.fb.group({
               id: contact.id,
               companyName: contact.companyName,
               street: contact.street,
@@ -139,7 +122,7 @@ export class CrmAppComponent implements OnInit {
       } else {
         this.contacts.map(contact => {
           if (id == contact.id) {
-            this.contactForm = this.fb.group({
+            return this.contactForm = this.fb.group({
               id: contact.id,
               companyName: contact.companyName,
               street: contact.street,

@@ -23,6 +23,11 @@ export class CrmService {
     return this.http.get(this.CompanyURI + '/' + user).pipe(map(res => res as JSON));
   }
 
+  // GET Company By Id
+  public getCompanyById(id) {
+    return this.http.get(this.CompanyURI + '/byId/' + id).pipe(map(res => res as JSON));
+  }
+
   // POST New Company
   public addNewCompany(company) {
     return this.http.post(this.CompanyURI, company).pipe(map(res => res as JSON));

@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'todoList/:todo', component: TodoComponent },
   // { path: 'signIn', component: LoginComponent },
   { path: 'crm', component: CrmAppComponent },
-  { path: 'details', component: ContactDetailsComponent },
+  { path: 'crm/:id', component: ContactDetailsComponent },
   { path: 'events', component: EventsAppComponent },
   { path: 'scores', component: FbsScoresComponent },
   { path: 'blogs', component: BlogAppComponent },

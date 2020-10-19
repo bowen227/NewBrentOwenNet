@@ -42,12 +42,18 @@ export class ContactDetailsComponent implements OnInit {
           name: u.displayName
         }
         this.user = user
-      
-        this.getCompanyData();
-  
-        this.getContactsByCompany();
-  
-        this.getTasks();
+
+        const id = this.route.snapshot.paramMap.get('id');
+        this.cService.getCompanyById(id).subscribe(res => {
+          console.log(res);
+          this.company = res;
+        })
+        
+        setTimeout(() => {
+          this.getContactsByCompany();
+          this.getTasks();
+        }, 1500)
+
       } else {
         this.user = null
       }
@@ -57,32 +63,6 @@ export class ContactDetailsComponent implements OnInit {
 
     this.scrollToTop();
 
-  }
-
-  // Get Contact If Not Logged In
-  public getCompanyData() {
-    let c = {
-      id: this.route.snapshot.paramMap.get('id'),
-      companyName: this.route.snapshot.paramMap.get('company'),
-      street: this.route.snapshot.paramMap.get('street'),
-      city: this.route.snapshot.paramMap.get('city'),
-      state: this.route.snapshot.paramMap.get('state'),
-      zip: this.route.snapshot.paramMap.get('zip'),
-      phone: this.route.snapshot.paramMap.get('phone'),
-      fax: this.route.snapshot.paramMap.get('fax')
-    }
-
-    this.company = c;
-  }
-
-  // Check if signed in
-  public checkLogIn() {
-    if (this.user == null) {
-      this.service.authState.subscribe(user => {
-        this.user = user;
-        // this.toast.success('Login Successful', this.user.firstName);
-      });
-    }
   }
 
   // Get Contacts

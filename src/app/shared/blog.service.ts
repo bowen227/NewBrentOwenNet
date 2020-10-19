@@ -29,14 +29,6 @@ export class BlogService {
     return this.authenticated ? this.authState.uid : null;
   }
 
-  // signIn() {
-  //   this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  // }
-
-  // signOut() {
-  //   this.afAuth.signOut();
-  // }
-
   public getPosts() {
     return this.postCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {

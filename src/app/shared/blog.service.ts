@@ -60,8 +60,12 @@ export class BlogService {
     return this.getPost(id).update(data);
   }
 
-  public updateLike(id: string) {
-    return this.getPost(id).update({likes: firebase.firestore.FieldValue.increment(1)})
+  public likePost(id: string, user: string) {
+    return this.getPost(id).update({likes: firebase.firestore.FieldValue.arrayUnion(user)});
+  }
+
+  public removeLike(id: string, user: string) {
+    return this.getPost(id).update({likes: firebase.firestore.FieldValue.arrayRemove(user)});
   }
 
   public addComment(id: string, data) {

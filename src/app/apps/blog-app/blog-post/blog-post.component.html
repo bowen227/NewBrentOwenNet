@@ -8,9 +8,10 @@
             <h4 class="mb-0">{{ post.title }}</h4>
             <small>Posted by: {{ post.author }} - {{ post.published.toDate() | date }}</small>
             <br>
-            <small>Likes: {{ post.likes }}</small>
+            <small>Likes: {{ post.likes.length }}</small>
             <small class="ml-2" *ngIf="!user">- Sign in to like post</small>
-            <i class="fas fa-thumbs-up" *ngIf="user" (click)="addLike()"></i>
+            <i class="fas fa-thumbs-up" *ngIf="user && !liked" (click)="addLike()"></i>
+            <i class="fas fa-thumbs-down" *ngIf="user && liked" (click)="removeLike()"></i>
             <p class="mt-4">{{ post.body }}</p>
             <div class="mt-4 comments">
                 <div class="d-flex align-items-center mb-1">

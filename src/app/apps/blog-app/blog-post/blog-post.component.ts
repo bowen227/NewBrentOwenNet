@@ -16,6 +16,8 @@ export class BlogPostComponent implements OnInit {
   public edit: boolean = false;
   public newComment: boolean = false;
   public comment: string;
+  public likes;
+  public liked: boolean;
 
   constructor(private route: ActivatedRoute,
               private bService: BlogService,
@@ -36,8 +38,15 @@ export class BlogPostComponent implements OnInit {
 
   public getPost() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.userId = id;
-    return this.bService.getData(id).subscribe(data => this.post = data);
+    return this.bService.getData(id).subscribe(data => {
+      this.post = data
+      for (const key in data.likes) {
+        if (Object.prototype.hasOwnProperty.call(data.likes, key)) {
+          const element = data.likes[key];
+          this.liked = (element === this.userId) ? true : false;
+        }
+      }
+    });
   }
 
   public editPost() {
@@ -52,7 +61,12 @@ export class BlogPostComponent implements OnInit {
 
   public addLike() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.bService.updateLike(id);
+    this.bService.likePost(id, this.userId);
+  }
+
+  public removeLike() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.bService.removeLike(id, this.userId);
   }
 
   public addComment() {

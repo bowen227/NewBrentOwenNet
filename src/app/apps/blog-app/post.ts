@@ -9,6 +9,6 @@ export class Post {
     body: string
     image: string
     published: Date
-    likes: number | firestore.FieldValue
+    likes: Array<string> | firestore.FieldValue
     comments: Array<string> | firestore.FieldValue
 }

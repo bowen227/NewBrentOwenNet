@@ -59,13 +59,11 @@ export class BlogDashboardComponent implements OnInit {
     } else {
       const task = this.storage.upload(path, file);
       this.uploadPerc = task.percentageChanges();
-      
-      this.loadingImage = true;
-      setTimeout(() => {
+
+      task.snapshotChanges().subscribe(() => {
         this.dloadURL = this.storage.ref(path).getDownloadURL();
         this.dloadURL.subscribe(url => this.image = url);
-        this.loadingImage = false;
-      }, 3000);
+      })
     }
   }
 

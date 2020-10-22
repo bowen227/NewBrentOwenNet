@@ -94,11 +94,32 @@
     </div>
     <div class="task-form-container d-flex flex-column justify-content-center align-items-center" *ngIf="showNewTaskForm || showEditTaskForm">
         <div class="task-form">
-            <h3 class="ml-4 mt-3">{{ showNewTaskForm ? "New Task" : "Edit Task"}}</h3>
+            <h3 class="ml-4 mt-3">{{ showNewTaskForm ? "New Lead" : "Edit Lead"}}</h3>
             <form class="container d-flex flex-column justify-content-around" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="task">Task</label>
+                    <label for="task">Lead</label>
                     <input type="text" class="form-control" formControlName="task" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Stage</label>
+                    <select name="service" class="selectpicker form-control" id="service" formControlName="service">
+                        <option value="oxygen">Oxygen</option>
+                        <option value="overnight">Overnight</option>
+                        <option value="mdinr">MdINR</option>
+                        <option value="ud">Unit Dose</option>
+                        <option value="vent">Vent</option>
+                        <option value="wvac">Wound Vac</option>
+                        <option value="vest">Vest</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="stage">Stage</label>
+                    <select name="stage" class="selectpicker form-control" id="stage" formControlName="stage">
+                        <option value="recieved">Recieved</option>
+                        <option value="toProvider">To Provider</option>
+                        <option value="completed">Completed</option>
+                        <option value="missed">Missed</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn">Save</button>
             </form>

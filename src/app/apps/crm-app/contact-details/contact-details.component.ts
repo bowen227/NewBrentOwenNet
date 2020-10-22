@@ -45,7 +45,6 @@ export class ContactDetailsComponent implements OnInit {
 
         const id = this.route.snapshot.paramMap.get('id');
         this.cService.getCompanyById(id).subscribe(res => {
-          console.log(res);
           this.company = res;
         })
         
@@ -266,6 +265,7 @@ export class ContactDetailsComponent implements OnInit {
       if (id == 'new') {
         return this.taskForm = this.fb.group({
           task: '',
+          stage: '',
           completed: false
         });
       } else {

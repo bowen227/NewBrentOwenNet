@@ -265,6 +265,7 @@ export class ContactDetailsComponent implements OnInit {
       if (id == 'new') {
         return this.taskForm = this.fb.group({
           task: '',
+          service: '',
           stage: '',
           completed: false
         });

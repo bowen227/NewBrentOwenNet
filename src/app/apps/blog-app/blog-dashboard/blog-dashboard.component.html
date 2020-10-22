@@ -16,12 +16,15 @@
                         <div class="progress" style="height: 10px;" [hidden]="!uploadPerc">
                             <progress max="100" [value]="(uploadPerc | async)"></progress>
                         </div>
+                        <div class="spinner-border text-danger" *ngIf="loadingImage" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                         <div [hidden]="!image" class="mb-2">
                             <img [src]="image || '//:0'">
                         </div>
                         <input class="form-control mb-2" type="text" placeholder="Title" [(ngModel)]="title">
                         <textarea class="form-control" name="body" cols="30" rows="10" [(ngModel)]="body"></textarea>
-                        <button class="btn" (click)="createNewPost()" [disabled]="!title || !body">Create Post</button>
+                        <button class="btn" (click)="createNewPost()" [disabled]="!title || !body || !image">Create Post</button>
                     </div>
                 </div>
             </div>

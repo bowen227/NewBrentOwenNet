@@ -18,6 +18,7 @@ export class BlogDashboardComponent implements OnInit {
   image: string = null;
   body: string;
   userId;
+  loadingImage: boolean = false;
 
   public uploadPerc: Observable<number>;
   public dloadURL: Observable<string>;
@@ -58,10 +59,13 @@ export class BlogDashboardComponent implements OnInit {
     } else {
       const task = this.storage.upload(path, file);
       this.uploadPerc = task.percentageChanges();
+      
+      this.loadingImage = true;
       setTimeout(() => {
         this.dloadURL = this.storage.ref(path).getDownloadURL();
         this.dloadURL.subscribe(url => this.image = url);
-      }, 2000);
+        this.loadingImage = false;
+      }, 3000);
     }
   }
 

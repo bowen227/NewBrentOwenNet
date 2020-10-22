@@ -22,7 +22,7 @@ export class ContactDetailsComponent implements OnInit {
   public taskForm: FormGroup;
   public showNewTaskForm: boolean = false;
   public showEditTaskForm: boolean = false;
-  public tasks = [];
+  public leads = [];
   public completedTasks = [];
   public isLoading: boolean = false;
   
@@ -93,7 +93,7 @@ export class ContactDetailsComponent implements OnInit {
             if (element.completed == true) {
               this.completedTasks.push(element);
             } else {
-              this.tasks.push(element);
+              this.leads.push(element);
             }
           }
         }
@@ -249,7 +249,7 @@ export class ContactDetailsComponent implements OnInit {
     }
   }
 
-  // Show Task Form
+  // Show Lead Form
   public showTaskForm(id) {
     if (id == 'new') {
       this.showNewTaskForm = true;
@@ -269,14 +269,14 @@ export class ContactDetailsComponent implements OnInit {
           completed: false
         });
       } else {
-        this.tasks.map(task => {
-          if (id == task.id) {
+        this.leads.map(lead => {
+          if (id == lead.id) {
             this.taskForm = this.fb.group({
-              id: task.id,
-              userId: task.userId,
-              company: task.companyName,
-              task: task.task,
-              completed: task.completed
+              id: lead.id,
+              userId: lead.userId,
+              company: lead.companyName,
+              task: lead.task,
+              completed: lead.completed
             });
           }
         });
@@ -284,19 +284,19 @@ export class ContactDetailsComponent implements OnInit {
     } else {
       if (id == 'new') {
         return this.taskForm = this.fb.group({
-          id: this.tasks.length,
+          id: this.leads.length,
           company: this.company.companyName,
           task: '',
           completed: false
         });
       } else {
-        this.tasks.map(task => {
-          if (id == task.id) {
+        this.leads.map(lead => {
+          if (id == lead.id) {
             this.taskForm = this.fb.group({
-              id: task.id,
-              company: task.company,
-              task: task.task,
-              completed: task.completed
+              id: lead.id,
+              company: lead.company,
+              task: lead.task,
+              completed: lead.completed
             });
           }
         });
@@ -304,21 +304,21 @@ export class ContactDetailsComponent implements OnInit {
     }
   }
 
-  // Create New Task
+  // Create New Lead
   public onSubmit() {
     const data = this.taskForm.value;
 
     if (data.task.length < 1) {
       this.showNewTaskForm = false;
       this.showEditTaskForm = false;
-      this.toast.warning("You didn't add a task..");
+      this.toast.warning("You didn't add a lead..");
     }
 
     if (this.user != null) {
-      const index = this.tasks.findIndex(x => x.id == data.id);
+      const index = this.leads.findIndex(x => x.id == data.id);
 
       if (this.showEditTaskForm && index != null) {
-        this.tasks.map(x => {
+        this.leads.map(x => {
           if (x.id == data.id) {
             let task = {
               id: data.id,
@@ -329,7 +329,7 @@ export class ContactDetailsComponent implements OnInit {
             };
   
             this.cService.updateTask(task).subscribe(res => {
-              this.tasks.splice(index, 1, res);
+              this.leads.splice(index, 1, res);
               this.showEditTaskForm = false;
               this.toast.success("Updated task!!");
             });
@@ -346,29 +346,29 @@ export class ContactDetailsComponent implements OnInit {
         };
 
         this.cService.addNewTask(task).subscribe(res => {
-          this.tasks.push(res);
+          this.leads.push(res);
           this.showNewTaskForm = false;
           this.toast.success("New task added!!");
         });
       }
     } else {
       if (this.showEditTaskForm) {
-        this.tasks.splice(data.id, 1, data);
+        this.leads.splice(data.id, 1, data);
         this.showEditTaskForm = false;
         this.toast.success("Task updated!!");
       } else {
         if (this.showNewTaskForm) {
-          this.tasks.push(data);
+          this.leads.push(data);
           this.showNewTaskForm = false;
         }
       }
     }
   }
 
-  // Complete Task
-  public completeTask(item, index) {
+  // Complete Lead
+  public completeLead(item, index) {
     if (this.user != null) {
-      this.tasks.map(task => {
+      this.leads.map(task => {
         if (task.id == item.id) {
           let cTask = {
             id: item.id,
@@ -379,30 +379,30 @@ export class ContactDetailsComponent implements OnInit {
           };
 
           this.cService.updateTask(cTask).subscribe(res => {
-            this.tasks.splice(index, 1);
+            this.leads.splice(index, 1);
             this.completedTasks.push(res);
             this.toast.success("You've completed a task!!");
           });
         }
       });
     } else {
-      this.tasks.splice(index, 1);
+      this.leads.splice(index, 1);
       this.completedTasks.push(item);
       this.toast.success("You've completed " + item.task);
     }
   }
 
-  // Delete Task
-  public deleteTask(id) {
-    const index = this.tasks.findIndex(x => x.id == id);
+  // Delete Lead
+  public deleteLead(id) {
+    const index = this.leads.findIndex(x => x.id == id);
 
     if (this.user != null) {
       this.cService.deleteTask(id).subscribe(res => {
-        this.tasks.splice(index, 1);
+        this.leads.splice(index, 1);
         this.toast.warning("Task deleted!!");
       });
     } else {
-      this.tasks.splice(index, 1);
+      this.leads.splice(index, 1);
       this.toast.warning("Task deleted");
     }
   }

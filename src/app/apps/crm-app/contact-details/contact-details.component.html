@@ -66,20 +66,20 @@
         </div>
     </div>
     <div class="task-container p-2">
-        <h3 class="ml-4 mt-3">Tasks<i class="fas fa-plus-square ml-3" (click)="showTaskForm('new')"></i></h3>
+        <h3 class="ml-4 mt-3">Leads<i class="fas fa-plus-square ml-3" (click)="showTaskForm('new')"></i></h3>
         <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-        <div class="no-contacts ml-4" *ngIf="tasks.length == 0 && !isLoading">
-            <p>You haven't added any Tasks</p>
+        <div class="no-contacts ml-4" *ngIf="leads.length == 0 && !isLoading">
+            <p>You haven't added any Leads</p>
         </div>
-        <ul class="list-group list-group-flush" *ngIf="tasks.length > 0">
+        <ul class="list-group list-group-flush" *ngIf="leads.length > 0">
             <li class="list-group-item" *ngFor="let t of tasks; let i = index;">
                 <div class="d-flex flex-row align-items-center">
-                    <input type="checkbox" class="checkbox mr-2" (click)="completeTask(t, i)">
+                    <input type="checkbox" class="checkbox mr-2" (click)="completeLead(t, i)">
                     <span class="flex-grow-1 mt-1 task">{{ t.task }}</span>
                     <i class="far fa-edit m-2" (click)="showTaskForm(t.id)"></i>
-                    <i class="far fa-trash-alt m-2" (click)="deleteTask(t.id)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="deleteLead(t.id)"></i>
                 </div>
             </li>
         </ul>

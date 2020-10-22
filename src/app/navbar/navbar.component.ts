@@ -21,10 +21,6 @@ export class NavbarComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit(): void {
-    // this.service.authState.subscribe((user) => {
-    //   this.user = user;
-    //   this.isLoggedIn = (user != null);
-    // });
     this.auth.auth.authState.subscribe(u => {
       if (u !== null) {
         const user = {
@@ -57,21 +53,6 @@ export class NavbarComponent implements OnInit {
   public openFile() {
     window.open('../../assets/WebDevResume.pdf');
   }
-
-  // public signIn() {
-  //   this.service.signIn(GoogleLoginProvider.PROVIDER_ID).then(user => {
-  //     if (user != null) {
-  //       this.toast.success("Login Successfull", this.user.firstName);
-  //     } else {
-  //       this.toast.warning("Login Failed..");
-  //     }
-  //   })
-  // }
-
-  // public signOut() {
-  //   this.service.signOut();
-  //   this.toast.success("Logged out successfully!");
-  // }
 
   public signIn() {
     this.auth.signIn();

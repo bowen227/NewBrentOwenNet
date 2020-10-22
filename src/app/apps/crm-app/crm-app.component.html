@@ -3,17 +3,6 @@
     <h3 class="ml-3" *ngIf="user != null">Welcome, {{ user.name }}</h3>
     <div class="form-container">
         <h3 class="ml-4 mt-3">Add New Company<i class="fas fa-plus-square ml-3" (click)="showForm('new')"></i></h3>
-        <!-- <form class="container d-flex flex-column justify-content-around" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" class="form-control" formControlName="firstName">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" formControlName="lastName">
-            </div>
-            <button type="submit" class="btn">Submit</button>
-        </form> -->
     </div>
     <div class="p-4 search-box-container form-group" *ngIf="contacts.length > 10;">
         <label for="searchTerm">Search Companies</label>
@@ -28,7 +17,6 @@
         <ul class="list-group list-group-flush" *ngIf="contacts.length > 0 && !showSearched">
             <li class="list-group-item" *ngFor="let c of contacts; let i = index;">
                 <div class="d-flex flex-row">
-                    <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
                     <span class="flex-grow-1 mt-1 contact" routerLink="{{c.id}}">{{ c.companyName }}</span>
                     <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(c.id)"></i>
@@ -38,8 +26,6 @@
         <ul class="list-group list-group-flush" *ngIf="showSearched">
             <li class="list-group-item" *ngFor="let c of searchedContacts; let i = index;">
                 <div class="d-flex flex-row">
-                    <!-- <span class="flex-grow-1 mt-1 contact" (click)="contactDetails(c)">{{ c.firstName }} {{ c.lastName }}</span> -->
-                    <!-- <span class="flex-grow-1 mt-1 contact" [routerLink]="['/details/{{c.id}}']">{{ c.company }}</span> -->
                     <i class="far fa-edit m-2" (click)="showForm(c.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="delete(c.id)"></i>
                 </div>
@@ -50,17 +36,6 @@
         <div class="edit-form">
             <h3 class="ml-4 mt-3">{{ showNewContactForm ? "New Company" : "Edit Company"}}</h3>
             <form class="container d-flex flex-column justify-content-around" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-                <!-- <div class="form-group">
-                    <label for="firstName">First Name  *</label>
-                    <input type="text" class="form-control" formControlName="firstName" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name  *</label>
-                    <input type="text" class="form-control" formControlName="lastName" required>
-                </div> -->
-                <!-- <div class="form-group" class="id-input">
-                    <input type="number" class="form-control" formControlName="id" disabled>
-                </div> -->
                 <div class="form-group">
                     <label for="companyName">Company Name</label>
                     <input type="text" class="form-control" formControlName="companyName">
@@ -89,17 +64,12 @@
                     <label for="fax">Fax</label>
                     <input type="tel" class="form-control" formControlName="fax">
                 </div>
-                <!-- <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" formControlName="email">
-                </div> -->
                 <button type="submit" class="btn">Save</button>
             </form>
         </div>
     </div>
     <div class="indev-container d-flex flex-column align-items-center justify-content-center" *ngIf="indevPopup">
         <div class="indev d-flex flex-column align-items-center justify-content-center p-3">
-            <!-- <i class="fas fa-times font-weight-bold align-self-end" (click)="togglePopup()"></i> -->
             <div>
                 <h3>Currently in development</h3>
                 <p>Backend not completely implemented. Some features not working or completed.</p>

@@ -23,7 +23,10 @@
                             <img [src]="image || '//:0'">
                         </div>
                         <input class="form-control mb-2" type="text" placeholder="Title" [(ngModel)]="title">
-                        <textarea class="form-control" name="body" cols="30" rows="10" [(ngModel)]="body"></textarea>
+                        <!-- <textarea class="form-control" name="body" cols="30" rows="10" [(ngModel)]="body"></textarea> -->
+                        <div formArrayName="para">
+                            <textarea *ngFor="let x of bodyForm.get('para').controls; let i = index" name="body" id="body" cols="30" rows="10"></textarea>
+                        </div>
                         <button class="btn" (click)="createNewPost()" [disabled]="!title || !body || !image">Create Post</button>
                     </div>
                 </div>

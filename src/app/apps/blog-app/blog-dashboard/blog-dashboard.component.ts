@@ -6,6 +6,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { timeout, timeoutWith } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/auth.service';
 import { map } from 'rxjs/operators';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { map } from 'rxjs/operators';
 export class BlogDashboardComponent implements OnInit {
   title: string;
   image: string = null;
+  bodyForm: any;
   body: string;
   userId;
   loadingImage: boolean = false;
@@ -30,8 +32,13 @@ export class BlogDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.auth.authState.subscribe(u => this.userId = u.uid);
+    this.bodyForm = new FormGroup({para: new FormArray([])})
   }
 
+  public addNewParagraph() {
+    this.bodyForm.get('para').push(new FormGroup({body: new FormControl('')}))
+  }
+  
   public createNewPost() {
     const data = {
       title: this.title,

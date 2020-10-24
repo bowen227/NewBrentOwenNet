@@ -265,6 +265,7 @@ export class ContactDetailsComponent implements OnInit {
       if (id == 'new') {
         return this.taskForm = this.fb.group({
           task: '',
+          provider: '',
           service: '',
           stage: '',
           completed: false
@@ -277,6 +278,9 @@ export class ContactDetailsComponent implements OnInit {
               userId: lead.userId,
               company: lead.companyName,
               task: lead.task,
+              provider: lead.provider,
+              stage: lead.stage,
+              service: lead.service,
               completed: lead.completed
             });
           }
@@ -288,6 +292,9 @@ export class ContactDetailsComponent implements OnInit {
           id: this.leads.length,
           company: this.company.companyName,
           task: '',
+          provider: '',
+          stage: '',
+          service: '',
           completed: false
         });
       } else {
@@ -297,6 +304,9 @@ export class ContactDetailsComponent implements OnInit {
               id: lead.id,
               company: lead.company,
               task: lead.task,
+              provider: lead.provider,
+              stage: lead.stage,
+              service: lead.service,
               completed: lead.completed
             });
           }
@@ -326,6 +336,9 @@ export class ContactDetailsComponent implements OnInit {
               userId: data.userId,
               company: data.company,
               task: data.task,
+              provider: data.provider,
+              stage: data.stage,
+              service: data.service,
               completed: data.completed
             };
   
@@ -343,6 +356,9 @@ export class ContactDetailsComponent implements OnInit {
           userId: this.user.id,
           company: this.company.companyName,
           task: data.task,
+          provider: data.provider,
+          stage: data.stage,
+          service: data.service,
           completed: data.completed
         };
 

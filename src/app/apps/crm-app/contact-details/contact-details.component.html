@@ -96,6 +96,7 @@
         <div class="task-form">
             <h3 class="ml-4 mt-3">{{ showNewTaskForm ? "New Lead" : "Edit Lead"}}</h3>
             <form class="container d-flex flex-column justify-content-around" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+                <button class="btn" (click)="closePopup(showNewTaskForm ? 'this.showNewTaskForm' : 'showEditTaskForm')">X</button>
                 <div class="form-group">
                     <label for="task">Lead</label>
                     <input type="text" class="form-control" formControlName="task" required>

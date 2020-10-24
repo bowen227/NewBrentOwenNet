@@ -424,6 +424,11 @@ export class ContactDetailsComponent implements OnInit {
     }
   }
 
+  public closePopup(target) {
+    target = !target
+    console.log(target)
+  }
+
   public scrollToTop() {
     window.scroll(0, 0);
   }

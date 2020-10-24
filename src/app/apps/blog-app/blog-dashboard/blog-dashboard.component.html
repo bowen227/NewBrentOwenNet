@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <button class="btn m-1" (click)="addParagraph()">Add New Paragraph</button>
-                        <button class="btn m-1" (click)="createNewPost()" [disabled]="!title">Create Post</button>
+                        <button class="btn m-1" (click)="createNewPost()" [disabled]="!title || !image">Create Post</button>
                     </div>
                 </div>
             </div>

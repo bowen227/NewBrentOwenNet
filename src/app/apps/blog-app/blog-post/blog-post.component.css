@@ -59,6 +59,14 @@ button {
     cursor: pointer;
 }
 
+.fa-edit:hover {
+    cursor: pointer;
+}
+
+.break {
+    color: black;
+}
+
 .new-comment {
     position: relative;
     height: 100%;

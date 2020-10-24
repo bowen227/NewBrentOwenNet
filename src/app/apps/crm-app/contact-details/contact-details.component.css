@@ -3,8 +3,15 @@ h2 {
     color: #fff;
 }
 
-.fa-arrow-alt-circle-left {
+.back:hover {
     cursor: pointer;
+    color: #fff;
+    background-color: #CD5334;
+}
+
+.back {
+    border: 1px solid #CD5334;
+    width: 190px;
 }
 
 .company {

@@ -12,7 +12,10 @@
             <small class="ml-2" *ngIf="!user">- Sign in to like post</small>
             <i class="fas fa-thumbs-up" *ngIf="user && !liked" (click)="addLike()"></i>
             <i class="fas fa-thumbs-down" *ngIf="user && liked" (click)="removeLike()"></i>
-            <p class="mt-4">{{ post.body }}</p>
+            <div class="mt-4" *ngFor="let para of post.body; let i = index">
+                <p>{{ para }}</p>
+            </div>
+            <!-- <p class="mt-4">{{ post.body }}</p> -->
             <div class="mt-4 comments">
                 <div class="d-flex align-items-center mb-1">
                     <h3 class="m-0 flex-grow-1">COMMENTS:</h3>

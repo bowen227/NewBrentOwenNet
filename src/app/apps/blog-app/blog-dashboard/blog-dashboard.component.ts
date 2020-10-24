@@ -36,6 +36,7 @@ export class BlogDashboardComponent implements OnInit {
     this.initBodyForm();
   }
 
+  // INITIALIZE BODYFORM
   public initBodyForm() {
     return this.bodyForm = this.fb.group({
       para: this.fb.array([
@@ -44,15 +45,18 @@ export class BlogDashboardComponent implements OnInit {
     })
   }
 
+  // INITIALIZE BODY
   public initBody() {
     return this.fb.group({ body: ''})
   }
 
+  // ADD NEW PARAGRAPH TO PARAGRAPH ARRAY
   public addParagraph() {
     let control = <FormArray>this.bodyForm.controls['para']
     control.push(this.initBody())
   }
 
+  // GET THE PARAGRAPH ARRAY
   get body() {
     return this.bodyForm.get('para') as FormArray;
   }

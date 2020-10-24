@@ -24,10 +24,15 @@
                         </div>
                         <input class="form-control mb-2" type="text" placeholder="Title" [(ngModel)]="title">
                         <!-- <textarea class="form-control" name="body" cols="30" rows="10" [(ngModel)]="body"></textarea> -->
-                        <div formArrayName="para">
-                            <textarea *ngFor="let x of bodyForm.get('para').controls; let i = index" name="body" id="body" cols="30" rows="10"></textarea>
+                        <div [formGroup]="bodyForm">
+                            <div formArrayName="para">
+                                <div *ngFor="let body of body.controls; let i = index" [formGroupName]="i">
+                                    <textarea class="form-control" formControlName="body" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <button class="btn" (click)="createNewPost()" [disabled]="!title || !body || !image">Create Post</button>
+                        <button class="btn m-1" (click)="addParagraph()">Add New Paragraph</button>
+                        <button class="btn m-1" (click)="createNewPost()" [disabled]="!title">Create Post</button>
                     </div>
                 </div>
             </div>

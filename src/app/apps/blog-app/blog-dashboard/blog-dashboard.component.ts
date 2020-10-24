@@ -6,7 +6,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { timeout, timeoutWith } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/auth.service';
 import { map } from 'rxjs/operators';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -17,8 +17,8 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 export class BlogDashboardComponent implements OnInit {
   title: string;
   image: string = null;
-  bodyForm: any;
-  body: string;
+  bodyForm: FormGroup;
+  // body: string;
   userId;
   loadingImage: boolean = false;
 
@@ -28,31 +28,58 @@ export class BlogDashboardComponent implements OnInit {
   constructor(private bService: BlogService,
               private toast: ToastrService,
               private storage: AngularFireStorage,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.authService.auth.authState.subscribe(u => this.userId = u.uid);
-    this.bodyForm = new FormGroup({para: new FormArray([])})
+    this.initBodyForm();
   }
 
-  public addNewParagraph() {
-    this.bodyForm.get('para').push(new FormGroup({body: new FormControl('')}))
+  public initBodyForm() {
+    return this.bodyForm = this.fb.group({
+      para: this.fb.array([
+        this.initBody()
+      ])
+    })
   }
-  
+
+  public initBody() {
+    return this.fb.group({ body: ''})
+  }
+
+  public addParagraph() {
+    let control = <FormArray>this.bodyForm.controls['para']
+    control.push(this.initBody())
+  }
+
+  get body() {
+    return this.bodyForm.get('para') as FormArray;
+  }
+
   public createNewPost() {
+    const body = this.bodyForm.get('para').value
+    let bodyArray = []
+    for (const key in body) {
+      if (Object.prototype.hasOwnProperty.call(body, key)) {
+        const element = body[key];
+        bodyArray.push(element['body'])
+      }
+    }
     const data = {
       title: this.title,
       image: this.image,
-      body: this.body,
+      body: bodyArray,
       published: new Date(),
       author: this.bService.authState.displayName || this.bService.authState.email,
       authorId: this.userId,
       likes: 0,
       comments: []
     }
+    console.log(data)
     this.bService.createPost(data)
     this.title = '';
-    this.body = '';
+    this.bodyForm.reset()
     this.image = null;
     this.toast.success("Post created!!");
   }

@@ -3,6 +3,17 @@ h2 {
     color: #fff;
 }
 
+.back {
+    border: 1px solid #CD5334;
+    width: 110px;
+}
+
+.back:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #CD5334;
+}
+
 img {
     width: 100%;
 }

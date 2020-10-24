@@ -1,7 +1,7 @@
 <section>
     <div *ngIf="!edit">
         <!-- <h2 class="p-3"><i class="fas fa-blog mr-2"></i>{{ title }}</h2> -->
-        <h3 class="p-2" routerLink="/blogs"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Blogs</h3>
+        <h3 class="p-2 ml-3 back" routerLink="/blogs"><i class="fas fa-chevron-left mr-2"></i>Back</h3>
         <div class="body-container p-3" *ngIf="post">
             <i class="fas fa-edit m-2" *ngIf="userId == post.authorId" (click)="edit = true"></i>
             <img src="{{ post.image }}" class="mb-3">

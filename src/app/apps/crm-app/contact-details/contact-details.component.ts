@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CrmService } from 'src/app/shared/crm.service';
+import { Lead } from '../models/lead';
 
 @Component({
   selector: 'app-contact-details',
@@ -22,7 +24,7 @@ export class ContactDetailsComponent implements OnInit {
   public taskForm: FormGroup;
   public showNewTaskForm: boolean = false;
   public showEditTaskForm: boolean = false;
-  public leads = [];
+  public leads: Observable<Lead[]>;
   public stageOptions = [
     {name: "Recieved", value: "recieved"},
     {name: "To Provider", value: "toProvider"},
@@ -56,7 +58,7 @@ export class ContactDetailsComponent implements OnInit {
         
         setTimeout(() => {
           this.getContactsByCompany();
-          this.getTasks();
+          this.leads = this.cService.getLeads()
         }, 1500)
 
       } else {
@@ -274,7 +276,6 @@ export class ContactDetailsComponent implements OnInit {
           provider: '',
           service: '',
           stage: '',
-          completed: false
         });
       } else {
         this.leads.map(lead => {
@@ -287,7 +288,6 @@ export class ContactDetailsComponent implements OnInit {
               provider: lead.provider,
               stage: lead.stage,
               service: lead.service,
-              completed: lead.completed
             });
           }
         });
@@ -301,7 +301,6 @@ export class ContactDetailsComponent implements OnInit {
           provider: '',
           stage: '',
           service: '',
-          completed: false
         });
       } else {
         this.leads.map(lead => {
@@ -313,7 +312,6 @@ export class ContactDetailsComponent implements OnInit {
               provider: lead.provider,
               stage: lead.stage,
               service: lead.service,
-              completed: lead.completed
             });
           }
         });
@@ -345,7 +343,6 @@ export class ContactDetailsComponent implements OnInit {
               provider: data.provider,
               stage: data.stage,
               service: data.service,
-              completed: data.completed
             };
   
             this.cService.updateTask(task).subscribe(res => {

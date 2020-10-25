@@ -1,13 +1,27 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { Lead } from '../apps/crm-app/models/lead';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrmService {
+  postCollection: AngularFirestoreCollection<Lead>
+  lead: AngularFirestoreDocument<Lead>
+  authState: any = null
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public afAuth: AngularFireAuth,
+    private afs: AngularFirestore) {
+      this.postCollection = this.afs.collection('leads', ref =>
+      ref.orderBy('started', 'desc'))
+
+      this.afAuth.authState.subscribe(data => this.authState = data);
+    }
 
   // readonly CompanyURI = "https://localhost:5001/api/Company";
   // readonly ContactURI = "https://localhost:5001/api/CompanyContacts";
@@ -17,6 +31,15 @@ export class CrmService {
   readonly ContactURI = "https://exerciselist.azurewebsites.net/api/CompanyContacts";
   readonly TaskURI = "https://exerciselist.azurewebsites.net/api/CompanyTask";
 
+  // GET auth state
+  get authenticated(): boolean {
+    return this.authState !== null
+  }
+
+  // GET userID
+  get userId(): string {
+    return this.authenticated ? this.authState.uid : null
+  }
 
   // GET Company By User
   public getCompaniesByUser(user) {
@@ -89,5 +112,36 @@ export class CrmService {
   // DELETE Contact
   public deleteTask(id) {
     return this.http.delete(this.TaskURI + '/' + id).pipe(map(res => res as JSON));
+  }
+
+  // GET Leads
+  public getLeads() {
+    return this.postCollection.snapshotChanges().pipe(map(actions => {
+      return actions.map(x => {
+        const data = x.payload.doc.data() as Lead
+        const id = x.payload.doc.id
+        return { id, ...data}
+      })
+    }))
+  }
+
+  // GET Lead
+  public getLead(id: string) {
+    return this.afs.doc<Lead>(`leads/${id}`)
+  }
+
+  // PUT Lead
+  public updateLead(id: string, data) {
+    return this.getLead(id).update(data)
+  }
+
+  // POST Lead
+  public newLead(data) {
+    this.postCollection.add(data)
+  }
+  
+  // DELETE Lead
+  public deleteLead(id: string) {
+    return this.getLead(id).delete()
   }
 }

@@ -84,7 +84,7 @@
                             <option *ngIf="o.value != lead.stage" value="o.value">{{ o.name }}</option>
                         </ng-container>
                     </select>
-                    <span class="flex-grow-2 mt-1 task">{{ lead.task }}</span>
+                    <span class="flex-grow-1 mt-1 ml-2 task">{{ lead.task }}</span>
                     <i class="far fa-edit m-2" (click)="showTaskForm(t.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="deleteLead(t.id)"></i>
                 </div>

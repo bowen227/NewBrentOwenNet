@@ -1,4 +1,3 @@
-import { Data } from '@angular/router'
 import { firestore } from 'firebase'
 
 export class Post {

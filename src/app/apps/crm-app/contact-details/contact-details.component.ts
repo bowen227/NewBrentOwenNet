@@ -23,6 +23,12 @@ export class ContactDetailsComponent implements OnInit {
   public showNewTaskForm: boolean = false;
   public showEditTaskForm: boolean = false;
   public leads = [];
+  public stageOptions = [
+    {name: "Recieved", value: "recieved"},
+    {name: "To Provider", value: "toProvider"},
+    {name: "Completed", value: "completed"},
+    {name: "Missed", value: "missed"}
+  ];
   public completedTasks = [];
   public isLoading: boolean = false;
   
@@ -290,7 +296,7 @@ export class ContactDetailsComponent implements OnInit {
       if (id == 'new') {
         return this.taskForm = this.fb.group({
           id: this.leads.length,
-          company: this.company.companyName,
+          // company: this.company.companyName,
           task: '',
           provider: '',
           stage: '',
@@ -302,7 +308,7 @@ export class ContactDetailsComponent implements OnInit {
           if (id == lead.id) {
             this.taskForm = this.fb.group({
               id: lead.id,
-              company: lead.company,
+              // company: lead.company,
               task: lead.task,
               provider: lead.provider,
               stage: lead.stage,
@@ -377,6 +383,7 @@ export class ContactDetailsComponent implements OnInit {
         if (this.showNewTaskForm) {
           this.leads.push(data);
           this.showNewTaskForm = false;
+          console.log(this.leads)
         }
       }
     }

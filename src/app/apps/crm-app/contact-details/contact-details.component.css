@@ -44,6 +44,10 @@ h2 {
     min-width: 125px;
 }
 
+.stage {
+    width: 150px;
+}
+
 .contact-more-details {
     display: flex;
     flex-direction: row;

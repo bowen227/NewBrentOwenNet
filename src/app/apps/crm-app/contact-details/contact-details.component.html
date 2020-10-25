@@ -74,10 +74,17 @@
             <p>You haven't added any Leads</p>
         </div>
         <ul class="list-group list-group-flush" *ngIf="leads.length > 0">
-            <li class="list-group-item" *ngFor="let t of tasks; let i = index;">
+            <li class="list-group-item" *ngFor="let lead of leads; let i = index;">
                 <div class="d-flex flex-row align-items-center">
-                    <input type="checkbox" class="checkbox mr-2" (click)="completeLead(t, i)">
-                    <span class="flex-grow-1 mt-1 task">{{ t.task }}</span>
+                    <!-- <input type="checkbox" class="checkbox mr-2" (click)="completeLead(t, i)"> -->
+                    <!-- <label for="stage" (click)="showStages == !showStages">{{ lead.stage }}</label> -->
+                    <select name="stage" class="selectpicker form-control stage" id="stage">
+                        <option value="lead.stage" selected>{{ lead.stage | titlecase }}</option>
+                        <ng-container *ngFor="let o of stageOptions">
+                            <option *ngIf="o.value != lead.stage" value="o.value">{{ o.name }}</option>
+                        </ng-container>
+                    </select>
+                    <span class="flex-grow-2 mt-1 task">{{ lead.task }}</span>
                     <i class="far fa-edit m-2" (click)="showTaskForm(t.id)"></i>
                     <i class="far fa-trash-alt m-2" (click)="deleteLead(t.id)"></i>
                 </div>
@@ -96,18 +103,17 @@
         <div class="task-form">
             <h3 class="ml-4 mt-3">{{ showNewTaskForm ? "New Lead" : "Edit Lead"}}</h3>
             <form class="container d-flex flex-column justify-content-around" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-                <button class="btn" (click)="closePopup(showNewTaskForm ? 'this.showNewTaskForm' : 'showEditTaskForm')">X</button>
                 <div class="form-group">
                     <label for="task">Lead</label>
                     <input type="text" class="form-control" formControlName="task" required>
                 </div>
                 <div class="form-group">
                     <label for="provider">Provider</label>
-                    <input type="text" formControlName="provider" class="form-control">
+                    <input type="text" formControlName="provider" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="service">Service</label>
-                    <select name="service" class="selectpicker form-control" id="service" formControlName="service">
+                    <select name="service" class="selectpicker form-control" id="service" formControlName="service" required>
                         <option value="oxygen">Oxygen</option>
                         <option value="overnight">Overnight</option>
                         <option value="mdinr">MdINR</option>
@@ -119,14 +125,17 @@
                 </div>
                 <div class="form-group">
                     <label for="stage">Stage</label>
-                    <select name="stage" class="selectpicker form-control" id="stage" formControlName="stage">
+                    <select name="stage" class="selectpicker form-control" id="stage" formControlName="stage" required>
                         <option value="recieved">Recieved</option>
                         <option value="toProvider">To Provider</option>
                         <option value="completed">Completed</option>
                         <option value="missed">Missed</option>
                     </select>
                 </div>
-                <button type="submit" class="btn">Save</button>
+                <div class="d-flex flex-row">
+                    <button type="submit" class="btn" [disabled]="!taskForm.valid">Save</button>
+                    <button class="btn" (click)="closePopup(showNewTaskForm ? 'this.showNewTaskForm' : 'showEditTaskForm')">Cancel</button>
+                </div>
             </form>
         </div>
     </div>

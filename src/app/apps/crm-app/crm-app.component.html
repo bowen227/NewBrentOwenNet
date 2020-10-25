@@ -14,7 +14,7 @@
         <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-        <ul class="list-group list-group-flush" *ngIf="contacts.length > 0 && !showSearched">
+        <ul class="list-group list-group-flush" *ngIf="contacts.length > 0 && !showSearched || !isLoading">
             <li class="list-group-item" *ngFor="let c of contacts; let i = index;">
                 <div class="d-flex flex-row">
                     <span class="flex-grow-1 mt-1 contact" routerLink="{{c.id}}">{{ c.companyName }}</span>

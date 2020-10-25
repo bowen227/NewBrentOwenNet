@@ -1,6 +1,6 @@
 <section class="todo-container">
     <h2 class="p-3"><i class="fas fa-list-ul mr-2"></i>{{ group }} Group</h2>
-    <h3 class="p-2 back" routerLink="/todo"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Groups</h3>
+    <h3 class="p-2 back ml-2" routerLink="/todo"><i class="fas fa-chevron-left mr-2"></i>Groups</h3>
     <div class="form-container">
         <h3 class="ml-4 mt-3">Add To-Do</h3>
         <form class="container d-flex flex-row justify-content-around align-items-center" [formGroup]="todoForm" (ngSubmit)="onSubmit()">

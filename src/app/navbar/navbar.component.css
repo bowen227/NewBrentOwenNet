@@ -78,6 +78,7 @@ h1 {
 @media only screen and (min-width: 1025px) {
     .nav-links {
         font-size: 20px;
+        height: 100%;
     }
 
     .nav-links div {
@@ -98,7 +99,7 @@ h1 {
         position: absolute;
         color: #fff;
         background-color: #CD5334;
-        top: 50px;
+        top: 64px;
         /* right: 20%; */
         padding: 0px !important;
     }
@@ -124,6 +125,7 @@ h1 {
     }
 
     .navbar-container {
-        padding: .4em 0px;
+        /* padding: .4em 0px; */
+        height: 64px;
     }
 }

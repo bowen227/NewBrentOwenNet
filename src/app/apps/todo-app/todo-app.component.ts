@@ -35,34 +35,18 @@ export class TodoAppComponent implements OnInit {
         }
         this.user = user
 
-        // console.log(this.user);
-
         this.getGroupsByUser();
 
       } else {
         this.user = null
       }
     });
-    // this.checkLogIn();
 
     this.initGroupForm();
 
 
     this.scrollToTop();
 
-  }
-
-  // Check if signed in
-  public checkLogIn() {
-    if (this.user == null) {
-      this.service.authState.subscribe(user => {
-        this.user = user;
-        // this.toast.success('Login Successfull!', user.firstName);
-      });
-
-      this.isLoggedIn = (this.user != null);
-      this.popup = (this.user != null);
-    }
   }
 
   // Get Todo Groups From API By User

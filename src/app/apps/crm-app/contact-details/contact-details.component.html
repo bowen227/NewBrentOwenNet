@@ -1,6 +1,6 @@
 <section class="details-container">
     <h2 class="p-3"><i class="fas fa-tasks mr-2"></i>Details</h2>
-    <h3 class="p-2" routerLink="/crm"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Companies</h3>
+    <h3 class="p-2 back ml-3" routerLink="/crm"><i class="fas fa-chevron-left mr-2"></i>Companies</h3>
     <div class="company p-3" *ngIf="company">
         <div class="company-name">
             <h4>{{ company.companyName }}</h4>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="contacts-container">
-        <h3 class="ml-4 mt-3">Contacts<i class="fas fa-plus-square ml-3" (click)="showForm('new')"></i></h3>
+        <h3 class="mt-3">Contacts<i class="fas fa-plus-square ml-3" (click)="showForm('new')"></i></h3>
         <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
             <span class="sr-only">Loading...</span>
         </div>
@@ -65,21 +65,28 @@
             </form>
         </div>
     </div>
-    <div class="task-container p-2">
-        <h3 class="ml-4 mt-3">Tasks<i class="fas fa-plus-square ml-3" (click)="showTaskForm('new')"></i></h3>
+    <div class="task-container">
+        <h3 class="mt-3">Leads<i class="fas fa-plus-square ml-3" (click)="showTaskForm('new')"></i></h3>
         <div class="spinner-border text-danger" *ngIf="isLoading" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-        <div class="no-contacts ml-4" *ngIf="tasks.length == 0 && !isLoading">
-            <p>You haven't added any Tasks</p>
+        <div class="no-contacts ml-4" *ngIf="leads.length == 0 && !isLoading">
+            <p>You haven't added any Leads</p>
         </div>
-        <ul class="list-group list-group-flush" *ngIf="tasks.length > 0">
-            <li class="list-group-item" *ngFor="let t of tasks; let i = index;">
+        <ul class="list-group list-group-flush" *ngIf="leads.length > 0">
+            <li class="list-group-item" *ngFor="let lead of leads; let i = index;">
                 <div class="d-flex flex-row align-items-center">
-                    <input type="checkbox" class="checkbox mr-2" (click)="completeTask(t, i)">
-                    <span class="flex-grow-1 mt-1 task">{{ t.task }}</span>
+                    <!-- <input type="checkbox" class="checkbox mr-2" (click)="completeLead(t, i)"> -->
+                    <!-- <label for="stage" (click)="showStages == !showStages">{{ lead.stage }}</label> -->
+                    <select name="stage" class="selectpicker form-control stage" id="stage">
+                        <option value="lead.stage" selected>{{ lead.stage | titlecase }}</option>
+                        <ng-container *ngFor="let o of stageOptions">
+                            <option *ngIf="o.value != lead.stage" value="o.value">{{ o.name }}</option>
+                        </ng-container>
+                    </select>
+                    <span class="flex-grow-1 mt-1 ml-2 task">{{ lead.task }}</span>
                     <i class="far fa-edit m-2" (click)="showTaskForm(t.id)"></i>
-                    <i class="far fa-trash-alt m-2" (click)="deleteTask(t.id)"></i>
+                    <i class="far fa-trash-alt m-2" (click)="deleteLead(t.id)"></i>
                 </div>
             </li>
         </ul>
@@ -94,13 +101,41 @@
     </div>
     <div class="task-form-container d-flex flex-column justify-content-center align-items-center" *ngIf="showNewTaskForm || showEditTaskForm">
         <div class="task-form">
-            <h3 class="ml-4 mt-3">{{ showNewTaskForm ? "New Task" : "Edit Task"}}</h3>
+            <h3 class="ml-4 mt-3">{{ showNewTaskForm ? "New Lead" : "Edit Lead"}}</h3>
             <form class="container d-flex flex-column justify-content-around" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="task">Task</label>
+                    <label for="task">Lead</label>
                     <input type="text" class="form-control" formControlName="task" required>
                 </div>
-                <button type="submit" class="btn">Save</button>
+                <div class="form-group">
+                    <label for="provider">Provider</label>
+                    <input type="text" formControlName="provider" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service</label>
+                    <select name="service" class="selectpicker form-control" id="service" formControlName="service" required>
+                        <option value="oxygen">Oxygen</option>
+                        <option value="overnight">Overnight</option>
+                        <option value="mdinr">MdINR</option>
+                        <option value="ud">Unit Dose</option>
+                        <option value="vent">Vent</option>
+                        <option value="wvac">Wound Vac</option>
+                        <option value="vest">Vest</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="stage">Stage</label>
+                    <select name="stage" class="selectpicker form-control" id="stage" formControlName="stage" required>
+                        <option value="recieved">Recieved</option>
+                        <option value="toProvider">To Provider</option>
+                        <option value="completed">Completed</option>
+                        <option value="missed">Missed</option>
+                    </select>
+                </div>
+                <div class="d-flex flex-row">
+                    <button type="submit" class="btn" [disabled]="!taskForm.valid">Save</button>
+                    <button class="btn" (click)="closePopup(showNewTaskForm ? 'this.showNewTaskForm' : 'showEditTaskForm')">Cancel</button>
+                </div>
             </form>
         </div>
     </div>

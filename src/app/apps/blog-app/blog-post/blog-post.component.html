@@ -1,7 +1,7 @@
 <section>
     <div *ngIf="!edit">
         <!-- <h2 class="p-3"><i class="fas fa-blog mr-2"></i>{{ title }}</h2> -->
-        <h3 class="p-2" routerLink="/blogs"><i class="far fa-arrow-alt-circle-left mr-2"></i>Back To Blogs</h3>
+        <h3 class="p-2 ml-3 back" routerLink="/blogs"><i class="fas fa-chevron-left mr-2"></i>Back</h3>
         <div class="body-container p-3" *ngIf="post">
             <i class="fas fa-edit m-2" *ngIf="userId == post.authorId" (click)="edit = true"></i>
             <img src="{{ post.image }}" class="mb-3">
@@ -12,7 +12,11 @@
             <small class="ml-2" *ngIf="!user">- Sign in to like post</small>
             <i class="fas fa-thumbs-up" *ngIf="user && !liked" (click)="addLike()"></i>
             <i class="fas fa-thumbs-down" *ngIf="user && liked" (click)="removeLike()"></i>
-            <p class="mt-4">{{ post.body }}</p>
+            <div class="mt-4" *ngFor="let para of post.body; let i = index">
+                <p>{{ para }}</p>
+            </div>
+            <!-- <p class="mt-4">{{ post.body }}</p> -->
+            <hr class="break">
             <div class="mt-4 comments">
                 <div class="d-flex align-items-center mb-1">
                     <h3 class="m-0 flex-grow-1">COMMENTS:</h3>
@@ -31,6 +35,7 @@
                             {{ c.date.toDate() | date }}
                             - {{ c.user }}
                         </small>
+                        <hr class="break">
                     </li>
                 </ul>
             </div>

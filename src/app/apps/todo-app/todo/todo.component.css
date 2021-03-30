@@ -3,17 +3,22 @@
     margin: 0px auto;
 }
 
+.back {
+    border: 1px solid #CD5334;
+    width: 137px;
+}
+
 .back:hover {
     cursor: pointer;
 }
 
 .todo-list-container {
-    max-width: 500px;
+    max-width: 700px;
     margin: 0px auto;
 }
 
 .completed-list-container {
-    max-width: 500px;
+    max-width: 700px;
     margin: 0px auto;
 }
 

@@ -8,7 +8,7 @@
                 <label for="groupName">Group Name</label>
                 <input type="text" class="form-control" formControlName="groupName">
             </div>
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn" [disabled]="!groupForm.value.groupName">Submit</button>
         </form>
     </div>
     <div class="todo-groups-container p-5">

@@ -1,4 +1,33 @@
-<section class="nav-bar p-2">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top px-md-5">
+    <a class="navbar-brand" href="#" routerLink="/">Software Developer</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" routerLink="/covid">
+                <a class="nav-link">Covid-19</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="openFile()">Resume</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Web Apps
+                </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item bg-dark text-light" routerLink="/blogs">Blog</a>
+                <a class="dropdown-item bg-dark text-light" routerLink="/todo">To-Do</a>
+            </div>
+            </li>
+        </ul>
+    </div>
+  </nav>
+
+<!-- <section class="nav-bar p-2">
     <section class="navbar-container container d-flex flex-row">
         <div class="logo flex-grow-1">
             <h1>Web Developer</h1>
@@ -8,7 +37,7 @@
             <i class="fas fa-times font-weight-bold" (click)="toggleMenu()" *ngIf="openMenu"></i>
         </div>
     </section>
-    <div class="drop-down-menu d-flex flex-column" *ngIf="openMenu">
+    <div class="drop-down-menu fixed-top d-flex flex-column" *ngIf="openMenu">
         <div class="links d-flex flex-column">
             <div class="d-flex flex-row justify-content-between p-3">
                 <h1>Web Developer</h1>
@@ -22,8 +51,33 @@
                     <div class="more-icon">
                         <i class="fas fa-angle-right"></i>
                     </div>
+                </li> -->
+                <!-- <li class="list-group-item d-flex" (click)="toggleMore('projects')">
+                    <div class="link-name flex-grow-1">
+                        <span>Projects</span>
+                    </div>
+                    <div class="more-icon">
+                        <i class="fas fa-angle-down" *ngIf="!projects"></i>
+                        <i class="fas fa-angle-up" *ngIf="projects"></i>
+                    </div>
                 </li>
-                <li class="list-group-item d-flex" (click)="toggleMore('projects')">
+                <div class="more-items" *ngIf="projects">
+                    <ul class="list-group list-group-flush p-3">
+                        <li class="list-group-item">
+                            Angular
+                        </li>
+                        <li class="list-group-item">
+                            React
+                        </li>
+                        <li class="list-group-item">
+                            .Net Core
+                        </li>
+                        <li class="list-group-item">
+                            NativeScripts
+                        </li>
+                    </ul>
+                </div> -->
+                <!-- <li class="list-group-item d-flex" (click)="toggleMore('projects')">
                     <div class="link-name flex-grow-1">
                         <span>Web Apps</span>
                     </div>
@@ -136,10 +190,10 @@
             <h1 class="ml-2">Chattanooga Web Developer</h1>
         </div>
         <div class="nav-links d-flex flex-row justify-content-around">
-            <div class="d-flex flex-column justify-content-center align-items-center" routerLink="/">Home</div>
+            <div routerLink="/">Home</div>
             <div class="d-flex flex-column justify-content-center align-items-center" (click)="toggleMore('projects')">Web Apps
                 <div class="more-items" *ngIf="projects">
-                    <ul class="list-group list-group-flush d-flex flex-row">
+                    <ul class="list-group list-group-flush">
                         <li class="list-group-item" routerLink="todo">
                             To-Do
                         </li>
@@ -167,11 +221,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="d-flex flex-column justify-content-center align-items-center" routerLink="/covid">Covid-19</div>
-            <div class="d-flex flex-column justify-content-center align-items-center" routerLink="/contact">Contact Me</div>
-            <div class="d-flex flex-column justify-content-center align-items-center" (click)="openFile()">Resume</div>
-            <div class="d-flex flex-column justify-content-center align-items-center" *ngIf="!user" (click)="signIn()">Sign In</div>
-            <div class="d-flex flex-column justify-content-center align-items-center" *ngIf="user" (click)="signOut()">Sign Out</div>
+            <div routerLink="/covid">Covid-19</div>
+            <div routerLink="/contact">Contact Me</div>
+            <div (click)="openFile()">Resume</div>
+            <div *ngIf="!user" (click)="signIn()">Sign In</div>
+            <div *ngIf="user" (click)="signOut()">Sign Out</div>
         </div>
     </section>
-</section>
+</section> -->

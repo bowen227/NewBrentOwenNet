@@ -1,3 +1,24 @@
+.hero-img {
+    width: 50%;
+    height: auto;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 0px;
+}
+
+@media only screen and (min-width: 768px) {
+    .hero-img {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .hero-img {
+        width: 100%;
+        margin-top: 2.5em;
+    }
+}
+
 .home-container-heading {
     color: #fff;
     background-color: #666666;

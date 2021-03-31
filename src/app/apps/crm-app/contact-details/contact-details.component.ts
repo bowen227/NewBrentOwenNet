@@ -68,7 +68,7 @@ export class ContactDetailsComponent implements OnInit {
 
     // this.checkLogIn();
 
-    this.scrollToTop();
+    // this.scrollToTop();
 
   }
 
@@ -91,24 +91,24 @@ export class ContactDetailsComponent implements OnInit {
     this.isLoading = false;
   }
   // Get Tasks
-  public getTasks() {
-    if (this.user != null) {
-      this.cService.getTasksByCompany(this.user.id, this.company.companyName).subscribe(res => {
-        for (const key in res) {
-          if (Object.prototype.hasOwnProperty.call(res, key)) {
-            const element = res[key];
-            if (element.completed == true) {
-              this.completedTasks.push(element);
-            } else {
-              this.leads.push(element);
-            }
-          }
-        }
-      });
-    } else {
-      console.log("Not Logged in...");
-    }
-  }
+//   public getTasks() {
+//     if (this.user != null) {
+//       this.cService.getTasksByCompany(this.user.id, this.company.companyName).subscribe(res => {
+//         for (const key in res) {
+//           if (Object.prototype.hasOwnProperty.call(res, key)) {
+//             const element = res[key];
+//             if (element.completed == true) {
+//               this.completedTasks.push(element);
+//             } else {
+//               this.leads.push(element);
+//             }
+//           }
+//         }
+//       });
+//     } else {
+//       console.log("Not Logged in...");
+//     }
+//   }
   
   // Show Add Contact Form
   public showForm(id) {
@@ -257,184 +257,184 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   // Show Lead Form
-  public showTaskForm(id) {
-    if (id == 'new') {
-      this.showNewTaskForm = true;
-      this.initTaskForm('new');
-    } else {
-      this.showEditTaskForm = true;
-      this.initTaskForm(id);
-    }
-  }
+//   public showTaskForm(id) {
+//     if (id == 'new') {
+//       this.showNewTaskForm = true;
+//       this.initTaskForm('new');
+//     } else {
+//       this.showEditTaskForm = true;
+//       this.initTaskForm(id);
+//     }
+//   }
 
   // Initialize TaskForm
-  public initTaskForm(id) {
-    if (this.user != null) {
-      if (id == 'new') {
-        return this.taskForm = this.fb.group({
-          task: '',
-          provider: '',
-          service: '',
-          stage: '',
-        });
-      } else {
-        this.leads.map(lead => {
-          if (id == lead.id) {
-            this.taskForm = this.fb.group({
-              id: lead.id,
-              userId: lead.userId,
-              company: lead.companyName,
-              task: lead.task,
-              provider: lead.provider,
-              stage: lead.stage,
-              service: lead.service,
-            });
-          }
-        });
-      }
-    } else {
-      if (id == 'new') {
-        return this.taskForm = this.fb.group({
-          id: this.leads.length,
-          // company: this.company.companyName,
-          task: '',
-          provider: '',
-          stage: '',
-          service: '',
-        });
-      } else {
-        this.leads.map(lead => {
-          if (id == lead.id) {
-            this.taskForm = this.fb.group({
-              id: lead.id,
-              // company: lead.company,
-              task: lead.task,
-              provider: lead.provider,
-              stage: lead.stage,
-              service: lead.service,
-            });
-          }
-        });
-      }
-    }
-  }
+//   public initTaskForm(id) {
+//     if (this.user != null) {
+//       if (id == 'new') {
+//         return this.taskForm = this.fb.group({
+//           task: '',
+//           provider: '',
+//           service: '',
+//           stage: '',
+//         });
+//       } else {
+//         this.leads.map(lead => {
+//           if (id == lead.id) {
+//             this.taskForm = this.fb.group({
+//               id: lead.id,
+//               userId: lead.userId,
+//               company: lead.companyName,
+//               task: lead.task,
+//               provider: lead.provider,
+//               stage: lead.stage,
+//               service: lead.service,
+//             });
+//           }
+//         });
+//       }
+//     } else {
+//       if (id == 'new') {
+//         return this.taskForm = this.fb.group({
+//           id: this.leads.length,
+//           // company: this.company.companyName,
+//           task: '',
+//           provider: '',
+//           stage: '',
+//           service: '',
+//         });
+//       } else {
+//         this.leads.map(lead => {
+//           if (id == lead.id) {
+//             this.taskForm = this.fb.group({
+//               id: lead.id,
+//               // company: lead.company,
+//               task: lead.task,
+//               provider: lead.provider,
+//               stage: lead.stage,
+//               service: lead.service,
+//             });
+//           }
+//         });
+//       }
+//     }
+//   }
 
   // Create New Lead
-  public onSubmit() {
-    const data = this.taskForm.value;
+//   public onSubmit() {
+//     const data = this.taskForm.value;
 
-    if (data.task.length < 1) {
-      this.showNewTaskForm = false;
-      this.showEditTaskForm = false;
-      this.toast.warning("You didn't add a lead..");
-    }
+//     if (data.task.length < 1) {
+//       this.showNewTaskForm = false;
+//       this.showEditTaskForm = false;
+//       this.toast.warning("You didn't add a lead..");
+//     }
 
-    if (this.user != null) {
-      const index = this.leads.findIndex(x => x.id == data.id);
+//     if (this.user != null) {
+//       const index = this.leads.findIndex(x => x.id == data.id);
 
-      if (this.showEditTaskForm && index != null) {
-        this.leads.map(x => {
-          if (x.id == data.id) {
-            let task = {
-              id: data.id,
-              userId: data.userId,
-              company: data.company,
-              task: data.task,
-              provider: data.provider,
-              stage: data.stage,
-              service: data.service,
-            };
+//       if (this.showEditTaskForm && index != null) {
+//         this.leads.map(x => {
+//           if (x.id == data.id) {
+//             let task = {
+//               id: data.id,
+//               userId: data.userId,
+//               company: data.company,
+//               task: data.task,
+//               provider: data.provider,
+//               stage: data.stage,
+//               service: data.service,
+//             };
   
-            this.cService.updateTask(task).subscribe(res => {
-              this.leads.splice(index, 1, res);
-              this.showEditTaskForm = false;
-              this.toast.success("Updated task!!");
-            });
-          }
-        });
-      }
+//             this.cService.updateTask(task).subscribe(res => {
+//               this.leads.splice(index, 1, res);
+//               this.showEditTaskForm = false;
+//               this.toast.success("Updated task!!");
+//             });
+//           }
+//         });
+//       }
 
-      if (this.showNewTaskForm) {
-        let task = {
-          userId: this.user.id,
-          company: this.company.companyName,
-          task: data.task,
-          provider: data.provider,
-          stage: data.stage,
-          service: data.service,
-          completed: data.completed
-        };
+//       if (this.showNewTaskForm) {
+//         let task = {
+//           userId: this.user.id,
+//           company: this.company.companyName,
+//           task: data.task,
+//           provider: data.provider,
+//           stage: data.stage,
+//           service: data.service,
+//           completed: data.completed
+//         };
 
-        this.cService.addNewTask(task).subscribe(res => {
-          this.leads.push(res);
-          this.showNewTaskForm = false;
-          this.toast.success("New task added!!");
-        });
-      }
-    } else {
-      if (this.showEditTaskForm) {
-        this.leads.splice(data.id, 1, data);
-        this.showEditTaskForm = false;
-        this.toast.success("Task updated!!");
-      } else {
-        if (this.showNewTaskForm) {
-          this.leads.push(data);
-          this.showNewTaskForm = false;
-          console.log(this.leads)
-        }
-      }
-    }
-  }
+//         this.cService.addNewTask(task).subscribe(res => {
+//           this.leads.push(res);
+//           this.showNewTaskForm = false;
+//           this.toast.success("New task added!!");
+//         });
+//       }
+//     } else {
+//       if (this.showEditTaskForm) {
+//         this.leads.splice(data.id, 1, data);
+//         this.showEditTaskForm = false;
+//         this.toast.success("Task updated!!");
+//       } else {
+//         if (this.showNewTaskForm) {
+//           this.leads.push(data);
+//           this.showNewTaskForm = false;
+//           console.log(this.leads)
+//         }
+//       }
+//     }
+//   }
 
   // Complete Lead
-  public completeLead(item, index) {
-    if (this.user != null) {
-      this.leads.map(task => {
-        if (task.id == item.id) {
-          let cTask = {
-            id: item.id,
-            userId: item.userId,
-            company: item.companyName,
-            task: item.task,
-            completed: true
-          };
+//   public completeLead(item, index) {
+//     if (this.user != null) {
+//       this.leads.map(task => {
+//         if (task.id == item.id) {
+//           let cTask = {
+//             id: item.id,
+//             userId: item.userId,
+//             company: item.companyName,
+//             task: item.task,
+//             completed: true
+//           };
 
-          this.cService.updateTask(cTask).subscribe(res => {
-            this.leads.splice(index, 1);
-            this.completedTasks.push(res);
-            this.toast.success("You've completed a task!!");
-          });
-        }
-      });
-    } else {
-      this.leads.splice(index, 1);
-      this.completedTasks.push(item);
-      this.toast.success("You've completed " + item.task);
-    }
-  }
+//           this.cService.updateTask(cTask).subscribe(res => {
+//             this.leads.splice(index, 1);
+//             this.completedTasks.push(res);
+//             this.toast.success("You've completed a task!!");
+//           });
+//         }
+//       });
+//     } else {
+//       this.leads.splice(index, 1);
+//       this.completedTasks.push(item);
+//       this.toast.success("You've completed " + item.task);
+//     }
+//   }
 
   // Delete Lead
-  public deleteLead(id) {
-    const index = this.leads.findIndex(x => x.id == id);
+//   public deleteLead(id) {
+//     const index = this.leads.findIndex(x => x.id == id);
 
-    if (this.user != null) {
-      this.cService.deleteTask(id).subscribe(res => {
-        this.leads.splice(index, 1);
-        this.toast.warning("Task deleted!!");
-      });
-    } else {
-      this.leads.splice(index, 1);
-      this.toast.warning("Task deleted");
-    }
-  }
+//     if (this.user != null) {
+//       this.cService.deleteTask(id).subscribe(res => {
+//         this.leads.splice(index, 1);
+//         this.toast.warning("Task deleted!!");
+//       });
+//     } else {
+//       this.leads.splice(index, 1);
+//       this.toast.warning("Task deleted");
+//     }
+//   }
 
-  public closePopup(target) {
-    target = !target
-    console.log(target)
-  }
+//   public closePopup(target) {
+//     target = !target
+//     console.log(target)
+//   }
 
-  public scrollToTop() {
-    window.scroll(0, 0);
-  }
+//   public scrollToTop() {
+//     window.scroll(0, 0);
+//   }
 
 }

@@ -2,10 +2,17 @@
     <h2 class="p-3 mt-5 bg-dark"><i class="fas fa-chart-line mr-2"></i>Covid Data</h2>
     <app-world-data></app-world-data>
 
-    <app-world-graph></app-world-graph>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <app-state-graph></app-state-graph>
+                <app-world-graph></app-world-graph>
+            </div>
+            <div class="col">
+                <app-us-breakdown></app-us-breakdown>
+            </div>
+        </div>
+    </div>
 
-    <app-us-breakdown></app-us-breakdown>
-
-    <app-state-graph></app-state-graph>
 
 </section>

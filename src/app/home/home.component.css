@@ -43,7 +43,6 @@
     max-width: 350px;
     max-height: 500px;
     margin: .5em;
-    transition: transform .2s;
 }
 
 .img-container {
@@ -55,13 +54,18 @@
 }
 
 .card img:hover {
-    transform: scale(1.5);
+    transform: scale(1.2);
+    transition: ease-out .5s;
+}
+
+small {
+    color: #CD5334;
 }
 
 
 @media only screen and (min-width: 768px) {
     .hero-img {
-        width: 80%;
+        width: 70%;
     }
 }
 
@@ -69,5 +73,9 @@
     .hero-img {
         width: 100%;
         margin-top: 2.5em;
+    }
+
+    .skill {
+        font-size: 3rem;
     }
 }

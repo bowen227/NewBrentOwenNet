@@ -23,6 +23,12 @@
                 <a class="dropdown-item bg-dark text-light" routerLink="/todo" data-toggle="collapse" data-target="#navbarNavDropdown">To-Do</a>
             </div>
             </li>
+            <li class="nav-item" *ngIf="!user" (click)="signIn()" (click)="toggleMenu()">
+                <a class="nav-link" data-toggle="collapse" data-target="#navbarNavDropdown">Sign In</a>
+            </li>
+            <li class="nav-item" *ngIf="user" (click)="signOut()" (click)="toggleMenu()">
+                <a class="nav-link" data-toggle="collapse" data-target="#navbarNavDropdown">Sign Out</a>
+            </li>
         </ul>
     </div>
   </nav>

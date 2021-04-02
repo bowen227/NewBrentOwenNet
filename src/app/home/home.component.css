@@ -62,6 +62,7 @@
     margin-bottom: 12px;
     color: #CD5334;
     text-decoration: none;
+    transition: ease-in .3s;
 }
 
 .card-body a:hover {

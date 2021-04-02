@@ -58,6 +58,18 @@
     transition: ease-out .5s;
 }
 
+.card-body a {
+    margin-bottom: 12px;
+    color: #CD5334;
+    text-decoration: none;
+}
+
+.card-body a:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #CD5334;
+}
+
 small {
     color: #CD5334;
 }

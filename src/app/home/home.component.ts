@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.scrollToTop();
+    this.scrollToTop();0
   }
 
   public scrollToTop() {

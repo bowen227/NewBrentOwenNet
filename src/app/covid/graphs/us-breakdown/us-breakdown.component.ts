@@ -37,7 +37,7 @@ export class UsBreakdownComponent implements OnInit {
     this.isLoading = true;
     this.service.getUsaTotals()
     .subscribe(data => {
-      // console.log(data);
+      console.log(data);
       this.usTotals = data;
       for (let i = 0; i < this.usTotals.length; i++) {
         const element = this.usTotals[i];

@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top px-md-5">
-    <a class="navbar-brand" href="#" routerLink="/">Software Developer</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <a class="navbar-brand" href="#" routerLink="/">Web Developer</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav">
@@ -15,16 +16,20 @@
                 <a class="nav-link">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="openFile()" data-toggle="collapse" data-target="#navbarNavDropdown">Resume</a>
+                <a class="nav-link" (click)="openFile()" data-toggle="collapse"
+                    data-target="#navbarNavDropdown">Resume</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Web Apps
                 </a>
-            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item bg-dark text-light" routerLink="/blogs" data-toggle="collapse" data-target="#navbarNavDropdown">Blog</a>
-                <a class="dropdown-item bg-dark text-light" routerLink="/todo" data-toggle="collapse" data-target="#navbarNavDropdown">To-Do</a>
-            </div>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item bg-dark text-light" routerLink="/blogs" data-toggle="collapse"
+                        data-target="#navbarNavDropdown">Blog</a>
+                    <a class="dropdown-item bg-dark text-light" routerLink="/todo" data-toggle="collapse"
+                        data-target="#navbarNavDropdown">To-Do</a>
+                </div>
             </li>
             <li class="nav-item" *ngIf="!user" (click)="signIn()" (click)="toggleMenu()">
                 <a class="nav-link" data-toggle="collapse" data-target="#navbarNavDropdown">Sign In</a>
@@ -61,7 +66,7 @@
                         <i class="fas fa-angle-right"></i>
                     </div>
                 </li> -->
-                <!-- <li class="list-group-item d-flex" (click)="toggleMore('projects')">
+<!-- <li class="list-group-item d-flex" (click)="toggleMore('projects')">
                     <div class="link-name flex-grow-1">
                         <span>Projects</span>
                     </div>
@@ -86,7 +91,7 @@
                         </li>
                     </ul>
                 </div> -->
-                <!-- <li class="list-group-item d-flex" (click)="toggleMore('projects')">
+<!-- <li class="list-group-item d-flex" (click)="toggleMore('projects')">
                     <div class="link-name flex-grow-1">
                         <span>Web Apps</span>
                     </div>

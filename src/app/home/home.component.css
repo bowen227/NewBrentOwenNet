@@ -1,109 +1,108 @@
 .hero-img {
-    width: 50%;
-    height: auto;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-top: 0px;
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 0px;
 }
 
 .social-links a {
-    font-size: 2em;
-    margin: 0px .5em;
-    color: #CD5334;
+  font-size: 2em;
+  margin: 0px 0.5em;
+  color: #cd5334;
 }
 
 .clipped-container {
-    clip-path: polygon(0 0, 100% 0, 100% 43%, 0% 100%);
-    height: 300px;
-    width: 100%;
-    position: absolute;
+  clip-path: polygon(0 0, 100% 0, 100% 43%, 0% 100%);
+  height: 300px;
+  width: 100%;
+  position: absolute;
 }
 
 .about-container {
-    position: relative;
+  position: relative;
 }
 
 .shadow {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .hobby {
-    width: 100px;
-    height: 100px;
-    font-size: 16px;
-    background-color: #CD5334;
-    color: #fff;
+  width: 100px;
+  height: 100px;
+  font-size: 16px;
+  background-color: #cd5334;
+  color: #fff;
 }
 
 #skill-heading {
-    font-size: 2.3 !important;
+  font-size: 2.3 !important;
 }
 
 .skill {
-    font-size: 5rem;
-    padding: .6em;
+  font-size: 4rem;
+  padding: 0.5em;
+  color: #cd5334;
 }
 
 .hidden {
-    opacity: 1;
+  opacity: 1;
 }
 
 .fade-in {
-    opacity: 1;
-    transition: ease-in 1s;
-
+  opacity: 1;
+  transition: ease-in 1s;
 }
 
 .card {
-    max-width: 350px;
-    max-height: 500px;
-    margin: .5em;
+  max-width: 350px;
+  max-height: 500px;
+  margin: 0.5em;
 }
 
 .img-container {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .card img {
-    height: 195px;
+  height: 195px;
 }
 
 .card img:hover {
-    transform: scale(1.2);
-    transition: ease-out .5s;
+  transform: scale(1.2);
+  transition: ease-out 0.5s;
 }
 
 .card-body a {
-    margin-bottom: 12px;
-    color: #CD5334;
-    text-decoration: none;
-    transition: ease-in .3s;
+  margin-bottom: 12px;
+  color: #cd5334;
+  text-decoration: none;
+  transition: ease-in 0.3s;
 }
 
 .card-body a:hover {
-    cursor: pointer;
-    color: #fff;
-    background-color: #CD5334;
+  cursor: pointer;
+  color: #fff;
+  background-color: #cd5334;
 }
 
 small {
-    color: #CD5334;
+  color: #cd5334;
 }
 
-
 @media only screen and (min-width: 768px) {
-    .hero-img {
-        width: 70%;
-    }
+  .hero-img {
+    width: 70%;
+  }
 }
 
 @media only screen and (max-width: 380px) {
-    .hero-img {
-        width: 100%;
-        margin-top: 2.5em;
-    }
+  .hero-img {
+    width: 100%;
+    margin-top: 2.5em;
+  }
 
-    .skill {
-        font-size: 3rem;
-    }
+  .skill {
+    font-size: 3rem;
+  }
 }
